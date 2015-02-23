@@ -1,0 +1,19 @@
+<ul class="sidebar-menu" id="nav-accordion">
+    {% if is_granted('ROLE_SUPER') %}
+        <li>
+            <a href="{{ path('super_home') }}">
+                <i class="fa fa-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-user"></i>
+                <span>Usuário</span>
+            </a>
+            <ul class="sub">
+                <li><a href="{{ path('super_usuario') }}">Manter Usuário</a></li>
+            </ul>
+        </li>
+    {% endif %}
+</ul>

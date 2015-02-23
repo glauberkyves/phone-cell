@@ -43,12 +43,16 @@ class AbstractController extends Controller
      *
      * @return mixed
      */
-    protected function resolveRouteName()
+    protected function resolveRouteName($actionName = null)
     {
         $explode    = explode('Controller', $this->getRequest()->attributes->get('_controller'));
         $bundle     = str_replace('\\', '', current($explode));
         $controller = str_replace('\\', '', next($explode));
         $action     = str_replace('::', '', str_replace('Action', '', end($explode)));
+
+        if($actionName){
+            $action = $actionName;
+        }
 
         return "{$bundle}:{$controller}:{$action}.html.twig";
     }

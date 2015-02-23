@@ -2,6 +2,20 @@ super_usuario_homepage:
     path:     /hello/{name}
     defaults: { _controller: SuperUsuarioBundle:Default:index }
 
+
+###### manter perfil
+super_usuario:
+    path:     /usuario
+    defaults: { _controller: SuperUsuarioBundle:Usuario:index }
+
+super_usuario_create:
+    path:     /perfil/create
+    defaults: { _controller: SuperUsuarioBundle:Usuario:create }
+
+super_usuario_edit:
+    path:     /perfil/edit
+    defaults: { _controller: SuperUsuarioBundle:Usuario:edit }
+
 ###### manter perfil
 super_usuario_perfil:
     path:     /perfil

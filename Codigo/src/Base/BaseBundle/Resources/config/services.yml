@@ -18,3 +18,9 @@ services:
     base_bundle.bairro:
         class: Base\BaseBundle\Service\Bairro
         arguments:  ["@service_container"]
+
+    app.twig_combo_situacao_extension:
+        class: Base\BaseBundle\Twig\ComboSituacaoExtension
+        arguments:  ["@service_container"]
+        tags:
+            - { name: twig.extension }

@@ -12,7 +12,5 @@ use Base\CrudBundle\Service\CrudService;
 
 class Usuario extends CrudService
 {
-    CONST PROVIDER_AUTH = 'main';
-
     protected $entityName = 'Base\BaseBundle\Entity\TbUsuario';
 }

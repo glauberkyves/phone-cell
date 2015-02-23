@@ -35,7 +35,7 @@ class CrudController extends AbstractCrud
 
         $this->vars['entity'] = $this->getService()->newEntity()->populate($request->request->all());
 
-        return $this->render($this->resolveRouteName(), $this->vars);
+        return $this->render($this->resolveRouteName('form'), $this->vars);
     }
 
     public function editAction(Request $request)
@@ -56,7 +56,7 @@ class CrudController extends AbstractCrud
             $this->vars['entity'] = $this->getService()->newEntity()->populate($request->request->all());
         }
 
-        return $this->render($this->resolveRouteName(), $this->vars);
+        return $this->render($this->resolveRouteName('form'), $this->vars);
     }
 
     public function listAction()

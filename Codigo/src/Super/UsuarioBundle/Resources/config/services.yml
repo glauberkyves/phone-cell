@@ -1,4 +1,8 @@
 services:
+    super_usuario_bundle.usuario:
+          class: Super\UsuarioBundle\Service\Usuario
+          arguments:  ["@service_container"]
+
     super_usuario_bundle.perfil:
           class: Super\UsuarioBundle\Service\Perfil
           arguments:  ["@service_container"]
