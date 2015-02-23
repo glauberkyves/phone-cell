@@ -1,0 +1,4 @@
+services:
+    super_usuario_bundle.perfil:
+          class: Super\UsuarioBundle\Service\Perfil
+          arguments:  ["@service_container"]

@@ -1,0 +1,21 @@
+services:
+    security_user:
+        class: Base\BaseBundle\Entity\TbUsuario
+
+    security_provider:
+        class: Super\SecurityBundle\Security\UsuarioProvider
+        arguments: ["@doctrine"]
+
+    super_security_bundle.perfil:
+          class: UsuarioBundle\Service\Perfil
+          arguments:  ["@service_container"]
+
+    authenticator:
+        class:     Super\SecurityBundle\Security\Authenticator
+        arguments: ["@security.password_encoder"]
+
+    handler_succes:
+        class:     Super\SecurityBundle\Security\LoginSuccessHandler
+        arguments:  ["@router", "@security.context"]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }

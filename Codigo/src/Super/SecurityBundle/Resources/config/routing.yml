@@ -1,0 +1,11 @@
+usuario_logout:
+    path:     /logout
+    defaults: { _controller: SuperSecurityBundle:Default:logout }
+
+usuario_login:
+    path:     /login
+    defaults: { _controller: SuperSecurityBundle:Default:login }
+
+login_check:
+    path:     /login_check
+    defaults: { _controller: SuperSecurityBundle:Default:login }

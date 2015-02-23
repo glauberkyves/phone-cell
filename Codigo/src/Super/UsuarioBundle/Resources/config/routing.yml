@@ -1,0 +1,16 @@
+super_usuario_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: SuperUsuarioBundle:Default:index }
+
+###### manter perfil
+super_usuario_perfil:
+    path:     /perfil
+    defaults: { _controller: SuperUsuarioBundle:Perfil:index }
+
+super_usuario_perfil_create:
+    path:     /perfil/create
+    defaults: { _controller: SuperUsuarioBundle:Perfil:create }
+
+super_usuario_perfil_edit:
+    path:     /perfil/edit
+    defaults: { _controller: SuperUsuarioBundle:Perfil:edit }

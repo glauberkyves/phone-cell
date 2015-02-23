@@ -1,0 +1,10 @@
+super_home:
+    path:     /super
+    defaults: { _controller: SuperBaseBundle:Default:index }
+
+super_usuario:
+    resource: "@SuperUsuarioBundle/Resources/config/routing.yml"
+    prefix:   /usuario
+
+super_security:
+    resource: "@SuperSecurityBundle/Resources/config/routing.yml"

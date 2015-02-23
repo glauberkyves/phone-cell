@@ -1,0 +1,41 @@
+security:
+    encoders:
+        Base\BaseBundle\Entity\TbUsuario:
+            algorithm: md5
+            iterations: 0
+            encode_as_base64: false
+
+    providers:
+        main:
+            entity: { class: BaseBaseBundle:TbUsuario, property: noEmail }
+
+    access_denied_url: /logout
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
+            security: false
+
+        login:
+            pattern:  ^/login$
+            security: false
+
+        main:
+            provider: main
+            pattern: ^/
+            form_login:
+                login_path:  /login
+                check_path:  /login_check
+                success_handler: handler_succes
+            logout:
+                path:   /logout
+                target: /
+
+    role_hierarchy:
+        ROLE_USER:      [ROLE_VENDEDOR]
+        ROLE_USER:      [ROLE_COLETADOR]
+        ROLE_SUPER:     [ROLE_SUPER]
+
+    access_control:
+         - { path: ^/profile, roles: [ROLE_USER, ROLE_SUPER] }
+         - { path: ^/super, roles: ROLE_SUPER }
