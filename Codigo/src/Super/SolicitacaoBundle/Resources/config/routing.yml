@@ -1,0 +1,3 @@
+super_solicitacao_homepage:
+    path:     /
+    defaults: { _controller: SuperSolicitacaoBundle:Default:index }

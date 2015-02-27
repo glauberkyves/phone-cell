@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Super\SecurityBundle\SuperSecurityBundle(),
             new Super\UsuarioBundle\SuperUsuarioBundle(),
             new Super\BaseBundle\SuperBaseBundle(),
+            new Super\SolicitacaoBundle\SuperSolicitacaoBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
