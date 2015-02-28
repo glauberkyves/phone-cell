@@ -2,140 +2,231 @@
 {% block body %}
     <div class="row">
         <div class="col-sm-12">
-            <section class="panel">
-                <header class="panel-heading">
-                    Basic Wizard
+            <form role="form">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Formulário de cadastro
                         <span class="tools pull-right">
-                            <a class="fa fa-chevron-down" href="javascript:;"></a>
-                            <a class="fa fa-cog" href="javascript:;"></a>
-                            <a class="fa fa-times" href="javascript:;"></a>
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-cog"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
                          </span>
-                </header>
-                <div class="panel-body">
+                    </header>
+                    <div class="panel-body">
+                        <div id="wizard-vertical">
+                            <h2>Dados cadastrais</h2>
+                            <section class="panel">
+                                <div class="panel-body">
+                                    <div class="">
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Nome</label>
 
-                    <div id="wizard" role="application" class="wizard clearfix">
-                        <div class="steps clearfix">
-                            <ul role="tablist">
-                                <li role="tab" class="first done" aria-disabled="false" aria-selected="false"><a
-                                            aria-controls="wizard-p-0" href="#wizard-h-0" id="wizard-t-0"><span
-                                                class="number">1.</span> Dados Básicos</a></li>
-                                <li role="tab" class="current" aria-disabled="false" aria-selected="true"><a
-                                            aria-controls="wizard-p-1" href="#wizard-h-1" id="wizard-t-1"><span
-                                                class="current-info audible">current step: </span><span class="number">2.</span>
-                                        Second Step</a></li>
-                                <li role="tab" class="done" aria-disabled="false" aria-selected="false"><a
-                                            aria-controls="wizard-p-2" href="#wizard-h-2" id="wizard-t-2"><span
-                                                class="number">3.</span> Third Step</a></li>
-                                <li role="tab" class="disabled last" aria-disabled="true"><a aria-controls="wizard-p-3"
-                                                                                             href="#wizard-h-3"
-                                                                                             id="wizard-t-3"><span
-                                                class="number">4.</span> Final Step</a></li>
-                            </ul>
-                        </div>
-                        <div class="content clearfix">
-                            <h2 id="wizard-h-0" tabindex="-1" class="title">First Step</h2>
-
-                            <section id="wizard-p-0" role="tabpanel" aria-labelledby="wizard-h-0" class="body"
-                                     style="display: none; left: -201px;" aria-hidden="true">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Full Name</label>
-
-                                        <div class="col-lg-8">
-                                            <input type="text" placeholder="Full Name" class="form-control">
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="Nome completo">
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Email Address</label>
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Nome da mãe</label>
 
-                                        <div class="col-lg-8">
-                                            <input type="text" placeholder="Email Address" class="form-control">
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="Nome completo">
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">User Name</label>
 
-                                        <div class="col-lg-8">
-                                            <input type="text" placeholder="Username" class="form-control">
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">E-mail</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="exemplo@exemplo.com">
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">CPF</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="999.999.999-99">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Data de nascimento</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="99/99/9999">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6  control-label">RG</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6  control-label">Orgão expedidor</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Data de expedição</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="99/99/9999">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Sexo</label>
+
+                                            <select class="form-control m-bot15">
+                                                <option>Masculino</option>
+                                                <option>Feminino</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Nascionalidade</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="">
+                                        </div>
+
                                     </div>
-                                </form>
+                                </div>
                             </section>
 
-                            <h2 id="wizard-h-1" tabindex="-1" class="title current">Second Step</h2>
-                            <section id="wizard-p-1" role="tabpanel" aria-labelledby="wizard-h-1" class="body current"
-                                     style="display: block; left: 0px;" aria-hidden="false">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Phone</label>
+                            <h2>Contato</h2>
+                            <section class="panel">
+                                <div class="panel-body">
+                                    <div class="">
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Nome</label>
 
-                                        <div class="col-lg-8">
-                                            <input type="text" placeholder="Phone" class="form-control">
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="Nome do contato">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Telefone Fixo</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="(99) 9999-9999">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Nome</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1"
+                                                   placeholder="Nome do contato">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Telefone Celular</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="(99) 9999-9999">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Mobile</label>
-
-                                        <div class="col-lg-8">
-                                            <input type="text" placeholder="Mobile" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Address</label>
-
-                                        <div class="col-lg-8">
-                                            <textarea rows="5" cols="60" class="form-control"></textarea>
-                                        </div>
-                                    </div>
-                                </form>
+                                </div>
                             </section>
 
-                            <h2 id="wizard-h-2" tabindex="-1" class="title">Third Step</h2>
-                            <section id="wizard-p-2" role="tabpanel" aria-labelledby="wizard-h-2" class="body"
-                                     style="display: none; left: 201px;" aria-hidden="true">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Bill Name 1</label>
+                            <h2>Endereço</h2>
+                            <section>
+                                <div class="panel-body">
+                                    <div class="">
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">CEP</label>
 
-                                        <div class="col-lg-8">
-                                            <input type="text" placeholder="Phone" class="form-control">
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="99999-999">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Estado</label>
+
+                                            <select class="form-control m-bot15">
+                                                <option>Goiás</option>
+                                                <option>Distrito Federal</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Cidade</label>
+
+                                            <select class="form-control m-bot15">
+                                                <option>Planaltina</option>
+                                                <option>Sobradinho</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Endereço</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="Endereço de instalação">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Número</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Complemento</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Bairro</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Ponto de referência</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="Perto de...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Endereço de cobrança</label>
+
+                                            <input type="checkbox" value="">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Bill Name 2</label>
-
-                                        <div class="col-lg-8">
-                                            <input type="text" placeholder="Mobile" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Status</label>
-
-                                        <div class="col-lg-8">
-                                            <textarea rows="5" cols="60" class="form-control"></textarea>
-                                        </div>
-                                    </div>
-                                </form>
+                                </div>
                             </section>
 
-                            <h2 id="wizard-h-3" tabindex="-1" class="title">Final Step</h2>
-                            <section id="wizard-p-3" role="tabpanel" aria-labelledby="wizard-h-3" class="body"
-                                     style="display: none;" aria-hidden="true">
-                                <p>Congratulations This is the Final Step</p>
+                            <h2>Oi Fixo</h2>
+                            <section>
+                                <div class="panel-body">
+                                    <div class="">
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Portabilidade</label>
+
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" id="inlineCheckbox1" value="option1"> Sim
+
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" id="inlineCheckbox2" value="option2"> Não
+                                            </label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Número portado</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="(99) 9999-9999">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Produto</label>
+
+                                            <select class="form-control m-bot15">
+                                                <option>1² linha</option>
+                                                <option>2² linha</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail1" class="col-lg-6 col-sm-6 control-label">Operadora origem</label>
+
+                                            <input type="email" class="form-control" id="inputEmail1" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
                             </section>
-                        </div>
-                        <div class="actions clearfix">
-                            <ul aria-label="Pagination" role="menu">
-                                <li class="" aria-disabled="false"><a role="menuitem" href="#previous">Previous</a></li>
-                                <li aria-hidden="false" aria-disabled="false"><a role="menuitem" href="#next">Next</a>
-                                </li>
-                                <li style="display: none;" aria-hidden="true"><a role="menuitem"
-                                                                                 href="#finish">Finish</a></li>
-                            </ul>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </form>
         </div>
     </div>
+
+    <script>
+        $(function () {
+            $("#wizard-vertical").steps({
+                headerTag:        "h2",
+                bodyTag:          "section",
+                transitionEffect: "slideLeft",
+                stepsOrientation: "vertical"
+            });
+        });
+    </script>
 {% endblock %}
