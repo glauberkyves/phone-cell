@@ -6,10 +6,6 @@ services:
         class: Super\SecurityBundle\Security\UsuarioProvider
         arguments: ["@doctrine"]
 
-    super_security_bundle.perfil:
-          class: UsuarioBundle\Service\Perfil
-          arguments:  ["@service_container"]
-
     authenticator:
         class:     Super\SecurityBundle\Security\Authenticator
         arguments: ["@security.password_encoder"]

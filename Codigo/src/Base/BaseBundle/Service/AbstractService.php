@@ -43,9 +43,11 @@ class AbstractService extends BaseService
             $this->entity = $this->find($params[current($metadata->getIdentifier())]);
             $this->entity->populate($params, true);
         } else {
-            $this->entity = $this->newEntity()->populate($params, true);
+            $this->entity = $this->newEntity()->populate($params, false);
             $insert       = true;
         }
+
+        echo '<pre>'; var_dump($this->entity);die;
 
         if(!$arguments){
             array_push($arguments, $this->entity);

@@ -65,7 +65,7 @@ class TbUsuario extends AbstractEntity implements UserInterface, \Serializable
     /**
      * @var \TbPessoa
      *
-     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbPessoa")
+     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\TbPessoa")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_pessoa", referencedColumnName="id_pessoa")
      * })

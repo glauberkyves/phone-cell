@@ -73,7 +73,7 @@ class CrudController extends AbstractCrud
             $entity = $this->getService()->newEntity();
         }
 
-        $entity->populate($this->getRequest()->request->all());
+        $entity->populate($this->getRequest()->request->all(), true);
 
         $validator = $this->getValidator();
         $errors    = $validator->validate($entity);

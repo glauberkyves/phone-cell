@@ -9,11 +9,11 @@ super_usuario:
     defaults: { _controller: SuperUsuarioBundle:Usuario:index }
 
 super_usuario_create:
-    path:     /perfil/create
+    path:     /usuario/cadastrar
     defaults: { _controller: SuperUsuarioBundle:Usuario:create }
 
 super_usuario_edit:
-    path:     /perfil/edit
+    path:     /usuario/edit
     defaults: { _controller: SuperUsuarioBundle:Usuario:edit }
 
 ###### manter perfil

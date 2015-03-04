@@ -1,21 +1,21 @@
 services:
-    base_bundle.email_error:
+    service.email_error:
         class: Base\BaseBundle\Service\EmailError
         arguments:  ["@service_container"]
 
-    base_bundle.endereco:
+    service.endereco:
         class: Base\BaseBundle\Service\Endereco
         arguments:  ["@service_container"]
 
-    base_bundle.estado:
+    service.estado:
         class: Base\BaseBundle\Service\Estado
         arguments:  ["@service_container"]
 
-    base_bundle.municipio:
+    service.municipio:
         class: Base\BaseBundle\Service\Municipio
         arguments:  ["@service_container"]
 
-    base_bundle.bairro:
+    service.bairro:
         class: Base\BaseBundle\Service\Bairro
         arguments:  ["@service_container"]
 

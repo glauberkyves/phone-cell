@@ -19,9 +19,9 @@ class AbstractEntity
      * @param array $params
      * @return $this
      */
-    public function populate(array $params = array(), $lazy = false)
+    public function populate(array $params = array(), $lazy = true)
     {
-        if (false === $lazy) {
+        if (!$lazy) {
             $reflection = new \ReflectionClass(get_class($this));
 
             foreach ($reflection->getProperties() as $refPropertie) {

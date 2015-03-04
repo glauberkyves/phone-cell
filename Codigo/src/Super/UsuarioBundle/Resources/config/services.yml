@@ -1,8 +1,16 @@
 services:
-    super_usuario_bundle.usuario:
+    service.usuario:
           class: Super\UsuarioBundle\Service\Usuario
           arguments:  ["@service_container"]
 
-    super_usuario_bundle.perfil:
+    service.perfil:
           class: Super\UsuarioBundle\Service\Perfil
+          arguments:  ["@service_container"]
+
+    service.pessoa:
+          class: Super\UsuarioBundle\Service\Pessoa
+          arguments:  ["@service_container"]
+
+    service.pessoa_fisica:
+          class: Super\UsuarioBundle\Service\PessoaFisica
           arguments:  ["@service_container"]

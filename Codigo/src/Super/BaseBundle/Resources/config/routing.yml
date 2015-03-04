@@ -4,7 +4,7 @@ super_home:
 
 super_usuario:
     resource: "@SuperUsuarioBundle/Resources/config/routing.yml"
-    prefix:   /usuario
+    prefix:   /
 
 super_solicitacao:
     resource: "@SuperSolicitacaoBundle/Resources/config/routing.yml"
