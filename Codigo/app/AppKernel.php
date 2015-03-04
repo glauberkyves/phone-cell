@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new Super\UsuarioBundle\SuperUsuarioBundle(),
             new Super\BaseBundle\SuperBaseBundle(),
             new Super\SolicitacaoBundle\SuperSolicitacaoBundle(),
+            new GlauberKyves\ZendFormTwigBundle\ZendFormTwigBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

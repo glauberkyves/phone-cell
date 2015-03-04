@@ -39,8 +39,7 @@
     "incenteev/composer-parameter-handler": "~2.0",
     "composer/composer": "1.0.*@dev",
     "knplabs/knp-paginator-bundle": "~2.4",
-    "knplabs/knp-snappy-bundle": "dev-master",
-    "zendframework/zendframework1": "1.*"
+    "knplabs/knp-snappy-bundle": "dev-master"
   },
   "autoload": {
     "psr-0": {
