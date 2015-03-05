@@ -12,16 +12,8 @@
   "version": "0.1.0",
   "repositories": [
     {
-      "type": "package",
-      "package": {
-        "name": "glauberkyves/form-element-twig",
-        "version": "0.1.0",
-        "source": {
-          "url": "https://github.com/glauberkyves/zend-form-element-twig.git",
-          "type": "git",
-          "reference": "0.1.0"
-        }
-      }
+      "type": "vcs",
+      "url": "https://github.com/glauberkyves/zend-form-twig"
     }
   ],
   "require": {
@@ -39,7 +31,8 @@
     "incenteev/composer-parameter-handler": "~2.0",
     "composer/composer": "1.0.*@dev",
     "knplabs/knp-paginator-bundle": "~2.4",
-    "knplabs/knp-snappy-bundle": "dev-master"
+    "knplabs/knp-snappy-bundle": "dev-master",
+    "glauberkyves/zend-form-twig": "master"
   },
   "autoload": {
     "psr-0": {

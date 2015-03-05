@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             new AppBundle\AppBundle(),
+            new GlauberKyves\Bundle\ZendFormTwigBundle\ZendFormTwigBundle(),
             new Base\BaseBundle\BaseBaseBundle(),
             new Base\CrudBundle\BaseCrudBundle(),
 
@@ -31,7 +32,6 @@ class AppKernel extends Kernel
             new Super\UsuarioBundle\SuperUsuarioBundle(),
             new Super\BaseBundle\SuperBaseBundle(),
             new Super\SolicitacaoBundle\SuperSolicitacaoBundle(),
-            new GlauberKyves\ZendFormTwigBundle\ZendFormTwigBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
