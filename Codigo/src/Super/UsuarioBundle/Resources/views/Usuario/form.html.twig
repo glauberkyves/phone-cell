@@ -8,29 +8,45 @@
                 </header>
                 <div class="panel-body">
                     <div class="position-center">
-                        <form role="form" class="form-horizontal" method="post" action="{{ path('super_usuario_create') }}">
+                        <form role="form" class="form-horizontal" method="post"
+                              action="{{ path('super_usuario_create') }}">
+
                             <div class="form-group">
-                                <div class="input-group m-bot15">
-                                    <span class="input-group-addon btn-primary">@</span>
-                                    <input type="text" class="form-control required email" id="noEmail" name="noEmail" placeholder="E-mail">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group m-bot15">
-                                    <span class="input-group-addon btn-primary"><span
-                                                class="fa fa-lock"></span></span>
-                                    <input type="password" class="form-control required" id="noSenha" name="noSenha" placeholder="Senha">
+                                <label for="noPessoa" class="col-lg-2 col-sm-2 control-label">Nome</label>
+
+                                <div class="col-lg-10">
+                                    <div class="input-group m-bot15">
+                                        <span class="input-group-addon btn-primary"><span
+                                                    class="fa fa-lock"></span></span>
+                                        {{ formText('noPessoa', entity.getIdPessoa.getNoPessoa, {placeholder: 'Nome completo', class: 'form-control required'}) }}
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="input-group m-bot15">
-                                    <span class="input-group-addon btn-primary"><span
-                                                class="fa fa-user"></span></span>
-                                    <input type="text" class="form-control required" id="noPessoa" name="noPessoa"
-                                           placeholder="Nome completo">
+                                <label for="noPessoa" class="col-lg-2 col-sm-2 control-label">E-mail</label>
+
+                                <div class="col-lg-10">
+                                    <div class="input-group m-bot15">
+                                        <span class="input-group-addon btn-primary">@</span>
+                                        {{ formText('noEmail', entity.getNoEmail, {placeholder: 'E-mail para acesso ao sistema', class: 'form-control required email'}) }}
+                                    </div>
                                 </div>
                             </div>
+
+                            {% if entity.getIdUsuario is null %}
+                                <div class="form-group">
+                                    <label for="noPessoa" class="col-lg-2 col-sm-2 control-label">Senha</label>
+
+                                    <div class="col-lg-10">
+                                        <div class="input-group m-bot15">
+                                        <span class="input-group-addon btn-primary"><span
+                                                    class="fa fa-lock"></span></span>
+                                            {{ formText('noSenha', '', {placeholder: 'Senha para acesso ao sistema', class: 'form-control required'}) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
 
                             <div class="form-group">
                                 <label for="noPessoa" class="col-lg-2 col-sm-2 control-label">Situação</label>
@@ -44,12 +60,15 @@
                                 <label for="Perfis" class="col-lg-2 col-sm-2 control-label">Perfis</label>
 
                                 <div class="col-lg-10">
-                                    {{ formSelect('Perfis', 1, {'class': 'multi-select required', 'multiple': 'multiple', 'id': 'perfis', 'name': 'perfis[]'}, cmbStAtivo) }}
+                                    {{ formSelect('Perfis', null, {'class': 'multi-select required', 'multiple': 'multiple', 'id': 'perfis', 'name': 'perfis[]'}, cmbPerfis) }}
                                 </div>
                             </div>
 
                             <div class="form-group pull-right">
-                                <button type="submit" class="btn btn-info">Salvar</button>
+                                <button type="submit" class="btn btn-primary"><span class="fa fa-save"></span> Salvar
+                                </button>
+                                <a href="{{ path('super_usuario') }}" class="btn btn-default"><span
+                                            class="fa fa-times"></span> Cancelar</a>
                             </div>
 
                         </form>

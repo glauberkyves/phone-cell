@@ -19,11 +19,31 @@ class Usuario extends CrudService
     {
         $entityPessoa = $this
             ->getService('service.pessoa_fisica')
-            ->newEntity()
-            ->populate();
-        echo '<pre>'; var_dump($entityPessoa);die;
+            ->save();
 
+        $this->entity->setIdPessoa($entityPessoa->getIdPessoa());
+        $this->entity->setDtCadastro(new \DateTime());
+    }
 
-        $entity->setIdPessoa($entityPessoa->getIdPessoa());
+    public function postSave(AbstractEntity $entity = null)
+    {
+        if($this->entity->getIdUsuario()){
+            $svUsuarioPerfil = $this->getService('service.usuario_perfil');
+            foreach($svUsuarioPerfil->findByIdUsuario($this->entity->getIdUsuario()) as $perfilOld){
+                $this->remove($perfilOld);
+            }
+
+            foreach($this->getRequest()->get('perfis') as $idPerfil){
+                $perfil = $this->getService('service.perfil')->find($idPerfil);
+
+                $usuarioPefil = $svUsuarioPerfil->newEntity();
+                $usuarioPefil->setIdUsuario($this->entity);
+                $usuarioPefil->setIdPerfil($perfil);
+
+                $this->persist($usuarioPefil);
+            }
+
+            echo '<pre>'; var_dump($_POST);die;
+        }
     }
 }

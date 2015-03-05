@@ -8,9 +8,17 @@
 
 namespace Base\BaseBundle\Service;
 
-
 class Dominio
 {
-    CONST ATIVO   = 1;
+    CONST ATIVO = 1;
     CONST INATIVO = 0;
+
+    public static function getStAtivo()
+    {
+        return array(
+            '' => 'Selecione',
+            self::INATIVO => 'Inativo',
+            self::INATIVO => 'Ativo'
+        );
+    }
 } 

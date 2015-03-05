@@ -63,9 +63,9 @@ class AbstractController extends Controller
     public function resolveRouteIndex()
     {
         $explode                      = explode('_', $this->getRequest()->get('_route'));
-        $explode[count($explode) - 1] = 'index';
+        $explode[count($explode) - 1] = 'router';
 
-        return $this->generateUrl(implode('_', $explode));
+        return $this->generateUrl(str_replace('_router', '', implode('_', $explode)));
     }
 
     /**

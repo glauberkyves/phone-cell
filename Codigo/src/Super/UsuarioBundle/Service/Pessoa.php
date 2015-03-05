@@ -23,6 +23,6 @@ class Pessoa extends CrudService
 
     public function postUpdate(AbstractEntity $entity = null)
     {
-        $entity->setDtAtualizacaoF(new \DateTime());
+        $entity->setDtAtualizacao(new \DateTime());
     }
 }

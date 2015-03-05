@@ -17,8 +17,10 @@ class PessoaFisica extends CrudService
 
     public function preInsert(AbstractEntity $entity = null)
     {
-        echo '<pre>';
-        var_dump($entity);
-        die;
+        $entityPessoa = $this
+            ->getService('service.pessoa')
+            ->save();
+
+        $this->entity->setIdPessoa($entityPessoa);
     }
 }

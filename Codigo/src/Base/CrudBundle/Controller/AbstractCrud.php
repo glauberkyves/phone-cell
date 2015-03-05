@@ -41,10 +41,8 @@ class AbstractCrud extends AbstractController
      */
     protected function addMessage($message, $type = 'success')
     {
-        $explode = explode('.', $message);
-        $domain  = $explode[1];
 
-        $trans = $this->getTranslator()->trans($message, array(), $domain);
+        $trans = $this->getTranslator()->trans($message, array());
         $this->container->get('session')->getFlashBag()->add($type, $trans);
     }
 

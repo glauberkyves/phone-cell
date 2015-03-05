@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * RlUsuarioPerfil
  *
  * @ORM\Table(name="rl_usuario_perfil")
- * @ORM\Entity(repositoryClass="Base\BaseBundle\Repository\RlUsuarioPerfil")
+ * @ORM\Entity(repositoryClass="Base\BaseBundle\Repository\UsuarioPerfilRepository")
  */
 class RlUsuarioPerfil extends AbstractEntity
 {

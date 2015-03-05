@@ -34,48 +34,40 @@ class AbstractService extends BaseService
             $this->entity = $entity;
         }
 
-        $params    = $this->getContainer()->get('request_stack')->getCurrentRequest()->request->all();
-        $metadata  = $this->getEntityManager()->getClassMetadata(get_class($this->entity));
+        $params = $this->getRequest()->request->all();
+        $metadata = $this->getEntityManager()->getClassMetadata(get_class($this->entity));
         $arguments = func_get_args();
-        $insert    = false;
+        $insert = false;
 
         if (array_key_exists(current($metadata->getIdentifier()), $params)) {
             $this->entity = $this->find($params[current($metadata->getIdentifier())]);
             $this->entity->populate($params, true);
         } else {
-            $this->entity = $this->newEntity()->populate($params, false);
-            $insert       = true;
+            $this->entity = $this->newEntity()->populate($params);
+            $insert = true;
         }
 
-        echo '<pre>'; var_dump($this->entity);die;
-
-        if(!$arguments){
+        if (!$arguments) {
             array_push($arguments, $this->entity);
         }
 
-        switch (true) {
-            case $insert:
-                call_user_func_array(array($this, 'preInsert'), $arguments);
-                break;
-            case !$insert:
-                call_user_func_array(array($this, 'preUpdate'), $arguments);
-                break;
-            default:
-                call_user_func_array(array($this, 'preSave'), $arguments);
+        call_user_func_array(array($this, 'preSave'), $arguments);
+
+        if ($insert) {
+            call_user_func_array(array($this, 'preInsert'), $arguments);
+        } else {
+            call_user_func_array(array($this, 'preUpdate'), $arguments);
         }
 
         $this->persist();
 
-        switch (true) {
-            case $insert:
-                call_user_func_array(array($this, 'postInsert'), $arguments);
-                break;
-            case !$insert:
-                call_user_func_array(array($this, 'postUpdate'), $arguments);
-                break;
-            default:
-                call_user_func_array(array($this, 'postSave'), $arguments);
+        if ($insert) {
+            call_user_func_array(array($this, 'postInsert'), $arguments);
+        } else {
+            call_user_func_array(array($this, 'postUpdate'), $arguments);
         }
+
+        call_user_func_array(array($this, 'postSave'), $arguments);
 
         return $this->entity;
     }
@@ -124,5 +116,11 @@ class AbstractService extends BaseService
         }
 
         return $entity;
+    }
+
+    public function remove($entity)
+    {
+        $this->getEntityManager()->remove($entity);
+        $this->getEntityManager()->flush($entity);
     }
 }

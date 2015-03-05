@@ -3,6 +3,10 @@ services:
           class: Super\UsuarioBundle\Service\Usuario
           arguments:  ["@service_container"]
 
+    service.usuario_perfil:
+          class: Super\UsuarioBundle\Service\UsuarioPerfil
+          arguments:  ["@service_container"]
+
     service.perfil:
           class: Super\UsuarioBundle\Service\Perfil
           arguments:  ["@service_container"]

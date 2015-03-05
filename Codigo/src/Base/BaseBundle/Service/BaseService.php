@@ -14,6 +14,7 @@ use Base\CrudBundle\Service\Exception\CrudServiceException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator;
 
 class BaseService
@@ -33,7 +34,7 @@ class BaseService
         }
 
         $this->entityManager = $container->get("doctrine.orm.entity_manager");
-        $this->container     = $container;
+        $this->container = $container;
     }
 
     /**
@@ -189,5 +190,13 @@ class BaseService
         }
 
         return $this->getEntityManager()->getRepository($entityName);
+    }
+
+    /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        return $this->getContainer()->get('request_stack')->getCurrentRequest();
     }
 }
