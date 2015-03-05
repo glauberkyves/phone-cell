@@ -18,7 +18,8 @@
                                     <div class="input-group m-bot15">
                                         <span class="input-group-addon btn-primary"><span
                                                     class="fa fa-lock"></span></span>
-                                        {{ formText('noPessoa', entity.getIdPessoa.getNoPessoa, {placeholder: 'Nome completo', class: 'form-control required'}) }}
+                                        {{ formText('noPessoa', entity.idPessoa.noPessoa, {placeholder: 'Nome completo', class: 'form-control required'}) }}
+                                        {{ formHidden('idUsuario', entity.idUsuario, {placeholder: 'Nome completo', class: 'form-control required'}) }}
                                     </div>
                                 </div>
                             </div>
@@ -29,7 +30,7 @@
                                 <div class="col-lg-10">
                                     <div class="input-group m-bot15">
                                         <span class="input-group-addon btn-primary">@</span>
-                                        {{ formText('noEmail', entity.getNoEmail, {placeholder: 'E-mail para acesso ao sistema', class: 'form-control required email'}) }}
+                                        {{ formText('noEmail', entity.noEmail, {placeholder: 'E-mail para acesso ao sistema', class: 'form-control required email'}) }}
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +53,7 @@
                                 <label for="noPessoa" class="col-lg-2 col-sm-2 control-label">Situação</label>
 
                                 <div class="col-lg-10">
-                                    {{ formSelect('stAtivo', 1, {'class': 'form-control required'}, cmbStAtivo) }}
+                                    {{ formSelect('stAtivo', entity.stAtivo, {'class': 'form-control required'}, cmbStAtivo) }}
                                 </div>
                             </div>
 

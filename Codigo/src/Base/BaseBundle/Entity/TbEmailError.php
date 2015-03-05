@@ -31,16 +31,16 @@ class TbEmailError extends AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="ds_mensagem", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="ds_assunto", type="string", length=250, nullable=false)
      */
-    private $dsMensagem;
+    private $dsAssunto;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ds_assunto", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="ds_mensagem", type="text", length=65535, nullable=false)
      */
-    private $dsAssunto;
+    private $dsMensagem;
 
     /**
      * @var \DateTime

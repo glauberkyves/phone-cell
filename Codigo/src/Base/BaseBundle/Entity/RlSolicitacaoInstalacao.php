@@ -15,6 +15,15 @@ class RlSolicitacaoInstalacao
     /**
      * @var integer
      *
+     * @ORM\Column(name="id_solicitacao_instalacao", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idSolicitacaoInstalacao;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="st_segunda_opcao", type="integer", nullable=false)
      */
     private $stSegundaOpcao = '0';
@@ -39,8 +48,6 @@ class RlSolicitacaoInstalacao
     /**
      * @var \TbSolicitacao
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="TbSolicitacao")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_solicitacao", referencedColumnName="id_solicitacao")

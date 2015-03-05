@@ -14,13 +14,23 @@ class UsuarioController extends CrudController
 
     public function indexAction(Request $request)
     {
-        $this->vars['cmbStAtivo'] = Dominio::getStAtivo();
-
+        $this->getCmb();
         return parent::indexAction($request);
     }
 
-
     public function createAction(Request $request)
+    {
+        $this->getCmb();
+        return parent::createAction($request);
+    }
+
+    public function editAction(Request $request)
+    {
+        $this->getCmb();
+        return parent::editAction($request);
+    }
+
+    public function getCmb()
     {
         $this->vars['cmbStAtivo'] = Dominio::getStAtivo();
         $this->vars['cmbPerfis'] = array();
@@ -28,8 +38,6 @@ class UsuarioController extends CrudController
         foreach ($this->getService('service.perfil')->findAll() as $perfil) {
             $this->vars['cmbPerfis'][$perfil->getIdPerfil()] = $perfil->getNoPerfil();
         }
-
-        return parent::createAction($request);
     }
 
     public function validate(AbstractEntity $entity = null)

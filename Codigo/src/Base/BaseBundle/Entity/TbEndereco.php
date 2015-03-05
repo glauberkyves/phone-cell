@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TbEndereco
  *
- * @ORM\Table(name="tb_endereco", indexes={@ORM\Index(name="FK_ENDERECO_MUNICPIO_idx", columns={"id_bairro"})})
+ * @ORM\Table(name="tb_endereco", indexes={@ORM\Index(name="fk_endereco_municipio_idx", columns={"id_municipio"}), @ORM\Index(name="fk_endereco_bairro_idx", columns={"id_bairro"})})
  * @ORM\Entity(repositoryClass="Base\BaseBundle\Repository\EnderecoRepository")
  */
 class TbEndereco extends AbstractEntity
@@ -25,16 +25,30 @@ class TbEndereco extends AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="no_logradouro", type="string", length=100, nullable=false)
+     * @ORM\Column(name="no_bairro", type="string", length=100, nullable=true)
+     */
+    private $noBairro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_logradouro", type="string", length=150, nullable=false)
      */
     private $noLogradouro;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="no_bairro", type="string", length=45, nullable=true)
+     * @ORM\Column(name="nu_endereco", type="string", length=45, nullable=false)
      */
-    private $noBairro;
+    private $nuEndereco;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ds_complemento", type="string", length=100, nullable=true)
+     */
+    private $dsComplemento;
 
     /**
      * @var integer
@@ -46,16 +60,9 @@ class TbEndereco extends AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="no_complemento", type="string", length=100, nullable=true)
+     * @ORM\Column(name="ds_referencia", type="string", length=150, nullable=true)
      */
-    private $noComplemento;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nu_endereco", type="string", length=10, nullable=true)
-     */
-    private $nuEndereco;
+    private $dsReferencia;
 
     /**
      * @var \TbBairro

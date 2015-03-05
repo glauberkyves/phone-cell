@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class RlPessoaContato
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_pessoa_contato", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idPessoaContato;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dt_cadastro", type="datetime", nullable=false)
@@ -32,8 +41,6 @@ class RlPessoaContato
     /**
      * @var \TbPessoa
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="TbPessoa")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_pessoa", referencedColumnName="id_pessoa")

@@ -13,7 +13,7 @@ super_usuario_create:
     defaults: { _controller: SuperUsuarioBundle:Usuario:create }
 
 super_usuario_edit:
-    path:     /usuario/edit
+    path:     /usuario/editar
     defaults: { _controller: SuperUsuarioBundle:Usuario:edit }
 
 ###### manter perfil

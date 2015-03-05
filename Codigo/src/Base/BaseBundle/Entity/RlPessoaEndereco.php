@@ -15,6 +15,15 @@ class RlPessoaEndereco
     /**
      * @var integer
      *
+     * @ORM\Column(name="id_pessoa_endereco", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idPessoaEndereco;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="st_endereco_cobranca", type="integer", nullable=false)
      */
     private $stEnderecoCobranca = '0';
@@ -39,8 +48,6 @@ class RlPessoaEndereco
     /**
      * @var \TbPessoa
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="TbPessoa")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_pessoa", referencedColumnName="id_pessoa")

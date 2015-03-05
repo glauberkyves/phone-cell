@@ -22,6 +22,13 @@ class TbBairro extends AbstractEntity
     private $idBairro;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="no_bairro", type="string", length=200, nullable=false)
+     */
+    private $noBairro;
+
+    /**
      * @var \TbMunicipio
      *
      * @ORM\ManyToOne(targetEntity="TbMunicipio")
@@ -31,12 +38,6 @@ class TbBairro extends AbstractEntity
      */
     private $idMunicipio;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="no_bairro", type="string", length=200, nullable=false)
-     */
-    private $noBairro;
 
     /**
      * @param int $idBairro

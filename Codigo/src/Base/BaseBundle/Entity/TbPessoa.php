@@ -26,7 +26,7 @@ class TbPessoa extends AbstractEntity
      * @var string
      *
      * @Assert\NotBlank(message="usuario_bundle.validators.pessoa_fisica.noPessoa.notBlank")
-     * @ORM\Column(name="no_pessoa", type="string", length=100, nullable=false)
+     * @ORM\Column(name="no_pessoa", type="string", length=150, nullable=false)
      */
     private $noPessoa;
 

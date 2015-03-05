@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class RlOrdemServicoSolicitacao
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_ordemservico_solicitacao", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idOrdemservicoSolicitacao;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dt_cadastro", type="datetime", nullable=false)
@@ -22,8 +31,6 @@ class RlOrdemServicoSolicitacao
     /**
      * @var \TbOrdemServico
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="TbOrdemServico")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_ordem_servico", referencedColumnName="id_ordem_servico")

@@ -38,75 +38,51 @@ class TbPessoaFisica extends AbstractEntity
     private $sgSexo;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="no_nascionalidade", type="string", length=45, nullable=true)
+     */
+    private $noNascionalidade;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nu_rg", type="string", length=45, nullable=true)
+     */
+    private $nuRg;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ds_orgao_expedido", type="string", length=45, nullable=true)
+     */
+    private $dsOrgaoExpedido;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dt_expedicao", type="datetime", nullable=true)
+     */
+    private $dtExpedicao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_mae", type="string", length=150, nullable=true)
+     */
+    private $noMae;
+
+    /**
      * @var \TbPessoa
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\TbPessoa", inversedBy="idPessoaFisica")
+     * @ORM\OneToOne(targetEntity="TbPessoa")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_pessoa", referencedColumnName="id_pessoa")
      * })
      */
     private $idPessoa;
-
-    /**
-     * Set noSobrenome
-     *
-     * @param string $noSobrenome
-     * @return TbPessoaFisica
-     */
-    public function setNoSobrenome($noSobrenome)
-    {
-        $this->noSobrenome = $noSobrenome;
-
-        return $this;
-    }
-
-    /**
-     * Get noSobrenome
-     *
-     * @return string
-     */
-    public function getNoSobrenome()
-    {
-        return $this->noSobrenome;
-    }
-
-    /**
-     * Set nuCpf
-     *
-     * @param integer $nuCpf
-     * @return TbPessoaFisica
-     */
-    public function setNuCpf($nuCpf)
-    {
-        $this->nuCpf = $nuCpf;
-
-        return $this;
-    }
-
-    /**
-     * Get nuCpf
-     *
-     * @return integer
-     */
-    public function getNuCpf()
-    {
-        return $this->nuCpf;
-    }
-
-    /**
-     * Set dtNascimento
-     *
-     * @param \DateTime $dtNascimento
-     * @return TbPessoaFisica
-     */
-    public function setDtNascimento($dtNascimento)
-    {
-        $this->dtNascimento = $dtNascimento;
-
-        return $this;
-    }
 
     /**
      * Get dtNascimento

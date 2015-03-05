@@ -39,11 +39,11 @@ class Usuario extends CrudService
                 $usuarioPefil = $svUsuarioPerfil->newEntity();
                 $usuarioPefil->setIdUsuario($this->entity);
                 $usuarioPefil->setIdPerfil($perfil);
+                $usuarioPefil->setStAtivo(true);
+                $usuarioPefil->setDtCadastro(new \DateTime());
 
                 $this->persist($usuarioPefil);
             }
-
-            echo '<pre>'; var_dump($_POST);die;
         }
     }
 }
