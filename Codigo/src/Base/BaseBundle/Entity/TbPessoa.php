@@ -65,7 +65,6 @@ class TbPessoa extends AbstractEntity
      */
     protected $idPessoaJuridica;
 
-
     /**
      * Get idPessoa
      *

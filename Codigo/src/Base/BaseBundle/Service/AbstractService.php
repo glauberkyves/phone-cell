@@ -39,9 +39,9 @@ class AbstractService extends BaseService
         $arguments = func_get_args();
         $insert = false;
 
-        if (array_key_exists(current($metadata->getIdentifier()), $params)) {
+        if (array_key_exists(current($metadata->getIdentifier()), $params) && $params[current($metadata->getIdentifier())]) {
             $this->entity = $this->find($params[current($metadata->getIdentifier())]);
-            $this->entity->populate($params, true);
+            $this->entity->populate($params);
         } else {
             $this->entity = $this->newEntity()->populate($params);
             $insert = true;

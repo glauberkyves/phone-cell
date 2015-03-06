@@ -25,15 +25,23 @@ class Usuario extends CrudService
         $this->entity->setDtCadastro(new \DateTime());
     }
 
+    public function postUpdate(AbstractEntity $entity = null)
+    {
+        $this->getService('service.pessoa')
+            ->save($this->entity->getIdPessoa());
+
+        $this->entity->setDtAtualizacao(new \DateTime());
+    }
+
     public function postSave(AbstractEntity $entity = null)
     {
-        if($this->entity->getIdUsuario()){
+        if ($this->entity->getIdUsuario()) {
             $svUsuarioPerfil = $this->getService('service.usuario_perfil');
-            foreach($svUsuarioPerfil->findByIdUsuario($this->entity->getIdUsuario()) as $perfilOld){
+            foreach ($svUsuarioPerfil->findByIdUsuario($this->entity->getIdUsuario()) as $perfilOld) {
                 $this->remove($perfilOld);
             }
 
-            foreach($this->getRequest()->get('perfis') as $idPerfil){
+            foreach ($this->getRequest()->get('perfis') as $idPerfil) {
                 $perfil = $this->getService('service.perfil')->find($idPerfil);
 
                 $usuarioPefil = $svUsuarioPerfil->newEntity();
@@ -45,5 +53,23 @@ class Usuario extends CrudService
                 $this->persist($usuarioPefil);
             }
         }
+    }
+
+    public function parserItens(array $itens = array())
+    {
+        foreach ($itens as $key => $value) {
+            $html = '<div class="btn-group  btn-group-sm">';
+            $rtEdit = $this->getRouter()->generate('super_usuario_edit', array('id' => $value['idUsuario']));
+
+            $html .= '<button class="btn btn-white" type="button">';
+            $html .= "<a href=\"{$rtEdit}\">";
+            $html .= '<i class="fa fa-edit"></i>';
+            $html .= '</a></button>';
+            $html .= ' </div>';
+
+            $itens[$key]['opcoes'] = $html;
+        }
+
+        return parent::parserItens($itens);
     }
 }

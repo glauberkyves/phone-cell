@@ -8,10 +8,7 @@
 
 namespace Base\BaseBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-
-class UsuarioRepository extends EntityRepository
+class UsuarioRepository extends AbstractRepository
 {
 
 } 

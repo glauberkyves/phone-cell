@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Validator\Validator;
 
 class BaseService
@@ -198,5 +199,13 @@ class BaseService
     public function getRequest()
     {
         return $this->getContainer()->get('request_stack')->getCurrentRequest();
+    }
+
+    /**
+     * @return Router
+     */
+    public function getRouter()
+    {
+        return $this->getContainer()->get('router');
     }
 }

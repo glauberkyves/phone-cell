@@ -17,8 +17,8 @@ class Dominio
     {
         return array(
             '' => 'Selecione',
-            self::INATIVO => 'Inativo',
-            self::INATIVO => 'Ativo'
+            self::ATIVO => 'Ativo',
+            self::INATIVO => 'Inativo'
         );
     }
 } 

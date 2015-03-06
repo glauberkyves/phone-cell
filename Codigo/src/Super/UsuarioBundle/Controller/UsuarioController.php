@@ -46,6 +46,14 @@ class UsuarioController extends CrudController
             $this->addMessage('usuario_bundle.validators.perfils.validate', 'error');
         }
 
+        if (!$this->getRequest()->get('idUsuario') && $this->getService()->findOneByNoEmail($this->getRequest()->get('noEmail'))) {
+            $this->addMessage('usuario_bundle.validators.email.duplicado', 'error');
+        }
+
+        if (!$this->getRequest()->get('idUsuario') && !$this->getRequest()->get('noSenha')) {
+            $this->addMessage('usuario_bundle.validators.email.duplicado', 'error');
+        }
+
         return parent::validate($entity);
     }
 }

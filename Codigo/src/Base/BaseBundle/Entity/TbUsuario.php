@@ -36,7 +36,6 @@ class TbUsuario extends AbstractEntity implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="usuario_bundle.validators.usuario.noSenha.notBlank")
      * @ORM\Column(name="no_senha", type="string", length=32, nullable=false)
      */
     private $noSenha;

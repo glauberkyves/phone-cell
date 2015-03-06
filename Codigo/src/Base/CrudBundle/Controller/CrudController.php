@@ -35,14 +35,12 @@ class CrudController extends AbstractCrud
 
         $this->vars['entity'] = $this->getService()->newEntity()->populate($request->request->all());
 
-        return $this->render($this->resolveRouteName('form'), $this->vars);
+        return $this->render($this->resolveRouteName(), $this->vars);
     }
 
     public function editAction(Request $request)
     {
-        if ($request->isMethod('post') && $this->validate()) {
-            $this->save();
-
+        if ($request->isMethod('post') && $this->validate() && $this->save()) {
             return $this->redirect($this->resolveRouteIndex());
         }
 
@@ -52,11 +50,11 @@ class CrudController extends AbstractCrud
 
         $this->vars['entity'] = $this->getService()->find($request->get('id'));
 
-        if ($request->isMethod('post')) {
-            $this->vars['entity'] = $this->getService()->newEntity()->populate($request->request->all());
+        if ($request->isMethod('post') && $this->vars['entity']) {
+            $this->vars['entity'] = $this->vars['entity']->populate($request->request->all());
         }
 
-        return $this->render($this->resolveRouteName('form'), $this->vars);
+        return $this->render($this->resolveRouteName(), $this->vars);
     }
 
     public function listAction()
@@ -76,7 +74,7 @@ class CrudController extends AbstractCrud
         $entity->populate($this->getRequest()->request->all(), false);
 
         $validator = $this->getValidator();
-        $errors    = $validator->validate($entity);
+        $errors = $validator->validate($entity);
 
         foreach ($errors->getIterator() as $error) {
             $this->addMessage($error->getMessageTemplate(), 'error');

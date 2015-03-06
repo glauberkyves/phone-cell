@@ -14,7 +14,11 @@
                                 <label for="noPessoa" class="col-lg-2 col-sm-2 control-label">Nome</label>
 
                                 <div class="col-lg-10">
-                                    {{ formText('noPessoa', '', {'class': 'form-control'}) }}
+                                    <div class="input-group m-bot15">
+                                    <span class="input-group-addon btn-primary"><span
+                                                class="fa fa-user"></span></span>
+                                        {{ formText('noPessoa', '', {'class': 'form-control'}) }}
+                                    </div>
                                 </div>
                             </div>
 
@@ -22,12 +26,15 @@
                                 <label for="noEmail" class="col-lg-2 col-sm-2 control-label">E-mail</label>
 
                                 <div class="col-lg-10">
-                                    {{ formText('noEmail', '', {'class': 'form-control'}) }}
+                                    <div class="input-group m-bot15">
+                                    <span class="input-group-addon btn-primary">@</span>
+                                        {{ formText('noEmail', '', {'class': 'form-control'}) }}
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="noEmail" class="col-lg-2 col-sm-2 control-label">E-mail</label>
+                                <label for="noEmail" class="col-lg-2 col-sm-2 control-label">Situação</label>
 
                                 <div class="col-lg-10">
                                     {{ formSelect('stAtivo', '', {'class': 'form-control'}, cmbStAtivo) }}
@@ -62,9 +69,9 @@
                         <table class="table table-bordered table-striped table-condensed" data-grid="form-usuario">
                             <thead>
                             <tr>
-                                <th data-column="noPerfil">Perfil</th>
+                                <th data-column="noEmail">Nome</th>
                                 <th data-column="stAtivo">Situação</th>
-                                <th data-column="option">Opções</th>
+                                <th data-column="opcoes" width="10%">Opções</th>
                             </tr>
                             </thead>
                             <tbody>
