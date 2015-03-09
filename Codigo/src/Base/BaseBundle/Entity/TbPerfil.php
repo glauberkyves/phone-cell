@@ -32,7 +32,6 @@ class TbPerfil extends AbstractEntity implements RoleInterface, \Serializable
 
     /**
      * @var string
-     * @Assert\NotBlank(message="super_usuario_bundle.validators.perfil.sgPerfil.notBlank")
      * @ORM\Column(name="sg_perfil", type="string", length=45, nullable=false)
      */
     private $sgPerfil;

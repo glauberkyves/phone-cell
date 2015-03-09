@@ -90,6 +90,14 @@ class TbUsuario extends AbstractEntity implements UserInterface, \Serializable
     }
 
     /**
+     * @param int $idUsuario
+     */
+    public function setIdUsuario($idUsuario)
+    {
+        $this->idUsuario = $idUsuario;
+    }
+
+    /**
      * Get idUsuario
      *
      * @return integer

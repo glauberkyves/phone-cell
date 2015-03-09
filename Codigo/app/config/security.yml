@@ -32,9 +32,13 @@ security:
                 target: /
 
     role_hierarchy:
-        ROLE_USER:      [ROLE_VENDEDOR]
-        ROLE_USER:      [ROLE_COLETADOR]
-        ROLE_SUPER:     [ROLE_SUPER]
+        ROLE_VENDEDOR:      [ROLE_VENDEDOR]
+        ROLE_AUDITOR:       [ROLE_AUDITOR]
+        ROLE_INPUTADOR:     [ROLE_INPUTADOR]
+        ROLE_ACOMPANHADOR:  [ROLE_ACOMPANHADOR]
+        ROLE_SUPERVISOR:    [ROLE_SUPERVISOR, ROLE_ACOMPANHADOR, ROLE_AUDITOR, ROLE_INPUTADOR, ROLE_VENDEDOR]
+        ROLE_GERENTE:       [ROLE_GERENTE, ROLE_SUPERVISOR]
+        ROLE_SUPER:         [ROLE_SUPER, ROLE_GERENTE, ROLE_SUPERVISOR]
 
     access_control:
          - { path: ^/profile, roles: [ROLE_USER, ROLE_SUPER] }

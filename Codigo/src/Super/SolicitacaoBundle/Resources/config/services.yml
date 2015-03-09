@@ -1,4 +1,10 @@
 services:
-#    super_solicitacao.example:
-#        class: Super\SolicitacaoBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    service.solicitacao:
+          class: Super\SolicitacaoBundle\Service\Solicitacao
+          arguments:  ["@service_container"]
+
+    service.plano:
+          class: Super\SolicitacaoBundle\Service\Plano
+          arguments:  ["@service_container"]
+
+

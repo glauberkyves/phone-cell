@@ -1,4 +1,4 @@
-{% extends 'SuperBaseBundle::layout.html.twig' %}
+{% extends 'BaseBaseBundle::layout.html.twig' %}
 {% block body %}
     <section class="panel">
         <header class="panel-heading">
@@ -8,24 +8,20 @@
               </span>
         </header>
         <div class="panel-body">
-            <form method="post" action="{{ path('super_usuario_perfil_edit') }}" id="form-cadastro" class="form-horizontal tasi-form">
+            <form method="post" action="" id="form-cadastro" class="form-horizontal tasi-form">
                 <div class="form-group">
                     <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Perfil</label>
 
                     <div class="col-lg-10">
-                        <input type="text" class="form-control required" id="noPerfil" name="noPerfil" value="{{ entity.getNoPerfil() }}">
-                        <input type="hidden" class="form-control required" id="idPerfil" name="idPerfil" value="{{ entity.getRlUsuarioPerfil() }}">
+                        {{ formHidden('idPerfil', entity.idPerfil, {class: 'form-control required'}) }}
+                        {{ formText('noPerfil', entity.noPerfil, {class: 'form-control required'}) }}
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Situação</label>
+                    <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Role</label>
 
                     <div class="col-lg-10">
-                        <select class="form-control required" id="stAtivo" name="stAtivo">
-                            <option value="">Selecione...</option>
-                            <option value="0">Inativo</option>
-                            <option value="1">Ativo</option>
-                        </select>
+                        {{ formText('', entity.sgPerfil, {class: 'form-control', disabled: 'disabled'}) }}
                     </div>
                 </div>
                 <div class="form-group">
@@ -35,7 +31,7 @@
                             Salvar
                         </button>
 
-                        <a href="{{ path('super_usuario_perfil') }}" class="btn btn-default">
+                        <a href="{{ path('super_perfil') }}" class="btn btn-default">
                             <i class="fa fa-times"></i>
                             Cancelar
                         </a>

@@ -6,7 +6,7 @@
             </header>
             <div class="panel-body">
                 <div class="position-center">
-                    <form role="form" class="form-horizontal" method="post" >
+                    <form role="form" class="form-horizontal" method="post">
 
                         <div class="form-group">
                             <label for="noPessoa" class="col-lg-2 col-sm-2 control-label">Nome</label>
@@ -58,7 +58,7 @@
                             <label for="Perfis" class="col-lg-2 col-sm-2 control-label">Perfis</label>
 
                             <div class="col-lg-10">
-                                {{ formSelect('Perfis', null, {'class': 'multi-select required', 'multiple': 'multiple', 'id': 'perfis', 'name': 'perfis[]'}, cmbPerfis) }}
+                                {{ formSelect('Perfis', perfis, {'class': 'multi-select required', 'multiple': 'multiple', 'id': 'perfis', 'name': 'perfis[]'}, cmbPerfis) }}
                             </div>
                         </div>
 

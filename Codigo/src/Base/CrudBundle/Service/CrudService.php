@@ -52,4 +52,9 @@ class CrudService extends AbstractService
 
         return $itens;
     }
+
+    public function getComboDefault(array $criteria = array(), array $orderBy = null, $limit = null, $offset = null)
+    {
+        return array_merge(array('' => 'Selecione'), $this->getRepository()->getComboDefault($criteria, $orderBy, $limit, $offset));
+    }
 }

@@ -8,9 +8,7 @@
 
 namespace Base\BaseBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-
-class EstadoRepository extends EntityRepository
+class EstadoRepository extends AbstractRepository
 {
     public function getEstadoBrowser($estado)
     {

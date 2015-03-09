@@ -66,6 +66,14 @@ class TbPessoa extends AbstractEntity
     protected $idPessoaJuridica;
 
     /**
+     * @param int $idPessoa
+     */
+    public function setIdPessoa($idPessoa)
+    {
+        $this->idPessoa = $idPessoa;
+    }
+
+    /**
      * Get idPessoa
      *
      * @return integer

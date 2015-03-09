@@ -6803,11 +6803,15 @@ label.error {
     font-weight: normal;
 }
 
-form label.control-label {
-    margin-left: -15px;
-}
+/*form label.control-label {*/
+    /*margin-left: -15px;*/
+/*}*/
 
-#wizard-vertical div.content.clearfix {
-    height: 780px;
-    border: 1px solid;
+/*#wizard-vertical div.content.clearfix {*/
+    /*height: 780px;*/
+    /*border: 1px solid;*/
+/*}*/
+
+.position-center {
+    width: 90%;
 }

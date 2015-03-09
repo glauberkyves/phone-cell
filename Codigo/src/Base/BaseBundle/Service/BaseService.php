@@ -155,14 +155,14 @@ class BaseService
         try {
             return $this->getMailer()->send($message);
         } catch (\Exception $exc) {
-            $entity = $this->getService('base_bundle.email_error')->newEntity();
+            $entity = $this->getService('service.email_error')->newEntity();
             $entity->setDtCadastro(new \DateTime());
             $entity->setNoDestinatario($toSend);
             $entity->setDsMensagem($body);
             $entity->setDsAssunto($subject);
             $entity->setStEnvio(false);
 
-            $this->getService('base_bundle.email_error')->persist($entity);
+            $this->getService('service.email_error')->persist($entity);
 
             $this->addLog($exc->getMessage());
 

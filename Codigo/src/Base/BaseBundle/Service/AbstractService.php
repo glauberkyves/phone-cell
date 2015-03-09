@@ -34,40 +34,48 @@ class AbstractService extends BaseService
             $this->entity = $entity;
         }
 
-        $params = $this->getRequest()->request->all();
+        $params   = $this->getRequest()->request->all();
         $metadata = $this->getEntityManager()->getClassMetadata(get_class($this->entity));
         $arguments = func_get_args();
-        $insert = false;
+        $insert   = false;
 
-        if (array_key_exists(current($metadata->getIdentifier()), $params) && $params[current($metadata->getIdentifier())]) {
-            $this->entity = $this->find($params[current($metadata->getIdentifier())]);
-            $this->entity->populate($params);
+        $methodGet = 'get' . ucfirst(current($metadata->getIdentifier()));
+
+        if ($this->entity->{$methodGet}()
+            || (array_key_exists(current($metadata->getIdentifier()), $params) && $params[current($metadata->getIdentifier())])
+        ) {
+            $id = $this->entity->{$methodGet}();
+
+            if(array_key_exists(current($metadata->getIdentifier()), $params) && $params[current($metadata->getIdentifier())]){
+                $id = $params[current($metadata->getIdentifier())];
+            }
+
+            $entityPersister = $this->find($id);
+            $entityPersister->populate($params);
         } else {
-            $this->entity = $this->newEntity()->populate($params);
-            $insert = true;
+            $entityPersister = $this->newEntity()->populate($params);
+            $insert          = true;
         }
 
-        if (!$arguments) {
-            array_push($arguments, $this->entity);
-        }
-
-        call_user_func_array(array($this, 'preSave'), $arguments);
+        call_user_func_array(array($this, 'preSave'), array($this->entity));
 
         if ($insert) {
-            call_user_func_array(array($this, 'preInsert'), $arguments);
+            call_user_func_array(array($this, 'preInsert'), array($this->entity));
         } else {
-            call_user_func_array(array($this, 'preUpdate'), $arguments);
+            call_user_func_array(array($this, 'preUpdate'), array($this->entity));
         }
 
-        $this->persist();
+        $this->persist($entityPersister);
+
+        $this->entity = $entityPersister;
 
         if ($insert) {
-            call_user_func_array(array($this, 'postInsert'), $arguments);
+            call_user_func_array(array($this, 'postInsert'), array($this->entity));
         } else {
-            call_user_func_array(array($this, 'postUpdate'), $arguments);
+            call_user_func_array(array($this, 'postUpdate'), array($this->entity));
         }
 
-        call_user_func_array(array($this, 'postSave'), $arguments);
+        call_user_func_array(array($this, 'postSave'), array($this->entity));
 
         return $this->entity;
     }

@@ -79,4 +79,32 @@ class AbstractRepository extends EntityRepository
 
         return $metadata->getTypeOfColumn($column);
     }
-} 
+
+    /**
+     * Monta combo com campos do Tipo Pessoa
+     * @param array $criteria
+     * @param array|null $orderBy
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return array The objects.
+     * @return array
+     */
+    public function getComboDefault(array $criteria = array(), array $orderBy = null, $limit = null, $offset = null)
+    {
+        $itens  = array();
+        $result = $this->findBy($criteria, $orderBy, $limit, $offset);
+
+        $className  = $this->getClassName();
+        $metadata   = $this->getEntityManager()->getClassMetadata($this->_entityName);
+        $fieldNames = $metadata->getFieldNames();
+
+        $getIdCodigo    = 'get' . ucfirst($fieldNames[0]);
+        $getNoDescricao = 'get' . ucfirst($fieldNames[1]);
+
+        foreach ($result as $item) {
+            $itens[$item->{$getIdCodigo}()] = $item->{$getNoDescricao}();
+        }
+
+        return $itens;
+    }
+}

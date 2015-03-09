@@ -23,6 +23,8 @@ class Usuario extends CrudService
 
         $this->entity->setIdPessoa($entityPessoa->getIdPessoa());
         $this->entity->setDtCadastro(new \DateTime());
+
+//        $this->generateSecretHash($entity);
     }
 
     public function postUpdate(AbstractEntity $entity = null)
@@ -55,10 +57,20 @@ class Usuario extends CrudService
         }
     }
 
+    public function generateSecretHash($entity)
+    {
+        $idUsuario = md5($entity->getIdUsuario());
+        $noSenha   = md5($entity->getNoSenha());
+
+        $entity->setNoSenha(md5($idUsuario . $noSenha));
+
+        $this->persist($entity);
+    }
+
     public function parserItens(array $itens = array())
     {
         foreach ($itens as $key => $value) {
-            $html = '<div class="btn-group  btn-group-sm">';
+            $html   = '<div class="btn-group  btn-group-sm">';
             $rtEdit = $this->getRouter()->generate('super_usuario_edit', array('id' => $value['idUsuario']));
 
             $html .= '<button class="btn btn-white" type="button">';

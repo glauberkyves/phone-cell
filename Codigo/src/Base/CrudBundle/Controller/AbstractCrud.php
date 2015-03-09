@@ -59,7 +59,10 @@ class AbstractCrud extends AbstractController
     public function save()
     {
         try {
-            call_user_func_array(array($this->getService(), 'save'), func_get_args());
+            $params = $this->getRequest()->request->all();
+            $entity = $this->getService()->newEntity()->populate($params, false);
+
+            call_user_func_array(array($this->getService(), 'save'), array($entity));
             $this->addMessage($this->resolveMessageSuccess(), 'success');
 
             return true;

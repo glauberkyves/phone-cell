@@ -24,4 +24,22 @@ class Perfil extends CrudService
     {
         $this->entity->setDtAtualizacao(new \DateTime());
     }
+
+    public function parserItens(array $itens = array())
+    {
+        foreach ($itens as $key => $value) {
+            $html   = '<div class="btn-group  btn-group-sm">';
+            $rtEdit = $this->getRouter()->generate('super_perfil_edit', array('id' => $value['idPerfil']));
+
+            $html .= '<button class="btn btn-white" type="button">';
+            $html .= "<a href=\"{$rtEdit}\">";
+            $html .= '<i class="fa fa-edit"></i>';
+            $html .= '</a></button>';
+            $html .= ' </div>';
+
+            $itens[$key]['opcoes'] = $html;
+        }
+
+        return parent::parserItens($itens);
+    }
 }

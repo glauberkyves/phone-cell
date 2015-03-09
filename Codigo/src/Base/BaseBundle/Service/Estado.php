@@ -8,7 +8,9 @@
 
 namespace Base\BaseBundle\Service;
 
-class Estado extends AbstractService
+use Base\CrudBundle\Service\CrudService;
+
+class Estado extends CrudService
 {
     CONST BRASILIA = 7;
 

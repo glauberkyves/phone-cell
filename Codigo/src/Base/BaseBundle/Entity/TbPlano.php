@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TbPlano
  *
  * @ORM\Table(name="tb_plano")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Base\BaseBundle\Repository\PlanoRepository")
  */
 class TbPlano extends AbstractEntity
 {

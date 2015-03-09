@@ -20,20 +20,18 @@ class TbEstado extends AbstractEntity
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idEstado;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="sg_uf", type="string", length=10, nullable=false)
-     */
-    private $sgUf;
-
     /**
      * @var string
      *
      * @ORM\Column(name="no_estado", type="string", length=20, nullable=false)
      */
     private $noEstado;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sg_uf", type="string", length=10, nullable=false)
+     */
+    private $sgUf;
 
     /**
      * @return int

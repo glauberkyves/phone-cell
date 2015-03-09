@@ -17,14 +17,10 @@ super_usuario_edit:
     defaults: { _controller: SuperUsuarioBundle:Usuario:edit }
 
 ###### manter perfil
-super_usuario_perfil:
+super_perfil:
     path:     /perfil
     defaults: { _controller: SuperUsuarioBundle:Perfil:index }
 
-super_usuario_perfil_create:
-    path:     /perfil/create
-    defaults: { _controller: SuperUsuarioBundle:Perfil:create }
-
-super_usuario_perfil_edit:
-    path:     /perfil/edit
+super_perfil_edit:
+    path:     /perfil/editar
     defaults: { _controller: SuperUsuarioBundle:Perfil:edit }
