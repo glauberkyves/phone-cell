@@ -8,9 +8,16 @@
 
 namespace Super\SolicitacaoBundle\Service;
 
+use Base\BaseBundle\Entity\AbstractEntity;
 use Base\CrudBundle\Service\CrudService;
 
 class Solicitacao extends CrudService
 {
     protected $entityName = 'Base\BaseBundle\Entity\TbSolicitacao';
+
+    public function preInsert(AbstractEntity $entity = null)
+    {
+        echo '<pre>'; var_dump(123);die;
+
+    }
 }

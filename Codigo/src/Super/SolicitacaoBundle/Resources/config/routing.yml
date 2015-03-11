@@ -1,3 +1,7 @@
 super_solicitacao_homepage:
     path:     /
     defaults: { _controller: SuperSolicitacaoBundle:Default:create }
+
+super_solicitacao_check_cpf:
+    path:     /check-cpf
+    defaults: { _controller: SuperSolicitacaoBundle:Default:checkCpf }
