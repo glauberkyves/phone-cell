@@ -8,7 +8,9 @@
 
 namespace Base\BaseBundle\Service;
 
-class Endereco extends AbstractService
+use Base\CrudBundle\Service\CrudService;
+
+class Endereco extends CrudService
 {
     protected $entityName = 'Base\BaseBundle\Entity\TbEndereco';
 }

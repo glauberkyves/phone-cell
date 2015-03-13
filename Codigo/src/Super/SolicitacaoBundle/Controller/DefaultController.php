@@ -13,14 +13,25 @@ class DefaultController extends CrudController
     public function createAction(Request $request)
     {
         $this->getCmb();
-
-        $id = $request->query->getDigits('id');
-
-        if($id){
-            $this->vars['idPessoa'] = $this->getService('service.pessoa')->find($id);
-        }
+        $this->setEntities();
 
         return parent::createAction($request);
+    }
+
+    public function setEntities()
+    {
+        $request = $this->getRequest()->request;
+        $arrPessoa = $request->get('pessoa', array());
+        $arrEndereco = $request->get('endereco', array());
+
+        $this->vars['idPessoa'] = $this->getService('service.pessoa')->newEntity()->populate($arrPessoa);
+        $this->vars['idEndereco'] = $this->getService('service.endereco')->newEntity()->populate($arrEndereco);
+
+        $id = $this->getRequest()->query->getDigits('id');
+
+        if ($id) {
+            $this->vars['idPessoa'] = $this->getService('service.pessoa')->find($id)->populate($arrPessoa);
+        }
     }
 
     public function CheckCpfAction(Request $request)

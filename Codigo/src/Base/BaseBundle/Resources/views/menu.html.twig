@@ -17,10 +17,14 @@
             </ul>
         </li>
         <li class="sub-menu">
-            <a href="{{ path('super_solicitacao_homepage') }}">
+            <a href="javascript:;">
                 <i class="fa fa-file-text-o"></i>
-                <span>Formulário de cadastro</span>
+                <span>Solicitação</span>
             </a>
+            <ul class="sub">
+                <li><a href="{{ path('super_solicitacao_oi_fixo') }}">Oi Fixo</a></li>
+                <li><a href="{{ path('super_solicitacao_oi_tv') }}">Oi Tv</a></li>
+            </ul>
         </li>
     {% endif %}
 </ul>

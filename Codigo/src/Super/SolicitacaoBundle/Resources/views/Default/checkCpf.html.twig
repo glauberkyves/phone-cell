@@ -33,7 +33,9 @@
                                         </a>
                                     </div>
                                     <div class="alert alert-danger fade in hide" id="div-cpf-error">
-                                        <strong>CPF não encontrado</strong>
+                                        <a href="#" class="checkOut">
+                                            <strong>CPF não encontrado</strong><span>, cadastrar?</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -68,8 +70,16 @@
                 }
             })
 
+            $('#pessoa-nuCpf').blur(function () {
+                $('#buscar').click()
+            });
+
             $('.checkOut').click(function () {
-                window.location = '{{ path('super_solicitacao_homepage') }}?id= ' + $('#pessoa-idPessoa').val()
+                {% if app.request.get('_route') == 'super_solicitacao_oi_fixo' %}
+                window.location = '{{ path('super_solicitacao_oi_fixo_create') }}?id= ' + $('#pessoa-idPessoa').val()
+                {% elseif app.request.get('_route') == 'super_solicitacao_oi_tv' %}
+                window.location = '{{ path('super_solicitacao_oi_tv_create') }}?id= ' + $('#pessoa-idPessoa').val()
+                {% endif %}
             });
         });
     </script>
