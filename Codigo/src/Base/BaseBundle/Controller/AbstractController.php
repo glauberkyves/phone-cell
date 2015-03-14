@@ -80,8 +80,8 @@ class AbstractController extends Controller
      * @param $params
      * @return JsonResponse
      */
-    public function renderJson($params)
+    public function renderJson($params, $status = 200)
     {
-        return new JsonResponse($params);
+        return new JsonResponse($params, $status);
     }
 }

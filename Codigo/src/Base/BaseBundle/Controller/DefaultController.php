@@ -11,8 +11,8 @@ class DefaultController extends CrudController
 
     public function getMunicipiosAction(Request $request)
     {
-        $arrMunicipio = $this->getService('base_bundle.municipio')->findByIdEstado(
-            $request->get('estado', 0),
+        $arrMunicipio = $this->getService('service.municipio')->findByIdEstado(
+            $request->query->getDigits('estado', 0),
             array(
                 'noMunicipio' => 'asc'
             )
@@ -28,9 +28,9 @@ class DefaultController extends CrudController
 
     public function getBairrosAction(Request $request)
     {
-        $arrBairros = $this->getService('base_bundle.bairro')->findByIdMunicipio(
-            $request->get('municipio', 0),
-            array(
+        $arrBairros = $this->getService('service.bairro')->findByIdMunicipio(
+                $request->query->getDigits('municipio', 0),
+        array(
                 'noBairro' => 'asc'
             )
         );
@@ -43,9 +43,20 @@ class DefaultController extends CrudController
         return $this->renderJson($arrResult);
     }
 
+    public function getDadosCepAction(Request $request)
+    {
+        $result = array();
+
+        if ($request->query->getDigits('cep')) {
+            $result = current($this->getService('service.logradouro')->getDadosCep($request->query->getDigits('cep')));
+        }
+
+        return $this->renderJson($result);
+    }
+
     public function faleConoscoAction(Request $request)
     {
-        $this->serviceName = 'base_bundle.newsletter';
+        $this->serviceName = 'service.newsletter';
 
         if ($request->isMethod('post') && $this->validate()) {
             $this->save();
