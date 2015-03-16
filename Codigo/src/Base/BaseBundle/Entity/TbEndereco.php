@@ -2,7 +2,6 @@
 
 namespace Base\BaseBundle\Entity;
 
-use AppBundle\Entity\TbMunicipio;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

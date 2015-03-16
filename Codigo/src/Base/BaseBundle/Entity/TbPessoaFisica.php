@@ -18,7 +18,7 @@ class TbPessoaFisica extends AbstractEntity
      * @var integer
      *
      * @BaseAssert\ConstraintCPF(message="base_bundle.validators.cpf")
-     * @ORM\Column(name="nu_cpf", type="integer", nullable=true)
+     * @ORM\Column(name="nu_cpf", type="string", nullable=true)
      */
     private $nuCpf;
 
@@ -84,6 +84,11 @@ class TbPessoaFisica extends AbstractEntity
      */
     private $idPessoa;
 
+    public function __construct(){
+        $this->dtNascimento = new \DateTime();
+        $this->dtExpedicao = new \DateTime();
+    }
+
     /**
      * Get dtNascimento
      *
@@ -92,6 +97,111 @@ class TbPessoaFisica extends AbstractEntity
     public function getDtNascimento()
     {
         return $this->dtNascimento;
+    }
+
+    /**
+     * @param \DateTime $dtNascimento
+     */
+    public function setDtNascimento($dtNascimento)
+    {
+        $this->dtNascimento = $dtNascimento;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getNuCpf()
+    {
+        return $this->nuCpf;
+    }
+
+    /**
+     * @param int $nuCpf
+     */
+    public function setNuCpf($nuCpf)
+    {
+        $this->nuCpf = $nuCpf;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNoNascionalidade()
+    {
+        return $this->noNascionalidade;
+    }
+
+    /**
+     * @param string $noNascionalidade
+     */
+    public function setNoNascionalidade($noNascionalidade)
+    {
+        $this->noNascionalidade = $noNascionalidade;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNuRg()
+    {
+        return $this->nuRg;
+    }
+
+    /**
+     * @param string $nuRg
+     */
+    public function setNuRg($nuRg)
+    {
+        $this->nuRg = $nuRg;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDsOrgaoExpedido()
+    {
+        return $this->dsOrgaoExpedido;
+    }
+
+    /**
+     * @param string $dsOrgaoExpedido
+     */
+    public function setDsOrgaoExpedido($dsOrgaoExpedido)
+    {
+        $this->dsOrgaoExpedido = $dsOrgaoExpedido;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDtExpedicao()
+    {
+        return $this->dtExpedicao;
+    }
+
+    /**
+     * @param \DateTime $dtExpedicao
+     */
+    public function setDtExpedicao($dtExpedicao)
+    {
+        $this->dtExpedicao = $dtExpedicao;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNoMae()
+    {
+        return $this->noMae;
+    }
+
+    /**
+     * @param string $noMae
+     */
+    public function setNoMae($noMae)
+    {
+        $this->noMae = $noMae;
     }
 
     /**

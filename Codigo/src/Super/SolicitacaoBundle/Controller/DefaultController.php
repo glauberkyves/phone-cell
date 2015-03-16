@@ -13,8 +13,45 @@ class DefaultController extends CrudController
     public function createAction(Request $request)
     {
         $this->getCmb();
+        $this->setEntities();
 
         return parent::createAction($request);
+    }
+
+    public function setEntities()
+    {
+        $request        = $this->getRequest()->request;
+        $arrPessoa      = $request->get('pessoa', array());
+        $arrEndereco    = $request->get('endereco', array());
+        $arrSolicitacao = $request->get('solicitacao', array());
+
+        $this->vars['idPessoa']      = $this->getService('service.pessoa')->newEntity()->populate($arrPessoa);
+        $this->vars['idEndereco']    = $this->getService('service.endereco')->newEntity()->populate($arrEndereco);
+        $this->vars['idSolicitacao'] = $this->getService('service.solicitacao')->newEntity()->populate($arrSolicitacao);
+
+        $id = $this->getRequest()->query->getDigits('id');
+
+        if ($id) {
+            $this->vars['idPessoa'] = $this->getService('service.pessoa')->find($id)->populate($arrPessoa);
+        }
+    }
+
+    public function CheckCpfAction(Request $request)
+    {
+        if ($request->query->getAlnum('buscar')) {
+            $nuCpf  = $request->query->getDigits('nuCpf');
+            $entity = $this->getService('service.pessoa_fisica')->findOneByNuCpf($nuCpf);
+            $json   = array();
+
+            if ($entity) {
+                $json['noPessoa'] = $entity->getIdPessoa()->getNoPessoa();
+                $json['idPessoa'] = $entity->getIdPessoa()->getIdPessoa();
+            }
+
+            return $this->renderJson($json);
+        }
+
+        return $this->render($this->resolveRouteName());
     }
 
     public function getCmb()

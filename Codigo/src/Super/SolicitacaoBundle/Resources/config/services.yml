@@ -7,4 +7,8 @@ services:
           class: Super\SolicitacaoBundle\Service\Plano
           arguments:  ["@service_container"]
 
+    service.solicitacao_plano:
+          class: Super\SolicitacaoBundle\Service\SolicitacaoPlano
+          arguments:  ["@service_container"]
+
 

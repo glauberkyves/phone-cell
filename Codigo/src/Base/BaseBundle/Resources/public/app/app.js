@@ -29,4 +29,9 @@ $(document).ready(function () {
 
         $('#menu-estado').append(li)
     })
+
+    $('.date-picker').datepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true
+    });
 });

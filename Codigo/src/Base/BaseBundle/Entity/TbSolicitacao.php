@@ -45,13 +45,6 @@ class TbSolicitacao extends AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="no_solicitaaco", type="string", length=100, nullable=false)
-     */
-    private $noSolicitaaco;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="ds_plano_outro", type="string", length=45, nullable=true)
      */
     private $dsPlanoOutro;
@@ -260,22 +253,6 @@ class TbSolicitacao extends AbstractEntity
     public function getTpVelocidade()
     {
         return $this->tpVelocidade;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDsVelocidadeOutra()
-    {
-        return $this->dsVelocidadeOutra;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNoSolicitaaco()
-    {
-        return $this->noSolicitaaco;
     }
 
     /**
