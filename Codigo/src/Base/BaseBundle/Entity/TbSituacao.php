@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TbSituacao
  *
  * @ORM\Table(name="tb_situacao")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Base\BaseBundle\Repository\SituacaoRepository")
  */
 class TbSituacao extends AbstractEntity
 {

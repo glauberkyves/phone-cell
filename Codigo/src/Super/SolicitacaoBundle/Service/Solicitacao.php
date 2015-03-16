@@ -23,22 +23,47 @@ class Solicitacao extends CrudService
 
     public function postSave(AbstractEntity $entity = null)
     {
-        $this->savePessoa();
-        $this->savePlanos();
+        $idPessoa = $this->savePessoa();
+        $idPlano = $this->savePlanos();
+        $idEndereco = $this->saveEndereco();
+        $idOrdemServico = $this->saveOrdem($idPessoa);
+        $this->saveHistorico($idOrdemServico);
+    }
 
-        echo '<pre>';
-        var_dump($this->entity);
-        die;
+    public function saveHistorico($idOrdemServico)
+    {
+        $entity = $this->getService('service.historico')->newEntity();
 
+        $entity->setIdOrdemServico($idOrdemServico);
+        $entity->setIdSituacao($idOrdemServico->getIdSituacao());
+        $entity->setIdUsuario($this->getUser());
+        $entity->setDtCadastro(new \DateTime());
+
+        $this->persist($entity);
+    }
+
+    public function saveOrdem($idPessoa)
+    {
+        $arrOrdem = $this->getRequest()->get('ordem');
+        $entity = $this->getService('service.ordem_servico')->newEntity()->populate($arrOrdem);
+
+        $entity->setIdPessoa($idPessoa);
+        $entity->setIdSolicitacao($this->entity);
+        $entity->setIdUsuario($this->getUser());
+
+        $idSituacao = $this->getService('service.situacao')->find(Situacao::COLETADA);
+        $entity->setIdSituacao($idSituacao);
+
+        return $this->persist($entity);
     }
 
     public function savePessoa()
     {
         $arrPessoa = $this->getRequest()->get('pessoa');
-        $entity    = $this->getService('service.pessoa')->newEntity()->populate($arrPessoa);
+        $entity = $this->getService('service.pessoa')->newEntity()->populate($arrPessoa);
 
         if (isset($arrPessoa['idPessoa']) && $arrPessoa['idPessoa']) {
-            $entity             = $this->getService('service.pessoa')->find($arrPessoa['idPessoa'])->populate($arrPessoa);
+            $entity = $this->getService('service.pessoa')->find($arrPessoa['idPessoa'])->populate($arrPessoa);
             $entityPessoaFisica = $this->getService('service.pessoa_fisica')->find($arrPessoa['idPessoa'])->populate($arrPessoa);
         }
 
@@ -47,6 +72,8 @@ class Solicitacao extends CrudService
 
         $this->persist($entity);
         $this->persist($entityPessoaFisica);
+
+        return $entity;
     }
 
     public function savePlanos()

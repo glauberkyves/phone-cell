@@ -26,11 +26,14 @@ class Dominio
     CONST TARDE = 2;
     CONST COMERCIAL = 3;
 
+    CONST NOVO = 1;
+    CONST EXISTENTE = 2;
+
     public static function getStAtivo()
     {
         return array(
-            ''            => 'Selecione',
-            self::ATIVO   => 'Ativo',
+            '' => 'Selecione',
+            self::ATIVO => 'Ativo',
             self::INATIVO => 'Inativo'
         );
     }
@@ -38,35 +41,44 @@ class Dominio
     public static function getStSexo()
     {
         return array(
-            ''              => 'Selecione',
+            '' => 'Selecione',
             self::MASCULINO => 'Masculino',
-            self::FEMININO  => 'Feminino'
+            self::FEMININO => 'Feminino'
         );
     }
 
     public static function getStProduto()
     {
         return array(
-            ''                   => 'Selecione',
+            '' => 'Selecione',
             self::PRIMEIRA_LINHA => '1 Linha',
-            self::SEGUNDA_LINHA  => '2 Linha'
+            self::SEGUNDA_LINHA => '2 Linha'
         );
     }
 
     public static function getPeriodo()
     {
         return array(
-            ''              => 'Selecione',
-            self::MANHA     => 'Manhã',
-            self::TARDE     => 'Tarde',
+            '' => 'Selecione',
+            self::MANHA => 'Manhã',
+            self::TARDE => 'Tarde',
             self::COMERCIAL => 'Comercial'
+        );
+    }
+
+    public static function getTpTerminal()
+    {
+        return array(
+            '' => 'Selecione',
+            self::NOVO => 'Novo',
+            self::EXISTENTE => 'Existente'
         );
     }
 
     public static function getSimNao($radio = false)
     {
         $item = array(
-            ''        => 'Selecione',
+            '' => 'Selecione',
             self::SIM => 'Sim',
             self::NAO => 'Não'
         );

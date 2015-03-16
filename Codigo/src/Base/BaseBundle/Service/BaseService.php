@@ -208,4 +208,9 @@ class BaseService
     {
         return $this->getContainer()->get('router');
     }
+
+    public function getUser()
+    {
+        return $this->getContainer()->get('security.context')->getToken()->getUser();
+    }
 }

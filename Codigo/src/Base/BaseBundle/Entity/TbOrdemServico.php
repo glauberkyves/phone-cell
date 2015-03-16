@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TbOrdemServico
  *
- * @ORM\Table(name="tb_ordem_servico", indexes={@ORM\Index(name="fk_ordemservico_situacao_idx", columns={"id_situacao"})})
- * @ORM\Entity
+ * @ORM\Table(name="tb_ordem_servico", indexes={@ORM\Index(name="fk_ordemservico_situacao_idx", columns={"id_situacao"}), @ORM\Index(name="fk_ordermservico_solicitacao_idx", columns={"id_solicitacao"}), @ORM\Index(name="fk_ordemservico_pessoa_idx", columns={"id_pessoa"})})
+ * @ORM\Entity(repositoryClass="Base\BaseBundle\Repository\OrdemServicoRepository")
  */
 class TbOrdemServico extends AbstractEntity
 {
@@ -24,30 +24,9 @@ class TbOrdemServico extends AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="nu_ordem_servico", type="string", length=20, nullable=false)
+     * @ORM\Column(name="nu_ordem_servico", type="string", length=20, nullable=true)
      */
     private $nuOrdemServico;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nu_matricula_vendedor", type="string", length=15, nullable=false)
-     */
-    private $nuMatriculaVendedor;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="st_termo_usuario", type="integer", nullable=false)
-     */
-    private $stTermoUsuario;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="st_termo_cliente", type="integer", nullable=false)
-     */
-    private $stTermoCliente;
 
     /**
      * @var string
@@ -101,16 +80,19 @@ class TbOrdemServico extends AbstractEntity
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dt_assinatura", type="datetime", nullable=false)
-     */
-    private $dtAssinatura;
-
-    /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="dt_cadastro", type="datetime", nullable=false)
      */
     private $dtCadastro;
+
+    /**
+     * @var \TbPessoa
+     *
+     * @ORM\ManyToOne(targetEntity="TbPessoa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_pessoa", referencedColumnName="id_pessoa")
+     * })
+     */
+    private $idPessoa;
 
     /**
      * @var \TbSituacao
@@ -123,11 +105,45 @@ class TbOrdemServico extends AbstractEntity
     private $idSituacao;
 
     /**
-     * @return int
+     * @var \TbSolicitacao
+     *
+     * @ORM\ManyToOne(targetEntity="TbSolicitacao")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_solicitacao", referencedColumnName="id_solicitacao")
+     * })
      */
-    public function getIdOrdemServico()
+    private $idSolicitacao;
+
+    /**
+     * @var \TbUsuario
+     *
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbUsuario")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
+     * })
+     */
+    private $idUsuario;
+
+    /**
+     * @return \TbUsuario
+     */
+    public function getIdUsuario()
     {
-        return $this->idOrdemServico;
+        return $this->idUsuario;
+    }
+
+    /**
+     * @param \TbUsuario $idUsuario
+     */
+    public function setIdUsuario($idUsuario)
+    {
+        $this->idUsuario = $idUsuario;
+    }
+
+    public function __construct()
+    {
+        $this->dtCadastro = new \DateTime();
+        $this->dtVenda = new \DateTime();
     }
 
     /**
@@ -352,5 +368,53 @@ class TbOrdemServico extends AbstractEntity
     public function setIdSituacao($idSituacao)
     {
         $this->idSituacao = $idSituacao;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdOrdemServico()
+    {
+        return $this->idOrdemServico;
+    }
+
+    /**
+     * @param int $idOrdemServico
+     */
+    public function setIdOrdemServico($idOrdemServico)
+    {
+        $this->idOrdemServico = $idOrdemServico;
+    }
+
+    /**
+     * @return \TbPessoa
+     */
+    public function getIdPessoa()
+    {
+        return $this->idPessoa;
+    }
+
+    /**
+     * @param \TbPessoa $idPessoa
+     */
+    public function setIdPessoa($idPessoa)
+    {
+        $this->idPessoa = $idPessoa;
+    }
+
+    /**
+     * @return \TbSolicitacao
+     */
+    public function getIdSolicitacao()
+    {
+        return $this->idSolicitacao;
+    }
+
+    /**
+     * @param \TbSolicitacao $idSolicitacao
+     */
+    public function setIdSolicitacao($idSolicitacao)
+    {
+        $this->idSolicitacao = $idSolicitacao;
     }
 }

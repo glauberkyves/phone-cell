@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TbSolicitacao
  *
- * @ORM\Table(name="tb_solicitacao")
+ * @ORM\Table(name="tb_solicitacao", indexes={@ORM\Index(name="fk_solicitacao_tiposolicitacao_idx", columns={"id_tipo_solicitacao"}), @ORM\Index(name="fk_solicitacao_velocidade_idx", columns={"id_velocidade"})})
  * @ORM\Entity(repositoryClass="Base\BaseBundle\Repository\SolicitacaoRepository")
  */
 class TbSolicitacao extends AbstractEntity
@@ -27,13 +27,6 @@ class TbSolicitacao extends AbstractEntity
      * @ORM\Column(name="no_solicitacao", type="string", length=45, nullable=false)
      */
     private $noSolicitacao;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="tp_velocidade", type="integer", nullable=true)
-     */
-    private $tpVelocidade;
 
     /**
      * @var string
@@ -232,21 +225,29 @@ class TbSolicitacao extends AbstractEntity
     private $dtCadastro;
 
     /**
-     * @return int
+     * @var \TbTipoSolicitaca
+     *
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbTipoSolicitacao")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipo_solicitacao", referencedColumnName="id_tipo_solicitacao")
+     * })
      */
-    public function getIdSolicitacao()
-    {
-        return $this->idSolicitacao;
-    }
+    private $idTipoSolicitacao;
 
     /**
-     * @return string
+     * @var \TbVelocidade
+     *
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbVelocidade")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_velocidade", referencedColumnName="id_velocidade")
+     * })
      */
+    private $idVelocidade;
+
     public function getNoSolicitacao()
     {
         return $this->noSolicitacao;
     }
-
     /**
      * @return int
      */
@@ -495,13 +496,6 @@ class TbSolicitacao extends AbstractEntity
         $this->dsVelocidadeOutra = $dsVelocidadeOutra;
     }
 
-    /**
-     * @param string $noSolicitaaco
-     */
-    public function setNoSolicitaaco($noSolicitaaco)
-    {
-        $this->noSolicitaaco = $noSolicitaaco;
-    }
 
     /**
      * @param string $dsPlanoOutro
@@ -719,5 +713,60 @@ class TbSolicitacao extends AbstractEntity
         $this->dtCadastro = $dtCadastro;
     }
 
+    /**
+     * @return int
+     */
+    public function getIdSolicitacao()
+    {
+        return $this->idSolicitacao;
+    }
+
+    /**
+     * @param int $idSolicitacao
+     */
+    public function setIdSolicitacao($idSolicitacao)
+    {
+        $this->idSolicitacao = $idSolicitacao;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDsVelocidadeOutra()
+    {
+        return $this->dsVelocidadeOutra;
+    }
+
+    /**
+     * @return \TbTipoSolicitacao
+     */
+    public function getIdTipoSolicitacao()
+    {
+        return $this->idTipoSolicitacao ? $this->idTipoSolicitacao : new TbTipoSolicitacao();
+    }
+
+    /**
+     * @param \TbTipoSolicitacao $idTipoSolicitacao
+     */
+    public function setIdTipoSolicitacao($idTipoSolicitacao)
+    {
+        $this->idTipoSolicitacao = $idTipoSolicitacao;
+    }
+
+    /**
+     * @return \TbVelocidade
+     */
+    public function getIdVelocidade()
+    {
+        return $this->idVelocidade ? $this->idVelocidade : new TbVelocidade();
+    }
+
+    /**
+     * @param \TbVelocidade $idVelocidade
+     */
+    public function setIdVelocidade($idVelocidade)
+    {
+        $this->idVelocidade = $idVelocidade;
+    }
 
 }

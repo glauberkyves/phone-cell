@@ -24,10 +24,12 @@ class DefaultController extends CrudController
         $arrPessoa      = $request->get('pessoa', array());
         $arrEndereco    = $request->get('endereco', array());
         $arrSolicitacao = $request->get('solicitacao', array());
+        $arrOrdemServico = $request->get('ordem', array());
 
         $this->vars['idPessoa']      = $this->getService('service.pessoa')->newEntity()->populate($arrPessoa);
         $this->vars['idEndereco']    = $this->getService('service.endereco')->newEntity()->populate($arrEndereco);
         $this->vars['idSolicitacao'] = $this->getService('service.solicitacao')->newEntity()->populate($arrSolicitacao);
+        $this->vars['idOrdemServico'] = $this->getService('service.ordem_servico')->newEntity()->populate($arrOrdemServico);
 
         $id = $this->getRequest()->query->getDigits('id');
 
@@ -66,5 +68,7 @@ class DefaultController extends CrudController
         $this->vars['arrPlano']   = $this->getService('service.plano')->findBy(array(), array('noPlano' => 'asc'));
         $this->vars['arrPeriodo'] = Dominio::getPeriodo(true);
         $this->vars['arrSimNao']  = Dominio::getSimNao(true);
+        $this->vars['arrTpTerminal']  = Dominio::getTpTerminal();
+        $this->vars['arrVelocidade']  = $this->getService('service.velocidade')->getComboDefault(array(), array('noVelocidade' => 'asc'));
     }
 }

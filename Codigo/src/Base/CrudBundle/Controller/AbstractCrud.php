@@ -82,7 +82,7 @@ class AbstractCrud extends AbstractController
      */
     public function resolveMessageSuccess()
     {
-        return 'base_bundle.message.Sucesso';
+        return 'base_bundle.messages.success';
     }
 
     /**
