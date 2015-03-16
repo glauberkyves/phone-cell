@@ -25,9 +25,28 @@ class Solicitacao extends CrudService
     {
         $idPessoa = $this->savePessoa();
         $idPlano = $this->savePlanos();
-        $idEndereco = $this->saveEndereco();
+        $idEndereco = $this->saveEndereco($idPessoa);
         $idOrdemServico = $this->saveOrdem($idPessoa);
         $this->saveHistorico($idOrdemServico);
+    }
+
+    public function saveEndereco($idPessoa)
+    {
+        $arrEndereco = $this->getRequest()->get('endereco');
+        $idEndereco = $this->getService('service.endereco')->newEntity()->populate($arrEndereco);
+
+        if (isset($arrEndereco['idEndereco']) && $arrEndereco['idEndereco']) {
+            $idEndereco = $this->getService('service.endereco')->find($arrEndereco['idPessoa'])->populate($arrEndereco);
+        }
+
+        $this->persist($idEndereco);
+
+        $idPessoaEndereco = $this->getService('service.pessoa_endereco')->newEntity();
+        $idPessoaEndereco->setIdPessoa($idPessoa);
+        $idPessoaEndereco->setIdEndereco($idEndereco);
+        $idPessoaEndereco->setDtCadastro(new \DateTime());
+
+        $this->persist($idPessoaEndereco);
     }
 
     public function saveHistorico($idOrdemServico)
