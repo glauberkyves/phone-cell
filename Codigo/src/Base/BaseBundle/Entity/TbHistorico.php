@@ -29,6 +29,16 @@ class TbHistorico extends AbstractEntity
     private $dtCadastro;
 
     /**
+     * @var \TbUsuario
+     *
+     * @ORM\ManyToOne(targetEntity="TbUsuario")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
+     * })
+     */
+    private $idUsuario;
+
+    /**
      * @var \TbOrdemServico
      *
      * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbOrdemServico")
@@ -48,15 +58,6 @@ class TbHistorico extends AbstractEntity
      */
     private $idSituacao;
 
-    /**
-     * @var \TbUsuario
-     *
-     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbUsuario")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
-     * })
-     */
-    private $idUsuario;
 
     /**
      * @return int

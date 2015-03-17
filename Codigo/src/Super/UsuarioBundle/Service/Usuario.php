@@ -23,6 +23,7 @@ class Usuario extends CrudService
 
         $this->entity->setIdPessoa($entityPessoa->getIdPessoa());
         $this->entity->setDtCadastro(new \DateTime());
+        $this->entity->setNoSenha($this->entity->getNoSenha());
 
 //        $this->generateSecretHash($entity);
     }

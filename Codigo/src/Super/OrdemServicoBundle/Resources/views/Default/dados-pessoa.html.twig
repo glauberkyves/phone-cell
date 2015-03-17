@@ -1,0 +1,253 @@
+<div class="col-lg-12">
+    <section class="panel">
+        <header class="panel-heading">
+            Dados Básicos
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                         </span>
+        </header>
+        <div class="panel-body">
+            <div class="position-center">
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Nome</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'pessoa[noPessoa]'}, idPessoa.getNoPessoa(), {class: 'form-control', placeholder: 'Nome completo'}) }}
+                        {{ formHidden({name: 'pessoa[idPessoa]'}, idPessoa.getIdPessoa()) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">E-mail</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'pessoa[noEmail]'}, '', {class: 'form-control', placeholder: 'exemplo@exemplo.com'}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">CPF</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'pessoa[nuCpf]'}, idPessoa.getIdPessoaFisica().getNuCpf(), {class: 'form-control', placeholder: '999.999.999-99', 'data-mask': '999.999.999-99'}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Nome da mãe</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'pessoa[noMae]'}, idPessoa.getIdPessoaFisica().getNoMae(), {class: 'form-control', placeholder: 'Nome completo'}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Data de
+                        nascimento</label>
+
+                    <div class="col-lg-10">
+                        <div class="input-group m-bot15">
+                            {{ formText({name: 'pessoa[dtNascimento]'}, idPessoa.getIdPessoaFisica().getDtNascimento().format('d/m/Y'), {
+                                class: 'form-control date-picker',
+                                placeholder: '99/99/9999',
+                                'data-mask': '99/99/9999',
+                                'data-date-format': 'dd/mm/yyyy'
+                            }) }}
+                            <span class="input-group-addon btn-primary" id="buscar">
+                                            <span class="fa fa-calendar"></span>
+                                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">RG</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'pessoa[nuRg]'}, idPessoa.getIdPessoaFisica().getNuRg(), {class: 'form-control'}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Orgão expedidor</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'pessoa[dsOrgaoExpedido]'}, idPessoa.getIdPessoaFisica().getDsOrgaoExpedido(), {class: 'form-control'}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Data de
+                        nascimento</label>
+
+                    <div class="col-lg-10">
+                        <div class="input-group m-bot15">
+                            {{ formText({name: 'pessoa[dtExpedicao]'}, idPessoa.getIdPessoaFisica().getDtExpedicao().format('d/m/Y'),{
+                                class: 'form-control date-picker',
+                                placeholder: '99/99/9999',
+                                'data-mask': '99/99/9999'
+                            }) }}
+                            <span class="input-group-addon btn-primary" id="buscar">
+                                            <span class="fa fa-calendar"></span>
+                                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Data de
+                        expedição</label>
+
+                    <div class="col-lg-10">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Sexo</label>
+
+                    <div class="col-lg-10">
+                        {{ formSelect({name: 'pessoa[sgSexo]'}, idPessoa.getIdPessoaFisica().getSgSexo(), {class: 'form-control  m-bot15'}, cmbSexo) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Nascionalidade</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'pessoa[noNascionalidade]'}, idPessoa.getIdPessoaFisica().getNoNascionalidade(), {class: 'form-control'}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="col-lg-12">
+    <section class="panel">
+        <header class="panel-heading">
+            Contatos
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                         </span>
+        </header>
+        <div class="panel-body">
+            <div class="position-center">
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Nome</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'contato[][noContato]'}, '', {class: 'form-control', placeholder: 'Nome do contato'}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Telefone</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'contato[][nuTelefone]'}, '', {class: 'form-control', placeholder: '(99) 9999-9999'}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="col-lg-12">
+    <section class="panel">
+        <header class="panel-heading">
+            Endereço
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                         </span>
+        </header>
+        <div class="panel-body">
+            <div class="position-center">
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">CEP</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'endereco[nuCep]'}, '', {class: 'form-control', placeholder: '99999-999'}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Estado</label>
+
+                    <div class="col-lg-10">
+                        {{ formSelect({name: 'endereco[idEstado]'}, '', {class: 'form-control m-bot15', id: 'estado'}, arrEstado) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Cidade</label>
+
+                    <div class="col-lg-10">
+                        {{ formSelect({name: 'endereco[idMunicipio]'}, '', {class: 'form-control m-bot15', id: 'municipio'}, arrMunicipio) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Bairro</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'endereco[noBairro]'}, '', {class: 'form-control'}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Endereço</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'endereco[noLogradouro]'}, '', {class: 'form-control', placeholder: 'Endereço de instalação'}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Número</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'endereco[nuEndereco]'}, '', {class: 'form-control'}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Complemento</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'endereco[dsComplemento]'}, '', {class: 'form-control'}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Ponto de
+                        referência</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'endereco[dsReferencia]'}, '', {class: 'form-control', placeholder: 'Perto de...'}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Endereço de
+                        cobrança? </label>
+
+                    <div class="col-lg-10">
+                        {{ formCheckbox({name: 'endereco[stEnderecoCobranca]'}, '', {class: 'form-control'}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('input[type=checkbox], input[type=radio]').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+            increaseArea: '20%' // optional
+        });
+
+        $('#pessoa-nuCpf').click()
+    });
+</script>

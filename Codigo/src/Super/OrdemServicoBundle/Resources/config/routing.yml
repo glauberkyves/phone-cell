@@ -1,0 +1,23 @@
+super_ordem_servico_homepage:
+    path:     /
+    defaults: { _controller: SuperOrdemServicoBundle:Default:create }
+
+super_ordem_servico_oi_fixo:
+    path:     /oi-fixo
+    defaults: { _controller: SuperOrdemServicoBundle:Default:checkCpf }
+
+super_ordem_servico_oi_tv:
+    path:     /oi-tv
+    defaults: { _controller: SuperOrdemServicoBundle:Default:checkCpf }
+
+super_ordem_servico_oi_fixo_create:
+    path:     /oi-fixo/cadastrar
+    defaults: { _controller: SuperOrdemServicoBundle:Default:create }
+
+super_ordem_servico_oi_tv_create:
+    path:     /oi-tv/cadastrar
+    defaults: { _controller: SuperOrdemServicoBundle:Default:create }
+
+super_ordem_servico_check_cpf:
+    path:     /verificar-cpf
+    defaults: { _controller: SuperOrdemServicoBundle:Default:checkCpf }

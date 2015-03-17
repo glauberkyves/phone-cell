@@ -1,0 +1,30 @@
+services:
+    service.ordem:
+          class: Super\OrdemServicoBundle\Service\OrdemServico
+          arguments:  ["@service_container"]
+
+    service.plano:
+          class: Super\OrdemServicoBundle\Service\Plano
+          arguments:  ["@service_container"]
+
+    service.ordem_plano:
+          class: Super\OrdemServicoBundle\Service\OrdemServicoPlano
+          arguments:  ["@service_container"]
+
+    service.velocidade:
+          class: Super\OrdemServicoBundle\Service\Velocidade
+          arguments:  ["@service_container"]
+
+    service.ordem_servico:
+          class: Super\OrdemServicoBundle\Service\OrdemServico
+          arguments:  ["@service_container"]
+
+    service.situacao:
+          class: Super\OrdemServicoBundle\Service\Situacao
+          arguments:  ["@service_container"]
+
+    service.historico:
+          class: Super\OrdemServicoBundle\Service\Historico
+          arguments:  ["@service_container"]
+
+

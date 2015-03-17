@@ -6,9 +6,9 @@ super_usuario:
     resource: "@SuperUsuarioBundle/Resources/config/routing.yml"
     prefix:   /
 
-super_solicitacao:
-    resource: "@SuperSolicitacaoBundle/Resources/config/routing.yml"
-    prefix:   /solicitacao
+super_ordem_servico:
+    resource: "@SuperOrdemServicoBundle/Resources/config/routing.yml"
+    prefix:   /
 
 super_security:
     resource: "@SuperSecurityBundle/Resources/config/routing.yml"

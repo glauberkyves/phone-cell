@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TbBairro
  *
- * @ORM\Table(name="tb_bairro")
+ * @ORM\Table(name="tb_bairro", indexes={@ORM\Index(name="FK_BAIRRO_MUNICIPIO_idx", columns={"id_municipio"})})
  * @ORM\Entity(repositoryClass="Base\BaseBundle\Repository\BairroRepository")
  */
 class TbBairro extends AbstractEntity
