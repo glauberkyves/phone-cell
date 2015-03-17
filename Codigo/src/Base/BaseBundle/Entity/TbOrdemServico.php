@@ -143,9 +143,9 @@ class TbOrdemServico extends AbstractEntity
     /**
      * @var integer
      *
-     * @ORM\Column(name="nu_taxa_habilitacao", type="integer", nullable=true)
+     * @ORM\Column(name="nu_valor_parcela", type="integer", nullable=true)
      */
-    private $nuTaxaHabilitacao;
+    private $nuValorParcela;
 
     /**
      * @var integer
@@ -274,7 +274,7 @@ class TbOrdemServico extends AbstractEntity
     /**
      * @var \TbSituacao
      *
-     * @ORM\ManyToOne(targetEntity="TBase\BaseBundle\Entity\TbSituacao")
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbSituacao")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_situacao", referencedColumnName="id_situacao")
      * })
@@ -563,17 +563,17 @@ class TbOrdemServico extends AbstractEntity
     /**
      * @return int
      */
-    public function getNuTaxaHabilitacao()
+    public function getNuValorParcela()
     {
-        return $this->nuTaxaHabilitacao;
+        return $this->nuValorParcela;
     }
 
     /**
-     * @param int $nuTaxaHabilitacao
+     * @param int $nuValorParcela
      */
-    public function setNuTaxaHabilitacao($nuTaxaHabilitacao)
+    public function setNuValorParcela($nuValorParcela)
     {
-        $this->nuTaxaHabilitacao = $nuTaxaHabilitacao;
+        $this->nuValorParcela = $nuValorParcela;
     }
 
     /**

@@ -54,7 +54,7 @@
 
             $('#buscar').click(function () {
                 if ($('#pessoa-nuCpf').val().length == 14 && $('form').valid()) {
-                    $.get('{{ path('super_solicitacao_check_cpf', {buscar: 'true'}) }}', {nuCpf: $('#pessoa-nuCpf').val()}, function (data) {
+                    $.get('{{ path('super_ordem_servico_check_cpf', {buscar: 'true'}) }}', {nuCpf: $('#pessoa-nuCpf').val()}, function (data) {
                         if (data.idPessoa) {
                             $('#div-cpf').removeClass('hide')
                             $('#nome').html(data.noPessoa)
@@ -75,10 +75,10 @@
             });
 
             $('.checkOut').click(function () {
-                {% if app.request.get('_route') == 'super_solicitacao_oi_fixo' %}
-                window.location = '{{ path('super_solicitacao_oi_fixo_create') }}?id= ' + $('#pessoa-idPessoa').val()
-                {% elseif app.request.get('_route') == 'super_solicitacao_oi_tv' %}
-                window.location = '{{ path('super_solicitacao_oi_tv_create') }}?id= ' + $('#pessoa-idPessoa').val()
+                {% if app.request.get('_route') == 'super_ordem_servico_oi_fixo' %}
+                window.location = '{{ path('super_ordem_servico_oi_fixo_create') }}?id= ' + $('#pessoa-idPessoa').val()
+                {% elseif app.request.get('_route') == 'super_ordem_servico_oi_tv' %}
+                window.location = '{{ path('super_ordem_servico_oi_tv_create') }}?id= ' + $('#pessoa-idPessoa').val()
                 {% endif %}
             });
         });

@@ -26,7 +26,7 @@ class AbstractService extends BaseService
      * @param AbstractEntity $entity
      * @return AbstractEntity|\Exception
      */
-    public function save(AbstractEntity $entity = null)
+    public function save(AbstractEntity $entity = null, array $params = array())
     {
         if (null === $entity) {
             $this->entity = new $this->entityName;
@@ -34,10 +34,13 @@ class AbstractService extends BaseService
             $this->entity = $entity;
         }
 
-        $params   = $this->getRequest()->request->all();
+        if (!$params) {
+            $params = $this->getRequest()->request->all();
+        }
+
         $metadata = $this->getEntityManager()->getClassMetadata(get_class($this->entity));
         $arguments = func_get_args();
-        $insert   = false;
+        $insert = false;
 
         $methodGet = 'get' . ucfirst(current($metadata->getIdentifier()));
 
@@ -46,23 +49,27 @@ class AbstractService extends BaseService
         ) {
             $id = $this->entity->{$methodGet}();
 
-            if(array_key_exists(current($metadata->getIdentifier()), $params) && $params[current($metadata->getIdentifier())]){
+            if (array_key_exists(current($metadata->getIdentifier()), $params) && $params[current($metadata->getIdentifier())]) {
                 $id = $params[current($metadata->getIdentifier())];
             }
 
             $entityPersister = $this->find($id);
             $entityPersister->populate($params);
+
         } else {
-            $entityPersister = $this->newEntity()->populate($params);
-            $insert          = true;
+            $insert = true;
+
+            if (null === $entity) {
+                $entityPersister = $this->newEntity()->populate($params);
+            }
         }
 
-        call_user_func_array(array($this, 'preSave'), array($this->entity));
+        call_user_func_array(array($this, 'preSave'), array($this->entity, $params));
 
         if ($insert) {
-            call_user_func_array(array($this, 'preInsert'), array($this->entity));
+            call_user_func_array(array($this, 'preInsert'), array($this->entity, $params));
         } else {
-            call_user_func_array(array($this, 'preUpdate'), array($this->entity));
+            call_user_func_array(array($this, 'preUpdate'), array($this->entity, $params));
         }
 
         $this->persist($entityPersister);
@@ -70,12 +77,12 @@ class AbstractService extends BaseService
         $this->entity = $entityPersister;
 
         if ($insert) {
-            call_user_func_array(array($this, 'postInsert'), array($this->entity));
+            call_user_func_array(array($this, 'postInsert'), array($this->entity, $params));
         } else {
-            call_user_func_array(array($this, 'postUpdate'), array($this->entity));
+            call_user_func_array(array($this, 'postUpdate'), array($this->entity, $params));
         }
 
-        call_user_func_array(array($this, 'postSave'), array($this->entity));
+        call_user_func_array(array($this, 'postSave'), array($this->entity, $params));
 
         return $this->entity;
     }

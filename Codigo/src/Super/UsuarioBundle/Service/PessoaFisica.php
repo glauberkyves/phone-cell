@@ -22,5 +22,19 @@ class PessoaFisica extends CrudService
             ->save();
 
         $this->entity->setIdPessoa($entityPessoa);
+
+        $entity->setDtNascimento(new \DateTime($entity->getDtNascimento()));
+        $entity->setDtExpedicao(new \DateTime($entity->getDtExpedicao()));
+    }
+
+    public function preUpdate(AbstractEntity $entity = null)
+    {
+        if (is_string($entity->getDtNascimento())) {
+            $this->entity->setDtNascimento(new \DateTime($this->entity->getDtNascimento()));
+        }
+
+        if (is_string($entity->getDtExpedicao())) {
+            $this->entity->setDtExpedicao(new \DateTime($this->entity->getDtExpedicao()));
+        }
     }
 }

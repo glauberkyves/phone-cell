@@ -30,7 +30,7 @@ class Dominio
     CONST EXISTENTE = 2;
 
     CONST AVISTA = 1;
-    CONST PARCELADO = 1;
+    CONST PARCELADO = 2;
 
 
     public static function getStAtivo()

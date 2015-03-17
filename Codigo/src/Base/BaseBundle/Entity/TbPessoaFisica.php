@@ -84,7 +84,8 @@ class TbPessoaFisica extends AbstractEntity
      */
     private $idPessoa;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->dtNascimento = new \DateTime();
         $this->dtExpedicao = new \DateTime();
     }
