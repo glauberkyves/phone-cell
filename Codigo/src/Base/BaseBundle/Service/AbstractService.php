@@ -39,7 +39,6 @@ class AbstractService extends BaseService
         }
 
         $metadata = $this->getEntityManager()->getClassMetadata(get_class($this->entity));
-        $arguments = func_get_args();
         $insert = false;
 
         $methodGet = 'get' . ucfirst(current($metadata->getIdentifier()));
@@ -53,14 +52,14 @@ class AbstractService extends BaseService
                 $id = $params[current($metadata->getIdentifier())];
             }
 
-            $entityPersister = $this->find($id);
-            $entityPersister->populate($params);
+            $this->entity = $this->find($id);
+            $this->entity->populate($params);
 
         } else {
             $insert = true;
 
             if (null === $entity) {
-                $entityPersister = $this->newEntity()->populate($params);
+                $this->entity = $this->newEntity()->populate($params);
             }
         }
 
@@ -72,9 +71,7 @@ class AbstractService extends BaseService
             call_user_func_array(array($this, 'preUpdate'), array($this->entity, $params));
         }
 
-        $this->persist($entityPersister);
-
-        $this->entity = $entityPersister;
+        $this->persist($this->entity);
 
         if ($insert) {
             call_user_func_array(array($this, 'postInsert'), array($this->entity, $params));

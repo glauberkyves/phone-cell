@@ -17,21 +17,37 @@ class OrdemServico extends CrudService
 
     public function preInsert(AbstractEntity $entity = null)
     {
-        $this->entity->populate($this->getRequest()->get('ordem'));
-        $this->entity->setDtCadastro(new \DateTime());
-        $this->entity->setIdPessoa($this->savePessoa());
+    }
 
-        echo '<pre>';
-        var_dump($this->entity);
-        die;
+    public function preSave(AbstractEntity $entity = null)
+    {
+        $params = $this->getRequest()->get('ordem');
+        $this->entity->populate($params);
+        $this->entity->setIdPessoa($this->savePessoa());
+        $this->entity->setIdUsuario($this->getUser());
+
+        $idTipoOrdemServico = $this->getService('service.tipo_ordem_servico')->find(TipoOrdemServico::OIFIXO);
+        $this->entity->setIdTipoOrdemServico($idTipoOrdemServico);
+
+        if (isset($params['idVelocidade']) && $params['idVelocidade']) {
+            $idVelocidade = $this->getService('service.velocidade')->find($params['idVelocidade']);
+            $this->entity->setIdTipoOrdemServico($idVelocidade);
+        }
+
+        if (is_string($this->entity->getDtCadastro())) {
+            $this->entity->setDtCadastro(new \DateTime($this->entity->getDtCadastro()));
+        }
     }
 
     public function postSave(AbstractEntity $entity = null)
     {
-        $idPessoa = $this->savePessoa();
         $idPlano = $this->savePlanos();
-        $idEndereco = $this->saveEndereco($idPessoa);
-        $idOrdemServico = $this->saveOrdem($idPessoa);
+        $idEndereco = $this->saveEndereco($this->entity->getIdPessoa());
+        $idOrdemServico = $this->saveOrdem($this->entity->getIdPessoa());
+
+        echo '<pre>';
+        var_dump(123);
+        die;
         $this->saveHistorico($idOrdemServico);
     }
 
@@ -87,26 +103,7 @@ class OrdemServico extends CrudService
         $entity = $this->getService('service.pessoa_fisica')->newEntity()->populate($arrPessoa);
         $this->getService('service.pessoa_fisica')->save($entity, $arrPessoa);
 
-        echo '<pre>'; var_dump($arrPessoa);die;
-//        $entityPessoaFisica = $this->getService('service.pessoa_fisica')->newEntity()->populate($arrPessoa);
-//
-////        if (isset($arrPessoa['idPessoa']) && $arrPessoa['idPessoa']) {
-////            $entity = $this->getService('service.pessoa')->find($arrPessoa['idPessoa'])->populate($arrPessoa);
-//                $entityPessoaFisica
-////        }
-//
-//        $entity->getIdPessoaFisica()->setDtNascimento(new \DateTime($entity->getIdPessoaFisica()->getDtNascimento()));
-//        $entity->getIdPessoaFisica()->setDtExpedicao(new \DateTime($entity->getIdPessoaFisica()->getDtExpedicao()));
-//
-////        $this->persist($entity->getIdPessoaFisica());
-//
-//        $this->persist($entity);
-
-        echo '<pre>';
-        var_dump($entity);
-        die;
-
-        return $entity;
+        return $entity->getIdPessoa();
     }
 
     public function savePlanos()

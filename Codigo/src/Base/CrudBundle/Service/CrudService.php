@@ -55,6 +55,6 @@ class CrudService extends AbstractService
 
     public function getComboDefault(array $criteria = array(), array $orderBy = null, $limit = null, $offset = null)
     {
-        return array_merge(array('' => 'Selecione'), $this->getRepository()->getComboDefault($criteria, $orderBy, $limit, $offset));
+        return array('' => 'Selecione') + $this->getRepository()->getComboDefault($criteria, $orderBy, $limit, $offset);
     }
 }

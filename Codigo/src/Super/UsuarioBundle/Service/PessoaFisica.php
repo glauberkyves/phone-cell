@@ -15,26 +15,20 @@ class PessoaFisica extends CrudService
 {
     protected $entityName = 'Base\BaseBundle\Entity\TbPessoaFisica';
 
-    public function preInsert(AbstractEntity $entity = null)
+    public function preSave(AbstractEntity $entity = null, $params = array())
     {
         $entityPessoa = $this
             ->getService('service.pessoa')
-            ->save();
+            ->save(null, $params);
 
         $this->entity->setIdPessoa($entityPessoa);
 
-        $entity->setDtNascimento(new \DateTime($entity->getDtNascimento()));
-        $entity->setDtExpedicao(new \DateTime($entity->getDtExpedicao()));
-    }
+//        if (is_string($this->entity->getDtNascimento())) {
+//            $this->entity->setDtNascimento(new \DateTime($this->entity->getDtNascimento()));
+//        }
 
-    public function preUpdate(AbstractEntity $entity = null)
-    {
-        if (is_string($entity->getDtNascimento())) {
-            $this->entity->setDtNascimento(new \DateTime($this->entity->getDtNascimento()));
-        }
-
-        if (is_string($entity->getDtExpedicao())) {
-            $this->entity->setDtExpedicao(new \DateTime($this->entity->getDtExpedicao()));
-        }
+//        if (is_string($this->entity->getDtExpedicao())) {
+//            $this->entity->setDtExpedicao(new \DateTime($this->entity->getDtExpedicao()));
+//        }
     }
 }

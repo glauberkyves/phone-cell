@@ -19,6 +19,10 @@ services:
           class: Super\OrdemServicoBundle\Service\OrdemServico
           arguments:  ["@service_container"]
 
+    service.tipo_ordem_servico:
+          class: Super\OrdemServicoBundle\Service\TipoOrdemServico
+          arguments:  ["@service_container"]
+
     service.situacao:
           class: Super\OrdemServicoBundle\Service\Situacao
           arguments:  ["@service_container"]
