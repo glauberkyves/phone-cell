@@ -7,8 +7,16 @@ services:
           class: Super\OrdemServicoBundle\Service\Plano
           arguments:  ["@service_container"]
 
+    service.pacote:
+          class: Super\OrdemServicoBundle\Service\Pacote
+          arguments:  ["@service_container"]
+
     service.ordem_plano:
           class: Super\OrdemServicoBundle\Service\OrdemServicoPlano
+          arguments:  ["@service_container"]
+
+    service.ordem_pacote:
+          class: Super\OrdemServicoBundle\Service\OrdemServicoPacote
           arguments:  ["@service_container"]
 
     service.velocidade:

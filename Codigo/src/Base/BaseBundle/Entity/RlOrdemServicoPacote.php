@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace Base\BaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="rl_ordem_servico_pacote", indexes={@ORM\Index(name="fk_solicitacaopacote_solicitacao_idx", columns={"id_ordem_servico"}), @ORM\Index(name="fk_solicitacaopacote_pacote_idx", columns={"id_pacote"})})
  * @ORM\Entity
  */
-class RlOrdemServicoPacote
+class RlOrdemServicoPacote extends AbstractEntity
 {
     /**
      * @var integer
@@ -20,13 +20,6 @@ class RlOrdemServicoPacote
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idOrdemServicoPacote;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="st_fidelizacao", type="integer", nullable=false)
-     */
-    private $stFidelizacao;
 
     /**
      * @var \DateTime
@@ -54,6 +47,70 @@ class RlOrdemServicoPacote
      * })
      */
     private $idPacote;
+
+    /**
+     * @return int
+     */
+    public function getIdOrdemServicoPacote()
+    {
+        return $this->idOrdemServicoPacote;
+    }
+
+    /**
+     * @param int $idOrdemServicoPacote
+     */
+    public function setIdOrdemServicoPacote($idOrdemServicoPacote)
+    {
+        $this->idOrdemServicoPacote = $idOrdemServicoPacote;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDtCadastro()
+    {
+        return $this->dtCadastro;
+    }
+
+    /**
+     * @param \DateTime $dtCadastro
+     */
+    public function setDtCadastro($dtCadastro)
+    {
+        $this->dtCadastro = $dtCadastro;
+    }
+
+    /**
+     * @return \TbOrdemServico
+     */
+    public function getIdOrdemServico()
+    {
+        return $this->idOrdemServico;
+    }
+
+    /**
+     * @param \TbOrdemServico $idOrdemServico
+     */
+    public function setIdOrdemServico($idOrdemServico)
+    {
+        $this->idOrdemServico = $idOrdemServico;
+    }
+
+    /**
+     * @return \TbPacote
+     */
+    public function getIdPacote()
+    {
+        return $this->idPacote;
+    }
+
+    /**
+     * @param \TbPacote $idPacote
+     */
+    public function setIdPacote($idPacote)
+    {
+        $this->idPacote = $idPacote;
+    }
 
 
 }

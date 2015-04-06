@@ -2,20 +2,141 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-3">
+            <div class="mini-stat clearfix">
+                <span class="mini-stat-icon tar"><i class="fa fa-eye"></i></span>
+
+                <div class="mini-stat-info">
+                    <span>{{ coletadas|length }}</span>
+                    Solitações Coletadas
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mini-stat clearfix">
+                <span class="mini-stat-icon green"><i class="fa fa-check-square-o"></i></span>
+
+                <div class="mini-stat-info">
+                    <span>{{ validadas|length }}</span>
+                    Solitações Validadas
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mini-stat clearfix">
+                <span class="mini-stat-icon pink"><i class="fa fa-warning"></i></span>
+
+                <div class="mini-stat-info">
+                    <span>{{ pendentes|length }}</span>
+                    Solicitações Pendentes
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mini-stat clearfix">
+                <span class="mini-stat-icon orange"><i class="fa fa-exclamation"></i></span>
+
+                <div class="mini-stat-info">
+                    <span>{{ canceladas|length }}</span>
+                    Solicitações canceladas
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
             <section class="panel">
-                <header class="panel-heading">
-                    Heading goes here..
-                        <span class="tools pull-right">
-                            <a href="javascript:;" class="fa fa-chevron-down"></a>
-                            <a href="javascript:;" class="fa fa-cog"></a>
-                            <a href="javascript:;" class="fa fa-times"></a>
-                         </span>
-                </header>
                 <div class="panel-body">
-                    This is a sample page
+                    <div class="top-stats-panel">
+                        <div class="gauge-canvas">
+                            <h4 class="widget-h">Novas solicitações</h4>
+                            <canvas width=160 height=100 id="gauge"></canvas>
+                        </div>
+                        <ul class="gauge-meta clearfix">
+                            <li id="gauge-textfield" class="pull-left gauge-value"></li>
+                            <li class="pull-right gauge-title">Total Oi Fixo</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="col-md-3">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="top-stats-panel">
+                        <div class="gauge-canvas">
+                            <h4 class="widget-h">Novas solicitações</h4>
+                            <canvas width=160 height=100 id="gauge-tv"></canvas>
+                        </div>
+                        <ul class="gauge-meta clearfix">
+                            <li id="gauge-textfield-tv" class="pull-left gauge-value"></li>
+                            <li class="pull-right gauge-title">Total Oi TV</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
         </div>
     </div>
+
+    <script src="{{ asset('bundles/basebase/js/skycons/skycons.js') }}"></script>
+    <script src="{{ asset('bundles/basebase/js/gauge/gauge.js') }}"></script>
+    {#<script src="{{ asset('bundles/basebase/js/morris-chart/morris.js') }}"></script>#}
+    {#<script src="{{ asset('bundles/basebase/js/morris-chart/raphael-min.js') }}"></script>#}
+    <script>
+        $(document).ready(function () {
+            if (Gauge) {
+                /*Knob*/
+                var opts = {
+                    lines:            12, // The number of lines to draw
+                    angle:            0, // The length of each line
+                    lineWidth:        0.48, // The line thickness
+                    pointer:          {
+                        length:      0.6, // The radius of the inner circle
+                        strokeWidth: 0.03, // The rotation offset
+                        color:       '#464646' // Fill color
+                    },
+                    limitMax:         'true', // If true, the pointer will not go past the end of the gauge
+                    colorStart:       '#fa8564', // Colors
+                    colorStop:        '#fa8564', // just experiment with them
+                    strokeColor:      '#F1F1F1', // to see which ones work best for you
+                    generateGradient: true
+                };
+
+
+                var target = document.getElementById('gauge'); // your canvas element
+                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                gauge.maxValue = parseInt({{ oiFixo|length }}) + 20; // set max gauge value
+                gauge.animationSpeed = 32; // set animation speed (32 is default value)
+                gauge.set({{ oiFixo|length }}); // set actual value
+                gauge.setTextField(document.getElementById("gauge-textfield"));
+
+                /*Knob*/
+                var optsTv = {
+                    lines:            12, // The number of lines to draw
+                    angle:            0, // The length of each line
+                    lineWidth:        0.48, // The line thickness
+                    pointer:          {
+                        length:      0.6, // The radius of the inner circle
+                        strokeWidth: 0.03, // The rotation offset
+                        color:       '#464646' // Fill color
+                    },
+                    limitMax:         'true', // If true, the pointer will not go past the end of the gauge
+                    colorStart:       '#fa8564', // Colors
+                    colorStop:        '#fa8564', // just experiment with them
+                    strokeColor:      '#F1F1F1', // to see which ones work best for you
+                    generateGradient: true
+                };
+
+                var targetTv = document.getElementById('gauge-tv'); // your canvas element
+                var gaugeTv = new Gauge(targetTv).setOptions(optsTv); // create sexy gauge!
+                gaugeTv.maxValue = parseInt({{ oiTv|length }}) + 20; // set max gauge value
+                gaugeTv.animationSpeed = 32; // set animation speed (32 is default value)
+                gaugeTv.set({{ oiTv|length }}); // set actual value
+                gaugeTv.setTextField(document.getElementById("gauge-textfield-tv"));
+            }
+        })
+    </script>
 {% endblock %}
+

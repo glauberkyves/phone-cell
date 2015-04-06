@@ -14,6 +14,7 @@ use Base\CrudBundle\Service\CrudService;
 class TipoOrdemServico extends CrudService
 {
     CONST OIFIXO = 1;
+    CONST OITV = 2;
 
     protected $entityName = 'Base\BaseBundle\Entity\TbTipoOrdemServico';
 }

@@ -1,0 +1,149 @@
+<div class="col-lg-12">
+    <section class="panel">
+        <header class="panel-heading">
+            Oi TV
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                         </span>
+        </header>
+        <div class="panel-body">
+            <div class="position-center">
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Número de pontos adicionais</label>
+
+                    <div class="col-lg-10">
+                        {{ formText({name: 'ordem[nuPontoAdicional]'}, idOrdemServico.getNuPontoAdicional(), {class: 'form-control'}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Fidelização</label>
+
+                    <div class="col-lg-10">
+                        {{ formSelect({name: 'ordem[tpFidelizacao]'}, idOrdemServico.getTpFidelizacao(), {class: 'form-control'}, arrFidelizacao) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Número de pontos adicionais</label>
+
+                    <div class="col-lg-10">
+                        {{ formSelect({name: 'ordem[tpFormaPagamento]'}, idOrdemServico.getTpFormaPagamento(), {class: 'form-control'}, arrFormaPagamento) }}
+                    </div>
+                </div>
+                <div id="parcela" class="hide">
+                    <div class="form-group">
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Quantidade de
+                            parcelas</label>
+
+                        <div class="col-lg-10">
+                            {{ formText({name: 'ordem[nuQuantidadeParcela]'}, idOrdemServico.getNuQuantidadeParcela(), {class: 'form-control'}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Valor
+                            parcela</label>
+
+                        <div class="col-lg-10">
+                            {{ formText({name: 'ordem[nuValorParcela]'}, idOrdemServico.getNuValorParcela(), {class: 'form-control'}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">DACC?</label>
+
+                    <div class="col-lg-10">
+                        {{ formCheckbox({name: 'ordem[tpDacc]'}, idOrdemServico.getTpDacc(), {class: 'form-control'}) }}
+                    </div>
+                </div>
+                <div id="banco" class="hide">
+                    <div class="form-group">
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Banco</label>
+
+                        <div class="col-lg-10">
+                            {{ formText({name: 'ordem[noBanco]'}, idOrdemServico.getNoBanco(), {class: 'form-control'}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Agência</label>
+
+                        <div class="col-lg-10">
+                            {{ formText({name: 'ordem[nuAgencia]'}, idOrdemServico.getNuAgencia(), {class: 'form-control'}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Conta</label>
+
+                        <div class="col-lg-10">
+                            {{ formText({name: 'ordem[nuConta]'}, idOrdemServico.getNuConta(), {class: 'form-control'}) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    Pacotes
+                                </div>
+                                <div class="panel-body">
+                                    {% for pacote in arrPacote %}
+                                        <div class="col-md-4 form-group">
+                                            <label class="checkbox-inline">
+                                                {{ formCheckbox({name: 'ordem[idPacote][]'}, pacote.idPacote, {class: 'form-control'}) }}
+                                            </label>
+
+                                            {{ pacote.noPacote }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="col-lg-12">
+    <section class="panel">
+        <div class="panel-heading">
+            Instalação / Habilitação
+        </div>
+        <div class="panel-body">
+            <div class="position-center">
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Melhor
+                        data
+                        de instalação</label>
+
+                    <div class="col-lg-10">
+                        <div class="input-group m-bot15">
+                            {{ formText({name: 'ordem[dtInstalacao]'}, '', {
+                                class: 'form-control date-picker',
+                                placeholder: '99/99/9999',
+                                'data-mask': '99/99/9999',
+                                'data-date-format': 'dd/mm/yyyy'
+                            }) }}
+                            <span class="input-group-addon btn-primary" id="buscar">
+                                            <span class="fa fa-calendar"></span>
+                                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Melhor
+                        horário para
+                        instalação</label>
+
+                    <div class="col-lg-10">
+                        {{ formSelect({name: 'ordem[dtInstalacao]'}, '', {class: 'form-control'}, arrPeriodo) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
