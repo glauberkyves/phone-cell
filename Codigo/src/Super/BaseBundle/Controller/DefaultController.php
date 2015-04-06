@@ -2,12 +2,25 @@
 
 namespace Super\BaseBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Base\CrudBundle\Controller\CrudController;
+use Super\OrdemServicoBundle\Service\Situacao;
+use Super\OrdemServicoBundle\Service\TipoOrdemServico;
+use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class DefaultController extends CrudController
 {
-    public function indexAction()
+    protected $serviceName = '';
+
+    public function indexAction(Request $request)
     {
-        return $this->render('SuperBaseBundle:Default:index.html.twig');
+        $this->vars['oiFixo']     = $this->getService('service.ordem_servico')->findByIdTipoOrdemServico(TipoOrdemServico::OIFIXO);
+        $this->vars['oiTv']       = $this->getService('service.ordem_servico')->findByIdTipoOrdemServico(TipoOrdemServico::OITV);
+        $this->vars['coletadas']  = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::COLETADA);
+        $this->vars['validadas']  = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::VALIDADA);
+        $this->vars['pendentes']  = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::PENDENTE);
+        $this->vars['canceladas'] = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::CANCELADA);
+
+
+        return $this->render($this->resolveRouteName(), $this->vars);
     }
 }

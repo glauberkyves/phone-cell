@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace Base\BaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="rl_ordem_servico_plano", indexes={@ORM\Index(name="id_solicitacaoplano_plano_idx", columns={"id_plano"}), @ORM\Index(name="id_solicitacaoplano_solicitacao_idx", columns={"id_ordem_servico"})})
  * @ORM\Entity
  */
-class RlOrdemServicoPlano
+class RlOrdemServicoPlano extends AbstractEntity
 {
     /**
      * @var integer
@@ -27,13 +27,6 @@ class RlOrdemServicoPlano
      * @ORM\Column(name="dt_cadastro", type="datetime", nullable=false)
      */
     private $dtCadastro;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="st_adicional", type="integer", nullable=false)
-     */
-    private $stAdicional;
 
     /**
      * @var \TbOrdemServico
@@ -55,6 +48,84 @@ class RlOrdemServicoPlano
      */
     private $idPlano;
 
+    /**
+     * @return int
+     */
+    public function getIdOrdemServicoPlano()
+    {
+        return $this->idOrdemServicoPlano;
+    }
 
+    /**
+     * @param int $idOrdemServicoPlano
+     */
+    public function setIdOrdemServicoPlano($idOrdemServicoPlano)
+    {
+        $this->idOrdemServicoPlano = $idOrdemServicoPlano;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDtCadastro()
+    {
+        return $this->dtCadastro;
+    }
+
+    /**
+     * @param \DateTime $dtCadastro
+     */
+    public function setDtCadastro($dtCadastro)
+    {
+        $this->dtCadastro = $dtCadastro;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStAdicional()
+    {
+        return $this->stAdicional;
+    }
+
+    /**
+     * @param int $stAdicional
+     */
+    public function setStAdicional($stAdicional)
+    {
+        $this->stAdicional = $stAdicional;
+    }
+
+    /**
+     * @return \TbOrdemServico
+     */
+    public function getIdOrdemServico()
+    {
+        return $this->idOrdemServico;
+    }
+
+    /**
+     * @param \TbOrdemServico $idOrdemServico
+     */
+    public function setIdOrdemServico($idOrdemServico)
+    {
+        $this->idOrdemServico = $idOrdemServico;
+    }
+
+    /**
+     * @return \TbPlano
+     */
+    public function getIdPlano()
+    {
+        return $this->idPlano;
+    }
+
+    /**
+     * @param \TbPlano $idPlano
+     */
+    public function setIdPlano($idPlano)
+    {
+        $this->idPlano = $idPlano;
+    }
 }
 

@@ -9,6 +9,7 @@
 namespace Super\UsuarioBundle\Service;
 
 use Base\BaseBundle\Entity\AbstractEntity;
+use Base\BaseBundle\Service\Data;
 use Base\CrudBundle\Service\CrudService;
 
 class PessoaFisica extends CrudService
@@ -23,12 +24,16 @@ class PessoaFisica extends CrudService
 
         $this->entity->setIdPessoa($entityPessoa);
 
-//        if (is_string($this->entity->getDtNascimento())) {
-//            $this->entity->setDtNascimento(new \DateTime($this->entity->getDtNascimento()));
-//        }
+        if (isset($params['nuCpf'])) {
+            $this->entity->setNuCpf(preg_replace("/[^0-9]/", "", $params['nuCpf']));
+        }
 
-//        if (is_string($this->entity->getDtExpedicao())) {
-//            $this->entity->setDtExpedicao(new \DateTime($this->entity->getDtExpedicao()));
-//        }
+        if (is_string($this->entity->getDtNascimento())) {
+            $this->entity->setDtNascimento(Data::dateBr($this->entity->getDtNascimento()));
+        }
+
+        if (is_string($this->entity->getDtExpedicao())) {
+            $this->entity->setDtExpedicao(Data::dateBr($this->entity->getDtExpedicao()));
+        }
     }
 }

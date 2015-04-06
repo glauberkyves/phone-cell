@@ -2,21 +2,53 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86e72e30-1e96-4548-849e-57552d83bb95" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Codigo/src/Super/SolicitacaoBundle/Resources/views/Default/checkCpf.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Codigo/src/Super/SolicitacaoBundle/Resources/views/Default/dados-pessoa.html.twig" />
-      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Codigo\src\Super\SolicitacaoBundle\Resources\views\Default\index.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Codigo\src\Super\UsuarioBundle\Resources\views\Perfil\create.html.twig" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/SolicitacaoBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/Codigo/src/Super/SolicitacaoBundle/Controller/DefaultController.php" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_rl_ordem_servico_instalacao.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_rl_ordem_servico_pacote.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_rl_ordem_servico_plano.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_rl_pessoa_contato.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_rl_pessoa_endereco.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_rl_usuario_perfil.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_bairro.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_contato.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_email_error.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_endereco.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_estado.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_historico.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_instalacao.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_logradouro.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_municipio.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_ordem_servico.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_pacote.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_perfil.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_pessoa.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_pessoa_fisica.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_pessoa_juridica.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_plano.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_situacao.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_tipo_ordem_servico.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_usuario.sql" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Glauber\my-projects\phone-cell\Banco\tables\phonecell_tb_velocidade.sql" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/BaseBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/Codigo/src/Super/BaseBundle/Controller/DefaultController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Controller/DefaultController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Service/Dominio.php" afterPath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Service/Dominio.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Service/Endereco.php" afterPath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Service/Endereco.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/SolicitacaoBundle/Service/Solicitacao.php" afterPath="$PROJECT_DIR$/Codigo/src/Super/SolicitacaoBundle/Service/Solicitacao.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Entity/TbPessoaFisica.php" afterPath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Entity/TbPessoaFisica.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Resources/public/app/app.js" afterPath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Resources/public/app/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/SolicitacaoBundle/Resources/views/Default/create.html.twig" afterPath="$PROJECT_DIR$/Codigo/src/Super/SolicitacaoBundle/Resources/views/Default/create.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Service/OrdemServico.php" afterPath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Service/OrdemServico.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/UsuarioBundle/Service/PessoaFisica.php" afterPath="$PROJECT_DIR$/Codigo/src/Super/UsuarioBundle/Service/PessoaFisica.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Entity/RlOrdemServicoPacote.php" afterPath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Entity/RlOrdemServicoPacote.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Entity/RlOrdemServicoPlano.php" afterPath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Entity/RlOrdemServicoPlano.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Service/Situacao.php" afterPath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Service/Situacao.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Entity/TbContato.php" afterPath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Entity/TbContato.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Entity/TbEndereco.php" afterPath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Entity/TbEndereco.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Entity/TbOrdemServico.php" afterPath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Entity/TbOrdemServico.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Service/TipoOrdemServico.php" afterPath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Service/TipoOrdemServico.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Repository/UsuarioRepository.php" afterPath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Repository/UsuarioRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Resources/views/Default/create.html.twig" afterPath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Resources/views/Default/create.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Resources/views/Default/dados-pessoa.html.twig" afterPath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Resources/views/Default/dados-pessoa.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Banco/dump.sql" afterPath="$PROJECT_DIR$/Banco/dump.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Resources/views/layout.html.twig" afterPath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Resources/views/layout.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Resources/views/menu.html.twig" afterPath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Resources/views/menu.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/SolicitacaoBundle/Resources/config/routing.yml" afterPath="$PROJECT_DIR$/Codigo/src/Super/SolicitacaoBundle/Resources/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/BaseBundle/Resources/views/Default/index.html.twig" afterPath="$PROJECT_DIR$/Codigo/src/Super/BaseBundle/Resources/views/Default/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Resources/config/routing.yml" afterPath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Resources/config/routing.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/Codigo/src/Base/BaseBundle/Resources/config/services.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/Codigo/src/Super/OrdemServicoBundle/Resources/config/services.yml" />
     </list>
     <ignored path="phone-cell.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -354,10 +386,16 @@
       <BehatRunner />
       <method />
     </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
       <method />
     </configuration>
     <list size="0" />
@@ -384,7 +422,6 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.284041" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -396,6 +433,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -418,9 +456,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.284041" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -448,7 +486,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1547">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -456,7 +493,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1547">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -464,7 +500,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1547">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -472,7 +507,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1615">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -480,7 +514,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1615">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -488,7 +521,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1615">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -531,7 +563,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.39826086" vertical-offset="604" max-vertical-offset="1547">
           <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>

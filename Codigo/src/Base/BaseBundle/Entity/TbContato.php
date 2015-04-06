@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace Base\BaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="tb_contato")
  * @ORM\Entity
  */
-class TbContato
+class TbContato extends AbstractEntity
 {
     /**
      * @var integer
@@ -36,11 +36,78 @@ class TbContato
     private $nuTelefone;
 
     /**
-     * @var integer
+     * @var \TbPessoa
      *
-     * @ORM\Column(name="st_fixo", type="integer", nullable=false)
+     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\TbPessoa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_pessoa", referencedColumnName="id_pessoa")
+     * })
      */
-    private $stFixo;
+    private $idPessoa;
+
+    /**
+     * @return int
+     */
+    public function getIdContato()
+    {
+        return $this->idContato;
+    }
+
+    /**
+     * @param int $idContato
+     */
+    public function setIdContato($idContato)
+    {
+        $this->idContato = $idContato;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNoContato()
+    {
+        return $this->noContato;
+    }
+
+    /**
+     * @param string $noContato
+     */
+    public function setNoContato($noContato)
+    {
+        $this->noContato = $noContato;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNuTelefone()
+    {
+        return $this->nuTelefone;
+    }
+
+    /**
+     * @param int $nuTelefone
+     */
+    public function setNuTelefone($nuTelefone)
+    {
+        $this->nuTelefone = $nuTelefone;
+    }
+
+    /**
+     * @return \TbPessoa
+     */
+    public function getIdPessoa()
+    {
+        return $this->idPessoa;
+    }
+
+    /**
+     * @param \TbPessoa $idPessoa
+     */
+    public function setIdPessoa($idPessoa)
+    {
+        $this->idPessoa = $idPessoa;
+    }
 
 
 }

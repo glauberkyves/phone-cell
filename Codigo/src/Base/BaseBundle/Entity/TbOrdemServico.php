@@ -24,7 +24,7 @@ class TbOrdemServico extends AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="nu_ordem_servico", type="string", length=20, nullable=false)
+     * @ORM\Column(name="nu_ordem_servico", type="string", length=20, nullable=true)
      */
     private $nuOrdemServico;
 
@@ -36,18 +36,25 @@ class TbOrdemServico extends AbstractEntity
     private $dsLocal;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="st_os_assinada", type="integer", nullable=false)
-     */
-    private $stOsAssinada;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="nu_contrato_oi", type="string", length=45, nullable=true)
      */
     private $nuContratoOi;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tp_forma_pagamento", type="string", length=45, nullable=true)
+     */
+    private $tpFormaPagamento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nu_ponto_adicional", type="string", length=45, nullable=true)
+     */
+    private $nuPontoAdicional;
 
     /**
      * @var string
@@ -162,13 +169,6 @@ class TbOrdemServico extends AbstractEntity
     private $nuQuantidadeParcela;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="tp_figuracao_em_lista", type="integer", nullable=true)
-     */
-    private $tpFiguracaoEmLista;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="no_banco", type="string", length=45, nullable=true)
@@ -181,6 +181,13 @@ class TbOrdemServico extends AbstractEntity
      * @ORM\Column(name="nu_conta", type="string", length=45, nullable=true)
      */
     private $nuConta;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tp_fidelizacao", type="string", length=45, nullable=true)
+     */
+    private $tpFidelizacao;
 
     /**
      * @var string
@@ -202,13 +209,6 @@ class TbOrdemServico extends AbstractEntity
      * @ORM\Column(name="dt_vencimento", type="datetime", nullable=true)
      */
     private $dtVencimento;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="nu_ponto_adicional", type="integer", nullable=true)
-     */
-    private $nuPontoAdicional;
 
     /**
      * @var integer
@@ -256,7 +256,7 @@ class TbOrdemServico extends AbstractEntity
      *
      * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbTipoOrdemServico")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_tipo_ordem_servico", referencedColumnName="id_tipo_ordem_servico")
+     *   @ORM\JoinColumn(name="id_tipo_ordem_servico", referencedColumnName="id_tipo_ordem_servico")
      * })
      */
     private $idTipoOrdemServico;
@@ -334,22 +334,6 @@ class TbOrdemServico extends AbstractEntity
     public function setDsLocal($dsLocal)
     {
         $this->dsLocal = $dsLocal;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStOsAssinada()
-    {
-        return $this->stOsAssinada;
-    }
-
-    /**
-     * @param int $stOsAssinada
-     */
-    public function setStOsAssinada($stOsAssinada)
-    {
-        $this->stOsAssinada = $stOsAssinada;
     }
 
     /**
@@ -609,22 +593,6 @@ class TbOrdemServico extends AbstractEntity
     }
 
     /**
-     * @return int
-     */
-    public function getTpFiguracaoEmLista()
-    {
-        return $this->tpFiguracaoEmLista;
-    }
-
-    /**
-     * @param int $tpFiguracaoEmLista
-     */
-    public function setTpFiguracaoEmLista($tpFiguracaoEmLista)
-    {
-        $this->tpFiguracaoEmLista = $tpFiguracaoEmLista;
-    }
-
-    /**
      * @return string
      */
     public function getNoBanco()
@@ -863,5 +831,38 @@ class TbOrdemServico extends AbstractEntity
     {
         $this->tpProduto = $tpProduto;
     }
+
+    /**
+     * @return string
+     */
+    public function getTpFormaPagamento()
+    {
+        return $this->tpFormaPagamento;
+    }
+
+    /**
+     * @param string $tpFormaPagamento
+     */
+    public function setTpFormaPagamento($tpFormaPagamento)
+    {
+        $this->tpFormaPagamento = $tpFormaPagamento;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTpFidelizacao()
+    {
+        return $this->tpFidelizacao;
+    }
+
+    /**
+     * @param string $tpFidelizacao
+     */
+    public function setTpFidelizacao($tpFidelizacao)
+    {
+        $this->tpFidelizacao = $tpFidelizacao;
+    }
+
 }
 

@@ -76,9 +76,9 @@
 
             $('.checkOut').click(function () {
                 {% if app.request.get('_route') == 'super_ordem_servico_oi_fixo' %}
-                window.location = '{{ path('super_ordem_servico_oi_fixo_create') }}?id= ' + $('#pessoa-idPessoa').val()
+                window.location = '{{ path('super_ordem_servico_oi_fixo_create') }}?id=' + $('#pessoa-idPessoa').val() + '&cpf=' + $('#pessoa-nuCpf').val()
                 {% elseif app.request.get('_route') == 'super_ordem_servico_oi_tv' %}
-                window.location = '{{ path('super_ordem_servico_oi_tv_create') }}?id= ' + $('#pessoa-idPessoa').val()
+                window.location = '{{ path('super_ordem_servico_oi_tv_create') }}?id=' + $('#pessoa-idPessoa').val() + '&cpf=' + $('#pessoa-nuCpf').val()
                 {% endif %}
             });
         });

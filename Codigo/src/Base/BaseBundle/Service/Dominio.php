@@ -32,6 +32,12 @@ class Dominio
     CONST AVISTA = 1;
     CONST PARCELADO = 2;
 
+    CONST BOLETO = 1;
+    CONST DEBITO_AUTOMATICO = 2;
+
+    CONST COM_FIDELIZACAO = 1;
+    CONST SEM_FIDELIACAO = 2;
+
 
     public static function getStAtivo()
     {
@@ -51,6 +57,15 @@ class Dominio
         );
     }
 
+    public static function getTpFidelizacao()
+    {
+        return array(
+            ''                    => 'Selecione',
+            self::COM_FIDELIZACAO => 'Com Fidelização',
+            self::SEM_FIDELIACAO  => 'Sem Fidelização'
+        );
+    }
+
     public static function getStProduto()
     {
         return array(
@@ -67,6 +82,15 @@ class Dominio
             self::MANHA     => 'Manhã',
             self::TARDE     => 'Tarde',
             self::COMERCIAL => 'Comercial'
+        );
+    }
+
+    public static function getTpFormaPagamento()
+    {
+        return array(
+            ''                      => 'Selecione',
+            self::BOLETO            => 'Boleto',
+            self::DEBITO_AUTOMATICO => 'Débito Automático',
         );
     }
 

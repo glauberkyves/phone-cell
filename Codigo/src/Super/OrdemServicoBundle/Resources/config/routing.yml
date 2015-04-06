@@ -12,11 +12,11 @@ super_ordem_servico_oi_tv:
 
 super_ordem_servico_oi_fixo_create:
     path:     /oi-fixo/cadastrar
-    defaults: { _controller: SuperOrdemServicoBundle:Default:create }
+    defaults: { _controller: SuperOrdemServicoBundle:Default:create, form: true }
 
 super_ordem_servico_oi_tv_create:
     path:     /oi-tv/cadastrar
-    defaults: { _controller: SuperOrdemServicoBundle:Default:create }
+    defaults: { _controller: SuperOrdemServicoBundle:Default:create, form: false }
 
 super_ordem_servico_check_cpf:
     path:     /verificar-cpf

@@ -83,6 +83,16 @@ class TbEndereco extends AbstractEntity
      */
     private $idMunicipio;
 
+    /**
+     * @var \TbPessoa
+     *
+     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\TbPessoa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_pessoa", referencedColumnName="id_pessoa")
+     * })
+     */
+    private $idPessoa;
+
 
     /**
      * @param \TbBairro $idBairro
@@ -114,6 +124,54 @@ class TbEndereco extends AbstractEntity
     public function getIdMunicipio()
     {
         return $this->idMunicipio ? $this->idMunicipio : new TbMunicipio();
+    }
+
+    /**
+     * @return string
+     */
+    public function getDsComplemento()
+    {
+        return $this->dsComplemento;
+    }
+
+    /**
+     * @param string $dsComplemento
+     */
+    public function setDsComplemento($dsComplemento)
+    {
+        $this->dsComplemento = $dsComplemento;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDsReferencia()
+    {
+        return $this->dsReferencia;
+    }
+
+    /**
+     * @param string $dsReferencia
+     */
+    public function setDsReferencia($dsReferencia)
+    {
+        $this->dsReferencia = $dsReferencia;
+    }
+
+    /**
+     * @return \TbPessoa
+     */
+    public function getIdPessoa()
+    {
+        return $this->idPessoa ? $this->idPessoa: new TbPessoa();
+    }
+
+    /**
+     * @param \TbPessoa $idPessoa
+     */
+    public function setIdPessoa($idPessoa)
+    {
+        $this->idPessoa = $idPessoa;
     }
 
     /**

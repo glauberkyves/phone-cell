@@ -17,84 +17,71 @@ class OrdemServico extends CrudService
 
     public function preInsert(AbstractEntity $entity = null)
     {
+        $this->entity->setDtCadastro(new \DateTime());
     }
 
-    public function preSave(AbstractEntity $entity = null)
+    public function preSave(AbstractEntity $entity = null, array $params = array())
     {
         $params = $this->getRequest()->get('ordem');
         $this->entity->populate($params);
         $this->entity->setIdPessoa($this->savePessoa());
         $this->entity->setIdUsuario($this->getUser());
 
+        if (isset($params['nuNumeroPortado'])) {
+            $this->entity->setNuNumeroPortado(preg_replace("/[^0-9]/", "", $params['nuNumeroPortado']));
+            $this->entity->setNuTerminalFixoExistente(preg_replace("/[^0-9]/", "", $params['nuTerminalFixoExistente']));
+        }
+
         $idTipoOrdemServico = $this->getService('service.tipo_ordem_servico')->find(TipoOrdemServico::OIFIXO);
         $this->entity->setIdTipoOrdemServico($idTipoOrdemServico);
 
+        $idSituacao = $this->getService('service.situacao')->find(Situacao::COLETADA);
+        $this->entity->setIdSituacao($idSituacao);
+
         if (isset($params['idVelocidade']) && $params['idVelocidade']) {
             $idVelocidade = $this->getService('service.velocidade')->find($params['idVelocidade']);
-            $this->entity->setIdTipoOrdemServico($idVelocidade);
+            $this->entity->setIdVelocidade($idVelocidade);
+        } else {
+            $this->entity->setIdVelocidade(null);
         }
 
-        if (is_string($this->entity->getDtCadastro())) {
-            $this->entity->setDtCadastro(new \DateTime($this->entity->getDtCadastro()));
+        if (is_string($this->entity->getDtVenda())) {
+            $this->entity->setDtVenda(new \DateTime($this->entity->getDtVenda()));
+        }
+
+        if (isset($params['idUsuario']) && $params['idUsuario']) {
+            $idUsuario = $this->getService('service.usuario')->find($params['idUsuario']);
+            $this->entity->setIdUsuario($idUsuario);
         }
     }
 
     public function postSave(AbstractEntity $entity = null)
     {
-        $idPlano = $this->savePlanos();
-        $idEndereco = $this->saveEndereco($this->entity->getIdPessoa());
-        $idOrdemServico = $this->saveOrdem($this->entity->getIdPessoa());
+        $this->savePlanos();
+        $this->savePacotes();
+        $this->saveContato();
+        $this->saveEndereco($this->entity->getIdPessoa()->getIdPessoa());
 
-        echo '<pre>';
-        var_dump(123);
-        die;
-        $this->saveHistorico($idOrdemServico);
+        $this->saveHistorico();
     }
 
     public function saveEndereco($idPessoa)
     {
         $arrEndereco = $this->getRequest()->get('endereco');
-        $idEndereco = $this->getService('service.endereco')->newEntity()->populate($arrEndereco);
-
-        if (isset($arrEndereco['idEndereco']) && $arrEndereco['idEndereco']) {
-            $idEndereco = $this->getService('service.endereco')->find($arrEndereco['idPessoa'])->populate($arrEndereco);
-        }
-
-        $this->persist($idEndereco);
-
-        $idPessoaEndereco = $this->getService('service.pessoa_endereco')->newEntity();
-        $idPessoaEndereco->setIdPessoa($idPessoa);
-        $idPessoaEndereco->setIdEndereco($idEndereco);
-        $idPessoaEndereco->setDtCadastro(new \DateTime());
-
-        $this->persist($idPessoaEndereco);
+        $arrEndereco['idPessoa'] = $idPessoa;
+        $this->getService('service.endereco')->save(null, $arrEndereco);
     }
 
-    public function saveHistorico($idOrdemServico)
+    public function saveHistorico()
     {
         $entity = $this->getService('service.historico')->newEntity();
 
-        $entity->setIdOrdemServico($idOrdemServico);
-        $entity->setIdSituacao($idOrdemServico->getIdSituacao());
+        $entity->setIdOrdemServico($this->entity);
+        $entity->setIdSituacao($this->entity->getIdSituacao());
         $entity->setIdUsuario($this->getUser());
         $entity->setDtCadastro(new \DateTime());
 
         $this->persist($entity);
-    }
-
-    public function saveOrdem($idPessoa)
-    {
-        $arrOrdem = $this->getRequest()->get('ordem');
-        $entity = $this->getService('service.ordem_servico')->newEntity()->populate($arrOrdem);
-
-        $entity->setIdPessoa($idPessoa);
-        $entity->setIdSolicitacao($this->entity);
-        $entity->setIdUsuario($this->getUser());
-
-        $idSituacao = $this->getService('service.situacao')->find(Situacao::COLETADA);
-        $entity->setIdSituacao($idSituacao);
-
-        return $this->persist($entity);
     }
 
     public function savePessoa()
@@ -108,25 +95,75 @@ class OrdemServico extends CrudService
 
     public function savePlanos()
     {
-        $arrSolicitacao = $this->getRequest()->get('solicitacao');
+        $arrOrdemServico = $this->getRequest()->get('ordem');
 
-        if (isset($arrSolicitacao['idPlano']) && $arrSolicitacao['idPlano']) {
-            $svSolictacaoPlano = $this->getService('service.solicitacao_plano');
-            foreach ($svSolictacaoPlano->findByIdSolicitacao($this->entity->getIdSolicitacao()) as $planoOld) {
+        if (isset($arrOrdemServico['idPacote']) && $arrOrdemServico['idPacote']) {
+            $svOrdemServicoPacote = $this->getService('service.ordem_pacote');
+
+            foreach ($svOrdemServicoPacote->findByIdOrdemServico($this->entity->getIdOrdemServico()) as $planoOld) {
                 $this->remove($planoOld);
             }
 
-            foreach ($arrSolicitacao['idPlano'] as $plano) {
-                $idPlano = $this->getService('service.plano')->find($plano);
+            foreach ($arrOrdemServico['idPacote'] as $pacote) {
+                $idPlano = $this->getService('service.pacote')->find($pacote);
 
-                $entity = $svSolictacaoPlano->newEntity();
+                $entity = $svOrdemServicoPacote->newEntity();
 
-                $entity->setIdPlano($idPlano);
-                $entity->setIdSolicitacao($this->entity);
+                $entity->setIdPacote($idPlano);
+                $entity->setIdOrdemServico($this->entity);
                 $entity->setDtCadastro(new \DateTime());
 
                 $this->persist($entity);
             }
         }
+    }
+
+    public function savePacotes()
+    {
+        $arrOrdemServico = $this->getRequest()->get('ordem');
+
+        if (isset($arrOrdemServico['idPlano']) && $arrOrdemServico['idPlano']) {
+            $svOrdemServicoPlano = $this->getService('service.ordem_plano');
+
+            foreach ($svOrdemServicoPlano->findByIdOrdemServico($this->entity->getIdOrdemServico()) as $planoOld) {
+                $this->remove($planoOld);
+            }
+
+            foreach ($arrOrdemServico['idPlano'] as $plano) {
+                $idPlano = $this->getService('service.plano')->find($plano);
+
+                $entity = $svOrdemServicoPlano->newEntity();
+
+                $entity->setIdPlano($idPlano);
+                $entity->setIdOrdemServico($this->entity);
+                $entity->setDtCadastro(new \DateTime());
+
+                $this->persist($entity);
+            }
+        }
+    }
+
+    public function saveContato()
+    {
+        $arrContato = $this->getRequest()->get('contato');
+    }
+
+    public function parserItens(array $itens = array())
+    {
+        foreach ($itens as $key => $value) {
+            foreach ($value as $keyIten => $iten) {
+                switch (true) {
+                    case $keyIten == 'nuCpf':
+                        $cpf = substr($itens[$key][$keyIten], 0, 3) . '.' . substr($itens[$key][$keyIten], 3, 3) . '.';
+                        $cpf .= substr($itens[$key][$keyIten], 6, 3) . '-' . substr($itens[$key][$keyIten], 9);
+                        $itens[$key][$keyIten] = $cpf;
+                        break;
+                }
+            }
+
+            $itens[$key]['opcoes'] = '';
+        }
+
+        return parent::parserItens($itens);
     }
 }
