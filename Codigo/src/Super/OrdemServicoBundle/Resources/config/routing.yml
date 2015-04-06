@@ -21,3 +21,7 @@ super_ordem_servico_oi_tv_create:
 super_ordem_servico_check_cpf:
     path:     /verificar-cpf
     defaults: { _controller: SuperOrdemServicoBundle:Default:checkCpf }
+
+super_ordem_servico_fila:
+    path:     /fila-de-atendimento
+    defaults: { _controller: SuperOrdemServicoBundle:Default:index }
