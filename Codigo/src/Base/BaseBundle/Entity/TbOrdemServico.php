@@ -254,7 +254,7 @@ class TbOrdemServico extends AbstractEntity
     /**
      * @var \TbTipoOrdemServico
      *
-     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbTipoOrdemServico")
+     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\TbTipoOrdemServico")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_tipo_ordem_servico", referencedColumnName="id_tipo_ordem_servico")
      * })

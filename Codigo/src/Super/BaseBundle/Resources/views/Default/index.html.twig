@@ -3,14 +3,16 @@
 {% block body %}
     <div class="row">
         <div class="col-md-3">
-            <div class="mini-stat clearfix">
-                <span class="mini-stat-icon tar"><i class="fa fa-eye"></i></span>
+            <a href="{{ path('super_ordem_servico_fila_auditor') }}">
+                <div class="mini-stat clearfix">
+                    <span class="mini-stat-icon tar"><i class="fa fa-eye"></i></span>
 
-                <div class="mini-stat-info">
-                    <span>{{ coletadas|length }}</span>
-                    Solitações Coletadas
+                    <div class="mini-stat-info">
+                        <span>{{ coletadas|length }}</span>
+                        Solitações Coletadas
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-md-3">
             <div class="mini-stat clearfix">

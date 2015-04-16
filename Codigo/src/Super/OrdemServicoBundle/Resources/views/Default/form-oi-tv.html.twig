@@ -12,21 +12,21 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Número de pontos adicionais</label>
 
                     <div class="col-lg-10">
-                        {{ formText({name: 'ordem[nuPontoAdicional]'}, idOrdemServico.getNuPontoAdicional(), {class: 'form-control'}) }}
+                        {{ formText('ordem[nuPontoAdicional',entity.getNuPontoAdicional(), {class: 'form-control'}) }}
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Fidelização</label>
 
                     <div class="col-lg-10">
-                        {{ formSelect({name: 'ordem[tpFidelizacao]'}, idOrdemServico.getTpFidelizacao(), {class: 'form-control'}, arrFidelizacao) }}
+                        {{ formSelect('ordem[tpFidelizacao',entity.getTpFidelizacao(), {class: 'form-control'}, arrFidelizacao) }}
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Número de pontos adicionais</label>
 
                     <div class="col-lg-10">
-                        {{ formSelect({name: 'ordem[tpFormaPagamento]'}, idOrdemServico.getTpFormaPagamento(), {class: 'form-control'}, arrFormaPagamento) }}
+                        {{ formSelect('ordem[tpFormaPagamento',entity.getTpFormaPagamento(), {class: 'form-control'}, arrFormaPagamento) }}
                     </div>
                 </div>
                 <div id="parcela" class="hide">
@@ -35,7 +35,7 @@
                             parcelas</label>
 
                         <div class="col-lg-10">
-                            {{ formText({name: 'ordem[nuQuantidadeParcela]'}, idOrdemServico.getNuQuantidadeParcela(), {class: 'form-control'}) }}
+                            {{ formText('ordem[nuQuantidadeParcela',entity.getNuQuantidadeParcela(), {class: 'form-control'}) }}
                         </div>
                     </div>
                     <div class="form-group">
@@ -43,7 +43,7 @@
                             parcela</label>
 
                         <div class="col-lg-10">
-                            {{ formText({name: 'ordem[nuValorParcela]'}, idOrdemServico.getNuValorParcela(), {class: 'form-control'}) }}
+                            {{ formText('ordem[nuValorParcela',entity.getNuValorParcela(), {class: 'form-control'}) }}
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">DACC?</label>
 
                     <div class="col-lg-10">
-                        {{ formCheckbox({name: 'ordem[tpDacc]'}, idOrdemServico.getTpDacc(), {class: 'form-control'}) }}
+                        {{ formCheckbox('ordem[tpDacc',entity.getTpDacc(), {class: 'form-control'}) }}
                     </div>
                 </div>
                 <div id="banco" class="hide">
@@ -59,21 +59,21 @@
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Banco</label>
 
                         <div class="col-lg-10">
-                            {{ formText({name: 'ordem[noBanco]'}, idOrdemServico.getNoBanco(), {class: 'form-control'}) }}
+                            {{ formText('ordem[noBanco',entity.getNoBanco(), {class: 'form-control'}) }}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Agência</label>
 
                         <div class="col-lg-10">
-                            {{ formText({name: 'ordem[nuAgencia]'}, idOrdemServico.getNuAgencia(), {class: 'form-control'}) }}
+                            {{ formText('nuAgencia',entity.getNuAgencia(), {class: 'form-control'}) }}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Conta</label>
 
                         <div class="col-lg-10">
-                            {{ formText({name: 'ordem[nuConta]'}, idOrdemServico.getNuConta(), {class: 'form-control'}) }}
+                            {{ formText('nuConta',entity.getNuConta(), {class: 'form-control'}) }}
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                                     {% for pacote in arrPacote %}
                                         <div class="col-md-4 form-group">
                                             <label class="checkbox-inline">
-                                                {{ formCheckbox({name: 'ordem[idPacote][]'}, pacote.idPacote, {class: 'form-control'}) }}
+                                                {{ formCheckbox('idPacote[]',pacote.idPacote, {class: 'form-control'}) }}
                                             </label>
 
                                             {{ pacote.noPacote }}
@@ -121,7 +121,7 @@
 
                     <div class="col-lg-10">
                         <div class="input-group m-bot15">
-                            {{ formText({name: 'ordem[dtInstalacao]'}, '', {
+                            {{ formText('dtInstalacao','', {
                                 class: 'form-control date-picker',
                                 placeholder: '99/99/9999',
                                 'data-mask': '99/99/9999',
@@ -140,7 +140,7 @@
                         instalação</label>
 
                     <div class="col-lg-10">
-                        {{ formSelect({name: 'ordem[dtInstalacao]'}, '', {class: 'form-control'}, arrPeriodo) }}
+                        {{ formSelect('dtInstalacao','', {class: 'form-control'}, arrPeriodo) }}
                     </div>
                 </div>
             </div>

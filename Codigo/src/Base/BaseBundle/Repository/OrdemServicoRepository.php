@@ -17,9 +17,11 @@ class OrdemServicoRepository extends AbstractRepository
         return  $this
             ->getEntityManager()
             ->createQueryBuilder()
-            ->select('p.idPessoa, p.noPessoa, pf.nuCpf')
+            ->select('o.idOrdemServico, p.idPessoa, p.noPessoa, pf.nuCpf, to.idTipoOrdemServico, to.noTipoOrdemServico, s.idSituacao')
             ->from($this->_entityName, 'o')
+            ->innerJoin('o.idTipoOrdemServico', 'to')
             ->innerJoin('o.idPessoa', 'p')
-            ->innerJoin('p.idPessoaFisica', 'pf');
+            ->innerJoin('p.idPessoaFisica', 'pf')
+            ->innerJoin('o.idSituacao', 's');
     }
 } 

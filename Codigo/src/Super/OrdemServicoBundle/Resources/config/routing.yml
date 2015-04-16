@@ -18,10 +18,22 @@ super_ordem_servico_oi_tv_create:
     path:     /oi-tv/cadastrar
     defaults: { _controller: SuperOrdemServicoBundle:Default:create, form: false }
 
+super_ordem_servico_oi_fixo_alterar:
+    path:     /oi-fixo/alterar
+    defaults: { _controller: SuperOrdemServicoBundle:Default:edit, form: true }
+
+super_ordem_servico_oi_tv_alterar:
+    path:     /oi-tv/alterar
+    defaults: { _controller: SuperOrdemServicoBundle:Default:edit, form: false }
+
 super_ordem_servico_check_cpf:
     path:     /verificar-cpf
     defaults: { _controller: SuperOrdemServicoBundle:Default:checkCpf }
 
-super_ordem_servico_fila:
-    path:     /fila-de-atendimento
+super_ordem_servico_fila_auditor:
+    path:     /auditor/fila-de-atendimento
     defaults: { _controller: SuperOrdemServicoBundle:Default:index }
+
+super_ordem_servico_encaminhar:
+    path:     /encaminhar/{idOrdemServico}
+    defaults: { _controller: SuperOrdemServicoBundle:Default:encaminhar }

@@ -17,12 +17,14 @@ class Endereco extends CrudService
 
     public function preSave(AbstractEntity $entity = null, array $params = array())
     {
+        $request = $this->getRequest()->request;
+
         $idPessoa = $this->getService('service.pessoa')->find($params['idPessoa']);
         $this->entity->setIdPessoa($idPessoa);
 
-        $idMunicipio = $this->getService('service.municipio')->find($params['idMunicipio']);
+        $idMunicipio = $this->getService('service.municipio')->find($request->get('idMunicipio'));
         $this->entity->setIdMunicipio($idMunicipio);
 
-        $this->entity->setNuCep(preg_replace("/[^0-9]/", "", $params['nuCep']));
+        $this->entity->setNuCep($request->getDigits('nuCep'));
     }
 }

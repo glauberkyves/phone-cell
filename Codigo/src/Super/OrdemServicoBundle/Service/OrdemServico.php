@@ -9,6 +9,7 @@
 namespace Super\OrdemServicoBundle\Service;
 
 use Base\BaseBundle\Entity\AbstractEntity;
+use Base\BaseBundle\Entity\TbTipoOrdemServico;
 use Base\CrudBundle\Service\CrudService;
 
 class OrdemServico extends CrudService
@@ -22,15 +23,13 @@ class OrdemServico extends CrudService
 
     public function preSave(AbstractEntity $entity = null, array $params = array())
     {
-        $params = $this->getRequest()->get('ordem');
+        $request = $this->getRequest()->request;
+
         $this->entity->populate($params);
         $this->entity->setIdPessoa($this->savePessoa());
-        $this->entity->setIdUsuario($this->getUser());
 
-        if (isset($params['nuNumeroPortado'])) {
-            $this->entity->setNuNumeroPortado(preg_replace("/[^0-9]/", "", $params['nuNumeroPortado']));
-            $this->entity->setNuTerminalFixoExistente(preg_replace("/[^0-9]/", "", $params['nuTerminalFixoExistente']));
-        }
+        $this->entity->setNuNumeroPortado($request->getDigits('nuNumeroPortado'));
+        $this->entity->setNuTerminalFixoExistente($request->getDigits('nuTerminalFixoExistente'));
 
         $idTipoOrdemServico = $this->getService('service.tipo_ordem_servico')->find(TipoOrdemServico::OIFIXO);
         $this->entity->setIdTipoOrdemServico($idTipoOrdemServico);
@@ -38,7 +37,7 @@ class OrdemServico extends CrudService
         $idSituacao = $this->getService('service.situacao')->find(Situacao::COLETADA);
         $this->entity->setIdSituacao($idSituacao);
 
-        if (isset($params['idVelocidade']) && $params['idVelocidade']) {
+        if ($request->has('idVelocidade')) {
             $idVelocidade = $this->getService('service.velocidade')->find($params['idVelocidade']);
             $this->entity->setIdVelocidade($idVelocidade);
         } else {
@@ -49,9 +48,11 @@ class OrdemServico extends CrudService
             $this->entity->setDtVenda(new \DateTime($this->entity->getDtVenda()));
         }
 
-        if (isset($params['idUsuario']) && $params['idUsuario']) {
-            $idUsuario = $this->getService('service.usuario')->find($params['idUsuario']);
+        if ($request->get('idUsuario')) {
+            $idUsuario = $this->getService('service.usuario')->find($request->get('idUsuario'));
             $this->entity->setIdUsuario($idUsuario);
+        } else {
+            $this->entity->setIdUsuario($this->getUser());
         }
     }
 
@@ -60,16 +61,19 @@ class OrdemServico extends CrudService
         $this->savePlanos();
         $this->savePacotes();
         $this->saveContato();
-        $this->saveEndereco($this->entity->getIdPessoa()->getIdPessoa());
+        $this->saveEndereco(
+            array('idPessoa' => $this->entity->getIdPessoa()->getIdPessoa()) +
+            $this->getRequest()->request->all()
+        );
 
         $this->saveHistorico();
     }
 
-    public function saveEndereco($idPessoa)
+    public function saveEndereco(array $params = array())
     {
-        $arrEndereco = $this->getRequest()->get('endereco');
-        $arrEndereco['idPessoa'] = $idPessoa;
-        $this->getService('service.endereco')->save(null, $arrEndereco);
+        $this
+            ->getService('service.endereco')
+            ->save(null, $params);
     }
 
     public function saveHistorico()
@@ -84,27 +88,26 @@ class OrdemServico extends CrudService
         $this->persist($entity);
     }
 
-    public function savePessoa()
+    public function savePessoa(array $params = array())
     {
-        $arrPessoa = $this->getRequest()->get('pessoa');
-        $entity = $this->getService('service.pessoa_fisica')->newEntity()->populate($arrPessoa);
-        $this->getService('service.pessoa_fisica')->save($entity, $arrPessoa);
-
-        return $entity->getIdPessoa();
+        return $this
+            ->getService('service.pessoa_fisica')
+            ->save(null, $params)
+            ->getIdPessoa();
     }
 
     public function savePlanos()
     {
-        $arrOrdemServico = $this->getRequest()->get('ordem');
+        $request = $this->getRequest()->request;
 
-        if (isset($arrOrdemServico['idPacote']) && $arrOrdemServico['idPacote']) {
+        if ($request->has('idPacote')) {
             $svOrdemServicoPacote = $this->getService('service.ordem_pacote');
 
             foreach ($svOrdemServicoPacote->findByIdOrdemServico($this->entity->getIdOrdemServico()) as $planoOld) {
                 $this->remove($planoOld);
             }
 
-            foreach ($arrOrdemServico['idPacote'] as $pacote) {
+            foreach ($request->get('idPacote') as $pacote) {
                 $idPlano = $this->getService('service.pacote')->find($pacote);
 
                 $entity = $svOrdemServicoPacote->newEntity();
@@ -120,16 +123,16 @@ class OrdemServico extends CrudService
 
     public function savePacotes()
     {
-        $arrOrdemServico = $this->getRequest()->get('ordem');
+        $request = $this->getRequest()->request;
 
-        if (isset($arrOrdemServico['idPlano']) && $arrOrdemServico['idPlano']) {
+        if ($request->get('idPlano')) {
             $svOrdemServicoPlano = $this->getService('service.ordem_plano');
 
             foreach ($svOrdemServicoPlano->findByIdOrdemServico($this->entity->getIdOrdemServico()) as $planoOld) {
                 $this->remove($planoOld);
             }
 
-            foreach ($arrOrdemServico['idPlano'] as $plano) {
+            foreach ($request->get('idPlano') as $plano) {
                 $idPlano = $this->getService('service.plano')->find($plano);
 
                 $entity = $svOrdemServicoPlano->newEntity();
@@ -161,9 +164,48 @@ class OrdemServico extends CrudService
                 }
             }
 
-            $itens[$key]['opcoes'] = '';
+            $html   = '<div class="btn-group  btn-group-sm">';
+            $rtEdit = $this
+                ->getRouter()
+                ->generate('super_ordem_servico_oi_fixo_alterar', array('id' => $value['idOrdemServico']));
+
+            if ($value['idTipoOrdemServico'] == TipoOrdemServico::OITV) {
+                $rtEdit = $this
+                    ->getRouter()
+                    ->generate('super_ordem_servico_oi_tv_alterar', array('id' => $value['idOrdemServico']));
+            }
+
+            $html .= '<a href="' . $rtEdit . '"><button class="btn btn-white" type="button"><i class="fa fa-edit"></i>';
+            $html .= '</button></a></div>';
+
+            $html .= '<a href="/encaminhar/' . $value['idOrdemServico'] . '"><button class="btn btn-success" type="button">';
+            $html .= '<i class="fa fa-share"></i>';
+            $html .= '</button></a></div>';
+
+            $itens[$key]['opcoes'] = $html;
         }
 
         return parent::parserItens($itens);
+    }
+
+    public function encaminhar($idOrdemServico)
+    {
+        $this->entity = $this->find($idOrdemServico);
+
+        if ($this->entity) {
+            switch ($this->entity->getIdSituacao()->getIdSituacao()) {
+                case Situacao::COLETADA:
+                    $this->entity->setIdSituacao($this->getService('service.situacao')->find(Situacao::VALIDADA));
+                    break;
+
+            }
+
+            $this->persist($this->entity);
+            $this->saveHistorico();
+
+            return true;
+        }
+
+        return false;
     }
 }

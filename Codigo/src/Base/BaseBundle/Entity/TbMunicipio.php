@@ -31,7 +31,7 @@ class TbMunicipio extends AbstractEntity
     /**
      * @var \TbEstado
      *
-     * @ORM\ManyToOne(targetEntity="TbEstado")
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbEstado")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id_estado")
      * })

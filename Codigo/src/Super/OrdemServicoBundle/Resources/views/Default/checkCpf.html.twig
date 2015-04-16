@@ -18,7 +18,6 @@
                                 <div class="col-lg-10">
                                     <div class="input-group m-bot15">
                                         {{ formText({name: 'pessoa[nuCpf]'}, '', {class: 'form-control required cpf', placeholder: '999.999.999-99', 'data-mask': '999.999.999-99'}) }}
-                                        {{ formHidden({name: 'pessoa[idPessoa]'}, '', {class: 'form-control'}) }}
                                         <span class="input-group-addon btn-primary" id="buscar">
                                             <span class="fa fa-search"></span>
                                         </span>
@@ -59,10 +58,8 @@
                             $('#div-cpf').removeClass('hide')
                             $('#nome').html(data.noPessoa)
                             $('#cpf').html($('#pessoa-nuCpf').val())
-                            $('#pessoa-idPessoa').val(data.idPessoa)
                         } else {
                             $('#div-cpf').addClass('hide')
-                            $('#pessoa-idPessoa').val('')
                             $('#nome, #cpf').html('')
                             $('#div-cpf-error').removeClass('hide')
                         }
@@ -76,9 +73,9 @@
 
             $('.checkOut').click(function () {
                 {% if app.request.get('_route') == 'super_ordem_servico_oi_fixo' %}
-                window.location = '{{ path('super_ordem_servico_oi_fixo_create') }}?id=' + $('#pessoa-idPessoa').val() + '&cpf=' + $('#pessoa-nuCpf').val()
+                window.location = '{{ path('super_ordem_servico_oi_fixo_create') }}?cpf=' + $('#pessoa-nuCpf').val()
                 {% elseif app.request.get('_route') == 'super_ordem_servico_oi_tv' %}
-                window.location = '{{ path('super_ordem_servico_oi_tv_create') }}?id=' + $('#pessoa-idPessoa').val() + '&cpf=' + $('#pessoa-nuCpf').val()
+                window.location = '{{ path('super_ordem_servico_oi_tv_create') }}?cpf=' + $('#pessoa-nuCpf').val()
                 {% endif %}
             });
         });

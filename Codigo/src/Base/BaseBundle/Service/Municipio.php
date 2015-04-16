@@ -8,7 +8,9 @@
 
 namespace Base\BaseBundle\Service;
 
-class Municipio extends AbstractService
+use Base\CrudBundle\Service\CrudService;
+
+class Municipio extends CrudService
 {
     protected $entityName = 'Base\BaseBundle\Entity\TbMunicipio';
 }

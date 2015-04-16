@@ -59,11 +59,11 @@ class TbPessoa extends AbstractEntity
     protected $idPessoaFisica;
 
     /**
-     * @var TbPessoaJuridica
+     * @var TbEndereco
      *
-     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\TbPessoaJuridica", mappedBy="idPessoa")
+     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\TbEndereco", mappedBy="idPessoa")
      */
-    protected $idPessoaJuridica;
+    protected $idEndereco;
 
     /**
      * @param int $idPessoa
@@ -188,11 +188,11 @@ class TbPessoa extends AbstractEntity
     }
 
     /**
-     * @return \Base\BaseBundle\Entity\TbPessoaJuridica
+     * @return \Base\BaseBundle\Entity\TbEndereco
      */
-    public function getIdPessoaJuridica()
+    public function getIdEndereco()
     {
-        return $this->idPessoaJuridica ? $this->idPessoaJuridica : new TbPessoaJuridica();
+        return $this->idEndereco ? $this->idEndereco : new TbEndereco();
     }
 
     /**
@@ -208,9 +208,9 @@ class TbPessoa extends AbstractEntity
     /**
      * @return TbPessoa
      */
-    public function setIdPessoaJuridica(\Base\BaseBundle\Entity\TbPessoaJuridica $idPessoaJuridica)
+    public function setIdEndereco(\Base\BaseBundle\Entity\TbEndereco $idEndereco)
     {
-        $this->idPessoaJuridica = $idPessoaJuridica;
+        $this->idEndereco = $idEndereco;
 
         return $this;
     }

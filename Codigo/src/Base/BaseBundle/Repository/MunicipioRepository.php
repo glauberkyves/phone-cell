@@ -8,9 +8,7 @@
 
 namespace Base\BaseBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-
-class MunicipioRepository extends EntityRepository
+class MunicipioRepository extends AbstractRepository
 {
 
 } 

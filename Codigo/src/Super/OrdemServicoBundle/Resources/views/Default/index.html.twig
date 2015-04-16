@@ -8,8 +8,8 @@
                 </header>
                 <div class="panel-body">
                     <div class="position-center">
-                        <form role="form" class="form-horizontal" action="{{ path('super_ordem_servico_fila') }}"
-                              id="form-fila">
+                        <form role="form" class="form-horizontal" action="{{ path(app.request.attributes.get('_route'),
+                        app.request.attributes.get('_route_params')) }}" id="form-fila">
                             <div class="form-group">
                                 <label for="noPessoa" class="col-lg-2 col-sm-2 control-label">Nome</label>
 
@@ -56,11 +56,12 @@
                             <tr>
                                 <th data-column="noPessoa">Nome</th>
                                 <th data-column="nuCpf" width="10%">CPF</th>
+                                <th data-column="noTipoOrdemServico" width="20%">Ordem de Serviço</th>
                                 <th data-column="opcoes" width="10%">Opções</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="odd">
+                            <tr class="odd" >
                                 <td valign="top" colspan="3">Acione a pesquisa</td>
                             </tr>
                             </tbody>
@@ -70,4 +71,9 @@
             </section>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+//            $('button[type=submit]').click()
+        });
+    </script>
 {% endblock %}

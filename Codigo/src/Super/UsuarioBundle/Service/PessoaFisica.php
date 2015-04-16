@@ -18,15 +18,13 @@ class PessoaFisica extends CrudService
 
     public function preSave(AbstractEntity $entity = null, $params = array())
     {
+        $request      = $this->getRequest()->request;
         $entityPessoa = $this
             ->getService('service.pessoa')
             ->save(null, $params);
 
         $this->entity->setIdPessoa($entityPessoa);
-
-        if (isset($params['nuCpf'])) {
-            $this->entity->setNuCpf(preg_replace("/[^0-9]/", "", $params['nuCpf']));
-        }
+        $this->entity->setNuCpf($request->getDigits('nuCpf'));
 
         if (is_string($this->entity->getDtNascimento())) {
             $this->entity->setDtNascimento(Data::dateBr($this->entity->getDtNascimento()));
