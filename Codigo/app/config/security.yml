@@ -9,7 +9,7 @@ security:
         main:
             entity: { class: BaseBaseBundle:TbUsuario, property: noEmail }
 
-    access_denied_url: /logout
+#    access_denied_url: /logout
 
     firewalls:
         dev:
@@ -43,4 +43,5 @@ security:
     access_control:
          - { path: ^/profile, roles: [ROLE_USER, ROLE_SUPER] }
 #         - { path: ^/administrativo, roles: [ROLE_SUPER] }
-         - { path: ^/ordem-de-servico/, roles: [ROLE_VENDEDOR, ROLE_AUDITOR] }
+         - { path: ^/ordem-de-servico/$, roles: [ROLE_VENDEDOR, ROLE_AUDITOR] }
+         - { path: ^/ordem-de-servico/visualizar/, roles: [ROLE_INPUTADOR] }

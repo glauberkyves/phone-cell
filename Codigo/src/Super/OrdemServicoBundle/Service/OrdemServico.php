@@ -164,23 +164,37 @@ class OrdemServico extends CrudService
                 }
             }
 
-            $html   = '<div class="btn-group  btn-group-sm">';
+            $html = '<div class="btn-group  btn-group-sm">';
             $rtEdit = $this
                 ->getRouter()
                 ->generate('super_ordem_servico_oi_fixo_alterar', array('id' => $value['idOrdemServico']));
+
+            $rtView = $this
+                ->getRouter()
+                ->generate('super_ordem_servico_oi_fixo_visualizar', array('id' => $value['idOrdemServico']));
 
             if ($value['idTipoOrdemServico'] == TipoOrdemServico::OITV) {
                 $rtEdit = $this
                     ->getRouter()
                     ->generate('super_ordem_servico_oi_tv_alterar', array('id' => $value['idOrdemServico']));
+
+                $rtView = $this
+                    ->getRouter()
+                    ->generate('super_ordem_servico_oi_tv_visualizar', array('id' => $value['idOrdemServico']));
             }
 
-            $html .= '<a href="' . $rtEdit . '"><button class="btn btn-white" type="button"><i class="fa fa-edit"></i>';
-            $html .= '</button></a></div>';
+            $html .= '<a href="' . $rtEdit . '">';
+            $html .= '<button class="btn btn-white" type="button"><i class="fa fa-edit"></i></button>';
+            $html .= '</a>';
 
-            $html .= '<a href="/encaminhar/' . $value['idOrdemServico'] . '"><button class="btn btn-success" type="button">';
-            $html .= '<i class="fa fa-share"></i>';
-            $html .= '</button></a></div>';
+            $html .= '<a href="' . $rtView . '">';
+            $html .= '<button class="btn btn-white" type="button"><i class="fa fa-edit"></i></button>';
+            $html .= '</a>';
+
+            $html .= '<a href="/encaminhar/' . $value['idOrdemServico'] . '">';
+            $html .= '<button class="btn btn-success" type="button"><i class="fa fa-share"></i></button>';
+            $html .= '</a>';
+            $html .= '</div>';
 
             $itens[$key]['opcoes'] = $html;
         }
@@ -198,6 +212,9 @@ class OrdemServico extends CrudService
                     $this->entity->setIdSituacao($this->getService('service.situacao')->find(Situacao::VALIDADA));
                     break;
 
+                case Situacao::VALIDADA:
+                    $this->entity->setIdSituacao($this->getService('service.situacao')->find(Situacao::IMPUTADA));
+                    break;
             }
 
             $this->persist($this->entity);

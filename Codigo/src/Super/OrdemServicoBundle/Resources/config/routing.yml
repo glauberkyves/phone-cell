@@ -26,6 +26,14 @@ super_ordem_servico_oi_tv_alterar:
     path:     /ordem-de-servico/oi-tv/alterar
     defaults: { _controller: SuperOrdemServicoBundle:Default:edit, form: false }
 
+super_ordem_servico_oi_fixo_visualizar:
+    path:     /ordem-de-servico/visualizar/oi-fixo
+    defaults: { _controller: SuperOrdemServicoBundle:Default:view, form: true }
+
+super_ordem_servico_oi_tv_visualizar:
+    path:     /ordem-de-servico/visualizar/oi-tv
+    defaults: { _controller: SuperOrdemServicoBundle:Default:view, form: false }
+
 super_ordem_servico_check_cpf:
     path:     /verificar-cpf
     defaults: { _controller: SuperOrdemServicoBundle:Default:checkCpf }
@@ -41,3 +49,11 @@ super_ordem_servico_fila_inputador:
 super_ordem_servico_encaminhar:
     path:     /encaminhar/{idOrdemServico}
     defaults: { _controller: SuperOrdemServicoBundle:Default:encaminhar }
+
+super_ordem_servico_historico:
+    path:     /ordem-de-servico/historico
+    defaults: { _controller: SuperOrdemServicoBundle:Default:historico }
+
+super_ordem_servico_historico_view:
+    path:     /ordem-de-servico/historico/ordem-de-servico/{idOrdemServico}
+    defaults: { _controller: SuperOrdemServicoBundle:Default:historicoView }

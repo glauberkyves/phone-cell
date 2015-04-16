@@ -1,0 +1,56 @@
+{% extends 'BaseBaseBundle::layout.html.twig' %}
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading tab-bg-dark-navy-blue">
+                    <ul class="nav nav-tabs nav-justified ">
+                        <li class="active">
+                            <a data-toggle="tab" href="#job-history">
+                                Histórico
+                            </a>
+                        </li>
+                    </ul>
+                </header>
+                <div class="panel-body">
+                    <div class="tab-content tasi-tab">
+                        <div id="job-history" class="tab-pane active">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="timeline-messages">
+                                        <h3>{{ entity.getIdTipoOrdemServico().getNoTipoOrdemServico() }}</h3>
+                                        {% for historico in historicos %}
+                                            <!-- Comment -->
+                                            <div class="msg-time-chat">
+                                                <div class="message-body msg-in">
+                                                    <span class="arrow"></span>
+
+                                                    <div class="text">
+                                                        <div class="first">
+                                                            {{ historico.dtCadastro.format('d/m/Y') }}
+                                                        </div>
+                                                        <div class="second bg-terques ">
+                                                            {{ historico.getIdUsuario().getIdPessoa().getNoPessoa() }}
+                                                            -
+                                                            {{ historico.getIdSituacao().getNoSituacao() }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <!-- /comment -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+//            $('button[type=submit]').click()
+        });
+    </script>
+{% endblock %}

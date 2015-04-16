@@ -59,7 +59,7 @@ class Usuario extends CrudService
     public function generateSecretHash($entity)
     {
         $idUsuario = md5($entity->getIdUsuario());
-        $noSenha   = md5($entity->getNoSenha());
+        $noSenha = md5($entity->getNoSenha());
 
         $entity->setNoSenha(md5($idUsuario . $noSenha));
 
@@ -69,13 +69,13 @@ class Usuario extends CrudService
     public function parserItens(array $itens = array())
     {
         foreach ($itens as $key => $value) {
-            $html   = '<div class="btn-group  btn-group-sm">';
+            $html = '<div class="btn-group  btn-group-sm">';
             $rtEdit = $this->getRouter()->generate('super_usuario_edit', array('id' => $value['idUsuario']));
 
-            $html .= '<button class="btn btn-white" type="button">';
             $html .= "<a href=\"{$rtEdit}\">";
+            $html .= '<button class="btn btn-white" type="button">';
             $html .= '<i class="fa fa-edit"></i>';
-            $html .= '</a></button>';
+            $html .= '</button></a>';
             $html .= ' </div>';
 
             $itens[$key]['opcoes'] = $html;

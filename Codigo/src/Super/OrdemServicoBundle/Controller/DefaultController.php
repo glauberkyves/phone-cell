@@ -48,12 +48,18 @@ class DefaultController extends CrudController
 //        $this->vars['idEndereco']     = $this->getService('service.endereco')->newEntity()->populate($arrEndereco);
 //        $this->vars['idOrdemServico'] = $this->getService('service.ordem_servico')->newEntity()->populate($arrOrdemServico);
 
+        $this->vars['entityPessoa'] = null;
         $cpf = $this->getRequest()->query->getDigits('cpf');
 
         if ($cpf && null === $this->getRequest()->query->get('id', null)) {
             $entityPessoaFisica = $this->getService('service.pessoa_fisica')->findOneByNuCpf($cpf);
             $this->vars['entityPessoa'] = $entityPessoaFisica->getIdPessoa();
         }
+    }
+
+    public function viewAction(Request $request, $form)
+    {
+        return $this->editAction($request, $form);
     }
 
     public function CheckCpfAction(Request $request)
@@ -106,7 +112,10 @@ class DefaultController extends CrudController
 
                 $this->vars['arrMunicipio'] = array('' => 'Selecione') + $arrMunicipio;
 
-                if ($entity->getIdSituacao()->getIdSituacao() != Situacao::COLETADA) {
+                $route = $this->getRequest()->get('_route');
+                if ($entity->getIdSituacao()->getIdSituacao() != Situacao::COLETADA
+                    && ($route == 'super_ordem_servico_oi_fixo_alterar' || $route == 'super_ordem_servico_oi_tv_alterar')
+                ) {
                     $this->addMessage('Ordem de serviço já em andamento, não é possível alterar.', 'error');
                     return $this->redirect($request->headers->get('referer'));
                 }
@@ -130,5 +139,19 @@ class DefaultController extends CrudController
         }
 
         return $this->redirect($this->getRequest()->headers->get('referer'));
+    }
+
+    public function historicoAction(Request $request)
+    {
+        $request->query->set('idSituacao', null);
+        return $this->indexAction($request);
+    }
+
+    public function historicoViewAction(Request $request, $idOrdemServico)
+    {
+        $entity = $this->getService()->find($idOrdemServico);
+        $historico = $this->getService('service.historico')->findByIdOrdemServico($idOrdemServico);
+
+        return $this->render($this->resolveRouteName(), array('entity' => $entity, 'historicos' => $historico));
     }
 }
