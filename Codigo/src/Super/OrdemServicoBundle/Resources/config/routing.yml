@@ -3,27 +3,27 @@ super_ordem_servico_homepage:
     defaults: { _controller: SuperOrdemServicoBundle:Default:create }
 
 super_ordem_servico_oi_fixo:
-    path:     /oi-fixo
+    path:     /ordem-de-servico/oi-fixo
     defaults: { _controller: SuperOrdemServicoBundle:Default:checkCpf }
 
 super_ordem_servico_oi_tv:
-    path:     /oi-tv
+    path:     /ordem-de-servico/oi-tv
     defaults: { _controller: SuperOrdemServicoBundle:Default:checkCpf }
 
 super_ordem_servico_oi_fixo_create:
-    path:     /oi-fixo/cadastrar
+    path:     /ordem-de-servico/oi-fixo/cadastrar
     defaults: { _controller: SuperOrdemServicoBundle:Default:create, form: true }
 
 super_ordem_servico_oi_tv_create:
-    path:     /oi-tv/cadastrar
+    path:     /ordem-de-servico/oi-tv/cadastrar
     defaults: { _controller: SuperOrdemServicoBundle:Default:create, form: false }
 
 super_ordem_servico_oi_fixo_alterar:
-    path:     /oi-fixo/alterar
+    path:     /ordem-de-servico/oi-fixo/alterar
     defaults: { _controller: SuperOrdemServicoBundle:Default:edit, form: true }
 
 super_ordem_servico_oi_tv_alterar:
-    path:     /oi-tv/alterar
+    path:     /ordem-de-servico/oi-tv/alterar
     defaults: { _controller: SuperOrdemServicoBundle:Default:edit, form: false }
 
 super_ordem_servico_check_cpf:
@@ -32,7 +32,11 @@ super_ordem_servico_check_cpf:
 
 super_ordem_servico_fila_auditor:
     path:     /auditor/fila-de-atendimento
-    defaults: { _controller: SuperOrdemServicoBundle:Default:index }
+    defaults: { _controller: SuperOrdemServicoBundle:Default:index, idSituacao: 1 }
+
+super_ordem_servico_fila_inputador:
+    path:     /inputador/fila-de-atendimento
+    defaults: { _controller: SuperOrdemServicoBundle:Default:index, idSituacao: 2 }
 
 super_ordem_servico_encaminhar:
     path:     /encaminhar/{idOrdemServico}

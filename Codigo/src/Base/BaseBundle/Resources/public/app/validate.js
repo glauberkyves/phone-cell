@@ -46,7 +46,7 @@ var Validation = {
                 return true;
             }
 
-        }, "Por favor, informe uma Data válida.");
+        }, "Por favor, informe uma data válida.");
     },
     addValidationCpf:              function () {
         jQuery.validator.addMethod("cpf", function (value, element) {

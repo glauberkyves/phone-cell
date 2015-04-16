@@ -12,19 +12,23 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Nome</label>
 
                     <div class="col-lg-10">
-                        {{ formText('noPessoa', entity.getIdPessoa().getNoPessoa(), {class: 'form-control', placeholder: 'Nome completo'}) }}
+                        {% if entityPessoa %}
+                            {{ entity.setIdPessoa(entityPessoa) }}
+                        {% endif %}
+
+                        {{ formText('noPessoa', entity.getIdPessoa().getNoPessoa(), {class: 'form-control required', placeholder: 'Nome completo'}) }}
                         {{ formHidden('idPessoa', entity.getIdPessoa().getIdPessoa()) }}
                         {{ formHidden('idOrdemServico', entity.getIdOrdemServico()) }}
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">E-mail</label>
+                {#<div class="form-group">#}
+                    {#<label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">E-mail</label>#}
 
-                    <div class="col-lg-10">
-                        {{ formText('noEmail', '', {class: 'form-control', placeholder: 'exemplo@exemplo.com'}) }}
-                    </div>
-                </div>
+                    {#<div class="col-lg-10">#}
+                        {#{{ formText('noEmail', '', {class: 'form-control', placeholder: 'exemplo@exemplo.com'}) }}#}
+                    {#</div>#}
+                {#</div>#}
 
                 {% if entity.getIdPessoa().getIdPessoa() %}
                     <div class="form-group">
@@ -32,7 +36,7 @@
 
                         <div class="col-lg-10">
                             {{ formText('nuCpf', entity.getIdPessoa().getIdPessoaFisica().getNuCpf(), {
-                                class: 'form-control',
+                                class: 'form-control required',
                                 placeholder: '999.999.999-99',
                                 'data-mask': '999.999.999-99',
                                 readonly: 'readonly'
@@ -45,7 +49,7 @@
 
                         <div class="col-lg-10">
                             {{ formText('nuCpf', entity.getIdPessoa().getIdPessoaFisica().getNuCpf(), {
-                                class: 'form-control',
+                                class: 'form-control required',
                                 placeholder: '999.999.999-99',
                                 'data-mask': '999.999.999-99',
                                 disabled: 'disabled'
@@ -58,7 +62,7 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Nome da mãe</label>
 
                     <div class="col-lg-10">
-                        {{ formText('noMae', entity.getIdPessoa().getIdPessoaFisica().getNoMae(), {class: 'form-control', placeholder: 'Nome completo'}) }}
+                        {{ formText('noMae', entity.getIdPessoa().getIdPessoaFisica().getNoMae(), {class: 'form-control required', placeholder: 'Nome completo'}) }}
                     </div>
                 </div>
 
@@ -69,7 +73,7 @@
                     <div class="col-lg-10">
                         <div class="input-group m-bot15">
                             {{ formText('dtNascimento', entity.getIdPessoa().getIdPessoaFisica().getDtNascimento().format('d/m/Y'), {
-                                class: 'form-control date-picker',
+                                class: 'form-control date-picker required dateBR',
                                 placeholder: '99/99/9999',
                                 'data-mask': '99/99/9999',
                                 'data-date-format': 'dd/mm/yyyy'
@@ -85,7 +89,7 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">RG</label>
 
                     <div class="col-lg-10">
-                        {{ formText('nuRg', entity.getIdPessoa().getIdPessoaFisica().getNuRg(), {class: 'form-control'}) }}
+                        {{ formText('nuRg', entity.getIdPessoa().getIdPessoaFisica().getNuRg(), {class: 'form-control required'}) }}
                     </div>
                 </div>
 
@@ -93,18 +97,18 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Orgão expedidor</label>
 
                     <div class="col-lg-10">
-                        {{ formText('dsOrgaoExpedido', entity.getIdPessoa().getIdPessoaFisica().getDsOrgaoExpedido(), {class: 'form-control'}) }}
+                        {{ formText('dsOrgaoExpedido', entity.getIdPessoa().getIdPessoaFisica().getDsOrgaoExpedido(), {class: 'form-control required'}) }}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Data de
-                        nascimento</label>
+                        expedição</label>
 
                     <div class="col-lg-10">
                         <div class="input-group m-bot15">
                             {{ formText('dtExpedicao', entity.getIdPessoa().getIdPessoaFisica().getDtExpedicao().format('d/m/Y'),{
-                                class: 'form-control date-picker',
+                                class: 'form-control date-picker required dateBR',
                                 placeholder: '99/99/9999',
                                 'data-mask': '99/99/9999'
                             }) }}
@@ -114,20 +118,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Data de
-                        expedição</label>
-
-                    <div class="col-lg-10">
-
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Sexo</label>
 
                     <div class="col-lg-10">
-                        {{ formSelect('sgSexo', entity.getIdPessoa().getIdPessoaFisica().getSgSexo(), {class: 'form-control  m-bot15'}, cmbSexo) }}
+                        {{ formSelect('sgSexo', entity.getIdPessoa().getIdPessoaFisica().getSgSexo(), {class: 'form-control  m-bot15 required'}, cmbSexo) }}
                     </div>
                 </div>
 
@@ -165,7 +161,7 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Estado</label>
 
                     <div class="col-lg-10">
-                        {{ formSelect('idEstado', entity.getIdPessoa().getIdEndereco().getIdMunicipio().getIdEstado().getIdEstado(), {class: 'form-control m-bot15', id: 'estado'}, arrEstado) }}
+                        {{ formSelect('idEstado', entity.getIdPessoa().getIdEndereco().getIdMunicipio().getIdEstado().getIdEstado(), {class: 'form-control m-bot15 required', id: 'estado'}, arrEstado) }}
                     </div>
                 </div>
 
@@ -173,7 +169,7 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Cidade</label>
 
                     <div class="col-lg-10">
-                        {{ formSelect('idMunicipio', entity.getIdPessoa().getIdEndereco().getIdMunicipio().getIdMunicipio(), {class: 'form-control m-bot15', id: 'municipio'}, arrMunicipio) }}
+                        {{ formSelect('idMunicipio', entity.getIdPessoa().getIdEndereco().getIdMunicipio().getIdMunicipio(), {class: 'form-control m-bot15 required', id: 'municipio'}, arrMunicipio) }}
                     </div>
                 </div>
 
@@ -181,7 +177,7 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Bairro</label>
 
                     <div class="col-lg-10">
-                        {{ formText('noBairro', entity.getIdPessoa().getIdEndereco().getNoBairro(), {class: 'form-control'}) }}
+                        {{ formText('noBairro', entity.getIdPessoa().getIdEndereco().getNoBairro(), {class: 'form-control required'}) }}
                     </div>
                 </div>
 
@@ -189,7 +185,7 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Endereço</label>
 
                     <div class="col-lg-10">
-                        {{ formText('noLogradouro', entity.getIdPessoa().getIdEndereco().getNoLogradouro(), {class: 'form-control', placeholder: 'Endereço de instalação'}) }}
+                        {{ formText('noLogradouro', entity.getIdPessoa().getIdEndereco().getNoLogradouro(), {class: 'form-control required', placeholder: 'Endereço de instalação'}) }}
                     </div>
                 </div>
 
@@ -197,7 +193,7 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Número</label>
 
                     <div class="col-lg-10">
-                        {{ formText('nuEndereco', entity.getIdPessoa().getIdEndereco().getNuEndereco(), {class: 'form-control'}) }}
+                        {{ formText('nuEndereco', entity.getIdPessoa().getIdEndereco().getNuEndereco(), {class: 'form-control required'}) }}
                     </div>
                 </div>
 

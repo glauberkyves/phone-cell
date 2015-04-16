@@ -42,7 +42,7 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Portabilidade?</label>
 
                     <div class="col-lg-10">
-                        {{ formCheckbox('stPortabilidade', entity.getStPortabilidade(), {class: 'form-control'}) }}
+                        {{ formCheckbox('stPortabilidade', entity.getStPortabilidade(), {class: 'form-control required'}) }}
                     </div>
                 </div>
                 <div class="form-group">
@@ -64,7 +64,7 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Produto</label>
 
                     <div class="col-lg-10">
-                        {{ formSelect('tpProduto', entity.getTpProduto(), {class: 'form-control m-bot15'}, arrProduto) }}
+                        {{ formSelect('tpProduto', entity.getTpProduto(), {class: 'form-control m-bot15 required'}, arrProduto) }}
                     </div>
                 </div>
 
@@ -79,7 +79,7 @@
                                     {% for plano in arrPlano %}
                                         <div class="col-md-4 form-group">
                                             <label class="checkbox-inline">
-                                                {{ formCheckbox('idPlano][]', plano.idPlano, {class: 'form-control'}) }}
+                                                {{ formCheckbox('idPlano][]', plano.idPlano, {class: 'form-control required'}) }}
                                             </label>
 
                                             {{ plano.noPlano }}
@@ -175,7 +175,7 @@
                         habilitação</label>
 
                     <div class="col-lg-10">
-                        {{ formSelect('stTaxaHabilitacao', entity.getStTaxaHabilitacao(), {class: 'form-control'}, arrTaxaHabilitacao) }}
+                        {{ formSelect('stTaxaHabilitacao', entity.getStTaxaHabilitacao(), {class: 'form-control required'}, arrTaxaHabilitacao) }}
                     </div>
                 </div>
                 <div id="parcela" class="hide">
@@ -200,7 +200,7 @@
                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">DACC?</label>
 
                     <div class="col-lg-10">
-                        {{ formCheckbox('tpDacc', entity.getTpDacc(), {class: 'form-control'}) }}
+                        {{ formCheckbox('tpDacc', entity.getTpDacc(), {class: 'form-control required'}) }}
                     </div>
                 </div>
                 <div id="banco" class="hide">
@@ -231,3 +231,50 @@
         </div>
     </section>
 </div>
+
+<script>
+    $(document).ready(function () {
+        if ($('#stPortabilidade').is(':checked')) {
+            $('#nuNumeroPortado, #noOperadoraOrigem').addClass('required')
+        } else {
+            $('#nuNumeroPortado, #noOperadoraOrigem').removeClass('required')
+        }
+
+        $('#stPortabilidade').click(function () {
+            if ($(this).is(':checked')) {
+                $('#nuNumeroPortado, #noOperadoraOrigem').addClass('required')
+            } else {
+                $('#nuNumeroPortado, #noOperadoraOrigem').removeClass('required')
+            }
+        })
+
+        if ($('#tpDacc').is(':checked')) {
+            $('#noBanco, #nuAgencia, #nuConta').addClass('required')
+        } else {
+            $('#noBanco, #nuAgencia, #nuConta').removeClass('required')
+        }
+
+        $('#tpDacc').click(function () {
+            if ($(this).is(':checked')) {
+                $('#noBanco, #nuAgencia, #nuConta').addClass('required')
+            } else {
+                $('#noBanco, #nuAgencia, #nuConta').removeClass('required')
+            }
+        })
+
+
+        if ($('#stTaxaHabilitacao').val() == 2) {
+            $('#nuQuantidadeParcela, #nuValorParcela').addClass('required')
+        } else {
+            $('#nuQuantidadeParcela, #nuValorParcela').removeClass('required')
+        }
+
+        $('#stTaxaHabilitacao').change(function () {
+            if ($(this).val() == 2) {
+                $('#nuQuantidadeParcela, #nuValorParcela').addClass('required')
+            } else {
+                $('#nuQuantidadeParcela, #nuValorParcela').removeClass('required')
+            }
+        })
+    })
+</script>

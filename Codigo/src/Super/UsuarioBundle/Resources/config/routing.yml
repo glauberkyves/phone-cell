@@ -1,26 +1,20 @@
-super_usuario_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: SuperUsuarioBundle:Default:index }
-
-
-###### manter perfil
 super_usuario:
-    path:     /usuario
+    path:     /administrativo/usuario
     defaults: { _controller: SuperUsuarioBundle:Usuario:index }
 
 super_usuario_create:
-    path:     /usuario/cadastrar
+    path:     /administrativo/usuario/cadastrar
     defaults: { _controller: SuperUsuarioBundle:Usuario:create }
 
 super_usuario_edit:
-    path:     /usuario/editar
+    path:     /administrativo/usuario/editar
     defaults: { _controller: SuperUsuarioBundle:Usuario:edit }
 
 ###### manter perfil
 super_perfil:
-    path:     /perfil
+    path:     /administrativo/perfil
     defaults: { _controller: SuperUsuarioBundle:Perfil:index }
 
 super_perfil_edit:
-    path:     /perfil/editar
+    path:     /administrativo/perfil/editar
     defaults: { _controller: SuperUsuarioBundle:Perfil:edit }

@@ -1,5 +1,4 @@
 <ul class="sidebar-menu" id="nav-accordion">
-    {% if is_granted('ROLE_SUPER') %}
         <li>
             <a href="{{ path('super_home') }}">
                 <i class="fa fa-dashboard"></i>
@@ -19,12 +18,11 @@
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="fa fa-file-text-o"></i>
-                <span>Solicitação</span>
+                <span>Ordem de serviço</span>
             </a>
             <ul class="sub">
                 <li><a href="{{ path('super_ordem_servico_oi_fixo') }}">Oi Fixo</a></li>
                 <li><a href="{{ path('super_ordem_servico_oi_tv') }}">Oi Tv</a></li>
             </ul>
         </li>
-    {% endif %}
 </ul>

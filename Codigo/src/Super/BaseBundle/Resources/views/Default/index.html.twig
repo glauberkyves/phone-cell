@@ -15,14 +15,16 @@
             </a>
         </div>
         <div class="col-md-3">
-            <div class="mini-stat clearfix">
-                <span class="mini-stat-icon green"><i class="fa fa-check-square-o"></i></span>
+            <a href="{{ path('super_ordem_servico_fila_inputador') }}">
+                <div class="mini-stat clearfix">
+                    <span class="mini-stat-icon green"><i class="fa fa-check-square-o"></i></span>
 
-                <div class="mini-stat-info">
-                    <span>{{ validadas|length }}</span>
-                    Solitações Validadas
+                    <div class="mini-stat-info">
+                        <span>{{ validadas|length }}</span>
+                        Solitações Validadas
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-md-3">
             <div class="mini-stat clearfix">
@@ -91,18 +93,18 @@
             if (Gauge) {
                 /*Knob*/
                 var opts = {
-                    lines:            12, // The number of lines to draw
-                    angle:            0, // The length of each line
-                    lineWidth:        0.48, // The line thickness
-                    pointer:          {
-                        length:      0.6, // The radius of the inner circle
+                    lines: 12, // The number of lines to draw
+                    angle: 0, // The length of each line
+                    lineWidth: 0.48, // The line thickness
+                    pointer: {
+                        length: 0.6, // The radius of the inner circle
                         strokeWidth: 0.03, // The rotation offset
-                        color:       '#464646' // Fill color
+                        color: '#464646' // Fill color
                     },
-                    limitMax:         'true', // If true, the pointer will not go past the end of the gauge
-                    colorStart:       '#fa8564', // Colors
-                    colorStop:        '#fa8564', // just experiment with them
-                    strokeColor:      '#F1F1F1', // to see which ones work best for you
+                    limitMax: 'true', // If true, the pointer will not go past the end of the gauge
+                    colorStart: '#fa8564', // Colors
+                    colorStop: '#fa8564', // just experiment with them
+                    strokeColor: '#F1F1F1', // to see which ones work best for you
                     generateGradient: true
                 };
 
@@ -116,18 +118,18 @@
 
                 /*Knob*/
                 var optsTv = {
-                    lines:            12, // The number of lines to draw
-                    angle:            0, // The length of each line
-                    lineWidth:        0.48, // The line thickness
-                    pointer:          {
-                        length:      0.6, // The radius of the inner circle
+                    lines: 12, // The number of lines to draw
+                    angle: 0, // The length of each line
+                    lineWidth: 0.48, // The line thickness
+                    pointer: {
+                        length: 0.6, // The radius of the inner circle
                         strokeWidth: 0.03, // The rotation offset
-                        color:       '#464646' // Fill color
+                        color: '#464646' // Fill color
                     },
-                    limitMax:         'true', // If true, the pointer will not go past the end of the gauge
-                    colorStart:       '#fa8564', // Colors
-                    colorStop:        '#fa8564', // just experiment with them
-                    strokeColor:      '#F1F1F1', // to see which ones work best for you
+                    limitMax: 'true', // If true, the pointer will not go past the end of the gauge
+                    colorStart: '#fa8564', // Colors
+                    colorStop: '#fa8564', // just experiment with them
+                    strokeColor: '#F1F1F1', // to see which ones work best for you
                     generateGradient: true
                 };
 
