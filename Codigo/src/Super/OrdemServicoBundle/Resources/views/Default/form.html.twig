@@ -11,7 +11,6 @@
                 {% include 'SuperOrdemServicoBundle:Default:form-oi-tv.html.twig' %}
             {% endif %}
 
-
             <div class="col-lg-12">
                 <section class="panel">
                     <div class="panel-heading">
@@ -24,11 +23,11 @@
                                 <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Local</label>
 
                                 <div class="col-lg-10">
-                                    {{ formText('dSlocal', entity.getDsLocal(), {class: 'form-control'}) }}
+                                    {{ formText('dSlocal', entity.getDsLocal(), {class: 'form-control required'}) }}
                                 </div>
                             </div>
 
-                            {% if is_granted("ROLE_VENDEDOR") %}
+                            {% if is_granted("ROLE_INPUTADOR") %}
                                 <div class="form-group">
                                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Vendedor</label>
 
@@ -44,7 +43,7 @@
                                 <div class="col-lg-10">
                                     <div class="input-group m-bot15">
                                         {{ formText('dtNascimento', entity.getDtCadastro().format('d/m/Y'), {
-                                            class: 'form-control date-picker',
+                                            class: 'form-control date-picker required',
                                             placeholder: '99/99/9999',
                                             'data-mask': '99/99/9999',
                                             'data-date-format': 'dd/mm/yyyy'
@@ -59,16 +58,10 @@
                             <div class="form-group ">
 
                                 <div class="col-lg-12">
-                                    {% if is_granted('ROLE_AUDITOR') and is_granted('ROLE_VENDEDOR') %}
+                                    {% if is_granted('ROLE_VENDEDOR') or is_granted('ROLE_INPUTADOR') or is_granted('ROLE_AUDITOR') or is_granted('ROLE_SUPER') %}
                                         <button type="submit" class="btn btn-primary">
                                             <span class="fa fa-save"></span> Salvar
                                         </button>
-                                    {% endif %}
-
-                                    {% if is_granted('ROLE_INPUTADOR') %}
-                                        <a href="/encaminhar/{{ entity.getIdOrdemServico() }}" class="btn btn-success">
-                                            <span class="fa fa-share"></span> Encaminhar
-                                        </a>
                                     {% endif %}
 
                                     <a href="{{ path('super_ordem_servico_oi_fixo') }}" class="btn btn-default"><span

@@ -23,11 +23,11 @@
                 </div>
 
                 {#<div class="form-group">#}
-                    {#<label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">E-mail</label>#}
+                {#<label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">E-mail</label>#}
 
-                    {#<div class="col-lg-10">#}
-                        {#{{ formText('noEmail', '', {class: 'form-control', placeholder: 'exemplo@exemplo.com'}) }}#}
-                    {#</div>#}
+                {#<div class="col-lg-10">#}
+                {#{{ formText('noEmail', '', {class: 'form-control', placeholder: 'exemplo@exemplo.com'}) }}#}
+                {#</div>#}
                 {#</div>#}
 
                 {% if entity.getIdPessoa().getIdPessoa() %}
@@ -52,7 +52,7 @@
                                 class: 'form-control required',
                                 placeholder: '999.999.999-99',
                                 'data-mask': '999.999.999-99',
-                                disabled: 'disabled'
+                                readonly: 'readonly'
                             }) }}
                         </div>
                     </div>
@@ -223,8 +223,8 @@
     $(document).ready(function () {
         $('input[type=checkbox], input[type=radio]').iCheck({
             checkboxClass: 'icheckbox_square-green',
-            radioClass:    'iradio_square-green',
-            increaseArea:  '20%' // optional
+            radioClass: 'iradio_square-green',
+            increaseArea: '20%' // optional
         });
 
         $('#nuCpf').val('{{ app.request.get('cpf') }}')

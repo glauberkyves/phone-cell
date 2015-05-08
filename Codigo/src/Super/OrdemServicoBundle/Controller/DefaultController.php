@@ -53,7 +53,10 @@ class DefaultController extends CrudController
 
         if ($cpf && null === $this->getRequest()->query->get('id', null)) {
             $entityPessoaFisica = $this->getService('service.pessoa_fisica')->findOneByNuCpf($cpf);
-            $this->vars['entityPessoa'] = $entityPessoaFisica->getIdPessoa();
+
+            if ($entityPessoaFisica) {
+                $this->vars['entityPessoa'] = $entityPessoaFisica->getIdPessoa();
+            }
         }
     }
 

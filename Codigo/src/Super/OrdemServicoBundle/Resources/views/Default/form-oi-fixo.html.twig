@@ -1,32 +1,32 @@
-<div class="col-lg-12">
-    <section class="panel">
-        <header class="panel-heading">
-            Contatos
-                        <span class="tools pull-right">
-                            <a href="javascript:;" class="fa fa-chevron-down"></a>
-                         </span>
-        </header>
-        <div class="panel-body">
-            <div class="position-center">
-                <div class="form-group">
-                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Nome</label>
+{#<div class="col-lg-12">#}
+    {#<section class="panel">#}
+        {#<header class="panel-heading">#}
+            {#Contatos#}
+                        {#<span class="tools pull-right">#}
+                            {#<a href="javascript:;" class="fa fa-chevron-down"></a>#}
+                         {#</span>#}
+        {#</header>#}
+        {#<div class="panel-body">#}
+            {#<div class="position-center">#}
+                {#<div class="form-group">#}
+                    {#<label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Nome</label>#}
 
-                    <div class="col-lg-10">
-                        {{ formText('contato[1][noContato]', '', {class: 'form-control', placeholder: 'Nome do contato'}) }}
-                    </div>
-                </div>
+                    {#<div class="col-lg-10">#}
+                        {#{{ formText('contato[1][noContato]', '', {class: 'form-control', placeholder: 'Nome do contato'}) }}#}
+                    {#</div>#}
+                {#</div>#}
 
-                <div class="form-group">
-                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Telefone</label>
+                {#<div class="form-group">#}
+                    {#<label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Telefone</label>#}
 
-                    <div class="col-lg-10">
-                        {{ formText('contato[1][nuTelefone]', '', {class: 'form-control', placeholder: '(99) 9999-9999'}) }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
+                    {#<div class="col-lg-10">#}
+                        {#{{ formText('contato[1][nuTelefone]', '', {class: 'form-control', placeholder: '(99) 9999-9999'}) }}#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+    {#</section>#}
+{#</div>#}
 
 <div class="col-lg-12">
     <section class="panel">
@@ -111,7 +111,7 @@
                         instalação</label>
 
                     <div class="col-lg-10">
-                        {{ formSelect('tpTerminalFixoInstalacao', entity.getTpTerminalFixoInstalacao(), {class: 'form-control'}, arrTpTerminal) }}
+                        {{ formSelect('tpTerminalFixoInstalacao', entity.getTpTerminalFixoInstalacao(), {class: 'form-control required'}, arrTpTerminal) }}
                     </div>
                 </div>
                 <div class="form-group">
@@ -250,18 +250,21 @@
 
         if ($('#tpDacc').is(':checked')) {
             $('#noBanco, #nuAgencia, #nuConta').addClass('required')
+            $('#banco').removeClass('hide')
         } else {
             $('#noBanco, #nuAgencia, #nuConta').removeClass('required')
+            $('#banco').addClass('hide')
         }
 
-        $('#tpDacc').click(function () {
-            if ($(this).is(':checked')) {
-                $('#noBanco, #nuAgencia, #nuConta').addClass('required')
-            } else {
-                $('#noBanco, #nuAgencia, #nuConta').removeClass('required')
-            }
+        $('#tpDacc').on('ifChecked', function () {
+            $('#noBanco, #nuAgencia, #nuConta').addClass('required')
+            $('#banco').removeClass('hide')
         })
 
+        $('#tpDacc').on('ifUnchecked', function () {
+            $('#noBanco, #nuAgencia, #nuConta').removeClass('required')
+            $('#banco').addClass('hide')
+        })
 
         if ($('#stTaxaHabilitacao').val() == 2) {
             $('#nuQuantidadeParcela, #nuValorParcela').addClass('required')

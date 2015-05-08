@@ -5,30 +5,36 @@
             <span>Dashboard</span>
         </a>
     </li>
-    <li class="sub-menu">
-        <a href="javascript:;">
-            <i class="fa fa-user"></i>
-            <span>Usuário</span>
-        </a>
-        <ul class="sub">
-            <li><a href="{{ path('super_usuario') }}">Manter Usuário</a></li>
-            <li><a href="{{ path('super_perfil') }}">Manter Perfil</a></li>
-        </ul>
-    </li>
-    <li class="sub-menu">
-        <a href="javascript:;">
-            <i class="fa fa-file-text-o"></i>
-            <span>Ordem de serviço</span>
-        </a>
-        <ul class="sub">
-            <li><a href="{{ path('super_ordem_servico_oi_fixo') }}">Oi Fixo</a></li>
-            <li><a href="{{ path('super_ordem_servico_oi_tv') }}">Oi Tv</a></li>
-        </ul>
-    </li>
-    <li>
-        <a href="{{ path('super_ordem_servico_historico') }}">
-            <i class="fa fa-sort-amount-asc"></i>
-            <span>Histórico</span>
-        </a>
-    </li>
+
+    {#{% if is_granted('ROLE_SUPER') %}#}
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-user"></i>
+                <span>Usuário</span>
+            </a>
+            <ul class="sub">
+                <li><a href="{{ path('super_usuario') }}">Manter Usuário</a></li>
+                <li><a href="{{ path('super_perfil') }}">Manter Perfil</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="{{ path('super_ordem_servico_historico') }}">
+                <i class="fa fa-sort-amount-asc"></i>
+                <span>Histórico</span>
+            </a>
+        </li>
+    {#{% endif %}#}
+
+    {% if is_granted('ROLE_VENDEDOR') and is_granted('ROLE_INPUTADOR') %}
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-file-text-o"></i>
+                <span>Ordem de serviço</span>
+            </a>
+            <ul class="sub">
+                <li><a href="{{ path('super_ordem_servico_oi_fixo') }}">Oi Fixo</a></li>
+                <li><a href="{{ path('super_ordem_servico_oi_tv') }}">Oi Tv</a></li>
+            </ul>
+        </li>
+    {% endif %}
 </ul>
