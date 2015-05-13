@@ -58,14 +58,23 @@
                             <div class="form-group ">
 
                                 <div class="col-lg-12">
-                                    {% if is_granted('ROLE_VENDEDOR') or is_granted('ROLE_INPUTADOR') or is_granted('ROLE_AUDITOR') or is_granted('ROLE_SUPER') %}
+                                    {% if not ('super_ordem_servico_oi_fixo_visualizar' == app.request.get('_route')
+                                    or 'super_ordem_servico_oi_tv_visualizar' == app.request.get('_route'))
+                                    and (is_granted('ROLE_VENDEDOR') or is_granted('ROLE_INPUTADOR') or is_granted('ROLE_AUDITOR') or is_granted('ROLE_SUPER')) %}
                                         <button type="submit" class="btn btn-primary">
                                             <span class="fa fa-save"></span> Salvar
                                         </button>
                                     {% endif %}
 
-                                    <a href="{{ path('super_ordem_servico_oi_fixo') }}" class="btn btn-default"><span
-                                                class="fa fa-times"></span> Cancelar</a>
+                                    <a href="javascript: history.back();" class="btn btn-default"><span
+                                                class="fa fa-times"></span>
+                                    {% if 'super_ordem_servico_oi_fixo_visualizar' == app.request.get('_route')
+                                    or 'super_ordem_servico_oi_tv_visualizar' == app.request.get('_route') %}
+                                        Voltar
+                                    {% else %}
+                                        Cancelar
+                                    {% endif %}
+                                    </a>
                                 </div>
                             </div>
                         </div>

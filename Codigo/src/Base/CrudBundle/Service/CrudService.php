@@ -19,23 +19,23 @@ class CrudService extends AbstractService
         $result = $this->getRepository()->getResultGrid($request);
 
         $sEcho = $request->query->get('sEcho');
-        $page  = $request->query->get('iDisplayStart', 1);
-        $rows  = $request->query->get('iDisplayLength', 10);
+        $page = $request->query->get('iDisplayStart', 1);
+        $rows = $request->query->get('iDisplayLength', 10);
 
-        $paginator  = new Paginator();
+        $paginator = new Paginator();
         $pagination = $paginator->paginate($result, $page, $rows);
 
-        $data                       = new \StdClass();
-        $data->sEcho                = $sEcho;
-        $data->iTotalRecords        = $page;
+        $data = new \StdClass();
+        $data->sEcho = $sEcho;
+        $data->iTotalRecords = $page;
         $data->iTotalDisplayRecords = ceil($pagination->getTotalItemCount() / $rows);
-        $data->records              = $pagination->getTotalItemCount();
-        $data->aaData               = $this->parserItens($pagination->getItems());
+        $data->records = $pagination->getTotalItemCount();
+        $data->aaData = $this->parserItens($pagination->getItems());
 
         return (array)$data;
     }
 
-    public function parserItens(array $itens = array())
+    public function parserItens(array $itens = array(), $addOptions = false)
     {
         foreach ($itens as $key => $value) {
             foreach ($value as $keyIten => $iten) {
@@ -47,14 +47,76 @@ class CrudService extends AbstractService
                         $itens[$key][$keyIten] = $iten == 1 ? 'Ativo' : 'Inativo';
                         break;
                 }
+
+                if ($addOptions) {
+                    $itens[$key]['opcoes'] = $this
+                        ->container
+                        ->get('templating')
+                        ->render(
+                            $this->optionsRouteName(),
+                            array(
+                                'data' => $value
+                            )
+                        );
+                }
             }
         }
 
         return $itens;
     }
 
+    public function optionsRouteName($templating = 'gridOptions.html.twig')
+    {
+        $explode = explode('Controller', $this->getRequest()->attributes->get('_controller'));
+        $bundle = str_replace('\\', '', current($explode));
+        $controller = str_replace('\\', '', next($explode));
+
+        return "{$bundle}:{$controller}:{$templating}";
+    }
+
     public function getComboDefault(array $criteria = array(), array $orderBy = null, $limit = null, $offset = null)
     {
         return array('' => 'Selecione') + $this->getRepository()->getComboDefault($criteria, $orderBy, $limit, $offset);
+    }
+
+    public function uploadFile($folder, $fileInput = null, $imageOnly = true)
+    {
+        $arrFilesNames = array();
+
+        if ($imageOnly) {
+            foreach ($this->getRequest()->files->all() as $key => $file) {
+                if ($file) {
+                    if ($fileInput && $fileInput == $key) {
+                        // Verifica se o mime-type do arquivo é de uma imagem
+                        if (!preg_match("/(bmp|gif|jpg|jpeg|png)/i", $file->guessExtension())) {
+                            $this->addMessage(sprintf('O arquivo %s não é uma imagem válida.', $file->getClientOriginalName()), 'error');
+
+                            return null;
+                        }
+                    }
+                }
+            }
+        }
+
+        foreach ($this->getRequest()->files->all() as $key => $file) {
+            if ($file) {
+                $fileName = md5(uniqid() . microtime()) . '.' . $file->getClientOriginalExtension();
+                $rootDir = $this->getRequest()->server->get('DOCUMENT_ROOT');
+                $path = DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR;
+
+                if ($fileInput && $fileInput == $key) {
+                    $file->move($rootDir . $path, $fileName);
+                    $this->getRequest()->files->remove($fileInput);
+
+                    return str_replace('\\', '/', $path . $fileName);
+                    break;
+                }
+
+                $file->move($rootDir . $path, $fileName);
+                $arrFilesNames[] = str_replace('\\', '/', $path . $fileName);
+            }
+        }
+
+        return $arrFilesNames;
     }
 }

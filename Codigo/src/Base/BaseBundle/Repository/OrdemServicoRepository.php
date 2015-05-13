@@ -19,7 +19,7 @@ class OrdemServicoRepository extends AbstractRepository
             ->createQueryBuilder()
             ->select(
                 'DISTINCT o.idOrdemServico, p.idPessoa, p.noPessoa, pf.nuCpf, to.idTipoOrdemServico, '
-                . 'to.noTipoOrdemServico, s.idSituacao, s.noSituacao')
+                . 'to.noTipoOrdemServico, s.idSituacao, s.noSituacao, o.noUrl')
             ->from($this->_entityName, 'o')
             ->innerJoin('o.idTipoOrdemServico', 'to')
             ->innerJoin('o.idPessoa', 'p')

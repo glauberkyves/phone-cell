@@ -6,6 +6,7 @@ use Base\BaseBundle\Service\Dominio;
 use Base\CrudBundle\Controller\CrudController;
 use Super\OrdemServicoBundle\Service\Situacao;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends CrudController
 {
@@ -156,5 +157,40 @@ class DefaultController extends CrudController
         $historico = $this->getService('service.historico')->findByIdOrdemServico($idOrdemServico);
 
         return $this->render($this->resolveRouteName(), array('entity' => $entity, 'historicos' => $historico));
+    }
+
+    public function anexarAction(Request $request)
+    {
+        if ($request->request->get('idOrdemServico')) {
+            $this->addMessage($this->resolveMessageSuccess());
+            $this->getService()->upload();
+        } else {
+            $this->addMessage('Erro ao anexar fomulário.', 'error');
+        }
+
+        return $this->redirect($this->getRequest()->headers->get('referer'));
+    }
+
+    public function downloadAction(Request $request, $idOrdemServico)
+    {
+        $entity = $this->getService()->find($idOrdemServico);
+
+        if (!$entity) {
+            $this->addMessage('Erro ao iniciar download.', 'error');
+            return $this->redirect($this->getRequest()->headers->get('referer'));
+        }
+
+        $rootDir  = $this->getRequest()->server->get('DOCUMENT_ROOT');
+        $filename = $rootDir . '/' .$entity->getNoUrl();
+        $response = new Response();
+
+        $response->headers->set('Cache-Control', 'private');
+        $response->headers->set('Content-type', mime_content_type($filename));
+        $response->headers->set('Content-Disposition', 'attachment; filename="' . basename($filename) . '";');
+        $response->headers->set('Content-length', filesize($filename));
+
+        $response->sendHeaders();
+
+        return $response->setContent(readfile($filename));
     }
 }

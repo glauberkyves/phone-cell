@@ -1,0 +1,81 @@
+<div class="btn-group  btn-group-sm">
+    {% if data.idTipoOrdemServico == 1 and (is_granted('ROLE_VENDEDOR') or is_granted('ROLE_AUDITOR')) %}
+        <a class="btn btn-white" href="{{ path('super_ordem_servico_oi_tv_alterar', {id: data.idOrdemServico}) }}"
+           title="Editar Ordem de Serviço">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a class="btn btn-white" href="{{ path('super_ordem_servico_oi_tv_visualizar', {id: data.idOrdemServico}) }}"
+           title="Visualizar Ordem de Serviço">
+            <i class="fa fa-eye"></i>
+        </a>
+    {% endif %}
+
+    {% if data.idTipoOrdemServico == 2 and (is_granted('ROLE_VENDEDOR') or is_granted('ROLE_AUDITOR')) %}
+        <a class="btn btn-white" href="{{ path('super_ordem_servico_oi_fixo_alterar', {id: data.idOrdemServico}) }}"
+           title="Editar Ordem de Serviço">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a class="btn btn-white" href="{{ path('super_ordem_servico_oi_fixo_visualizar', {id: data.idOrdemServico}) }}"
+           title="Visualizar Ordem de Serviço">
+            <i class="fa fa-eye"></i>
+        </a>
+    {% endif %}
+
+    {% if data.noUrl  %}
+        <a class="btn btn-white" href="{{ path('super_ordem_servico_download', {idOrdemServico: data.idOrdemServico}) }}" title="Download Anexo Ordem de Serviço">
+            <i class="fa  fa-download"></i>
+        </a>
+    {% endif %}
+
+    {% if not data.noUrl and (is_granted('ROLE_AUDITOR') or is_granted('ROLE_SUPER')) %}
+        <a class="btn btn-white anexar" data-toggle="modal" data-target="#anexo-modal"
+           data-id="{{ data.idOrdemServico }}"
+           data-nome="{{ data.noPessoa }}"
+           data-cpf="{{ data.nuCpf }}"
+           data-ordem-servico="{{ data.noTipoOrdemServico }}"
+           href="#"
+           title="Anexar Ordem de Serviço">
+            <i class="fa  fa-file-text-o"></i>
+        </a>
+    {% endif %}
+
+    {% if not is_granted('ROLE_VENDEDOR') %}
+        <a class="btn btn-white encaminhar" data-toggle="modal" data-target="#encaminhar-modal"
+           data-id="{{ data.idOrdemServico }}"
+           href="#"
+           title="Encaminhar Ordem de Serviço">
+            <i class="fa fa-share"></i>
+        </a>
+    {% endif %}
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.anexar').click(function () {
+            var id = $(this).attr('data-id')
+            var nome = $(this).attr('data-nome')
+            var cpf = $(this).attr('data-cpf')
+            var tipoOrdem = $(this).attr('data-ordem-servico')
+
+            $('span[id=anexo-nome]').html(nome)
+            $('span[id=anexo-cpf]').html(cpf)
+            $('span[id=anexo-ordem-servico]').html(tipoOrdem)
+            $('#idOrdemServico').val(id)
+            $('[name=file]').val('').change()
+        })
+
+        $('.encaminhar').click(function () {
+            var id = $(this).attr('data-id')
+
+            $('#idOrdemServico').val(id)
+        })
+
+        $('#btn-anexar').click(function(){
+            $('#form-anexar').submit()
+        })
+
+        $('#btn-encaminhar').click(function(){
+            window.location = '/encaminhar/' + $('#idOrdemServico').val()
+        })
+    })
+</script>

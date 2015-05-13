@@ -232,6 +232,13 @@ class TbOrdemServico extends AbstractEntity
     private $dsOutroPacote;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="no_url", type="string", length=45, nullable=true)
+     */
+    private $noUrl;
+
+    /**
      * @var \TbPessoa
      *
      * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbPessoa")
@@ -864,5 +871,19 @@ class TbOrdemServico extends AbstractEntity
         $this->tpFidelizacao = $tpFidelizacao;
     }
 
-}
+    /**
+     * @return string
+     */
+    public function getNoUrl()
+    {
+        return $this->noUrl;
+    }
 
+    /**
+     * @param string $noUrl
+     */
+    public function setNoUrl($noUrl)
+    {
+        $this->noUrl = $noUrl;
+    }
+}
