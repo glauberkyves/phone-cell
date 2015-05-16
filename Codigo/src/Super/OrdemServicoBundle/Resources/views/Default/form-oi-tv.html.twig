@@ -86,14 +86,22 @@
                                     Pacotes
                                 </div>
                                 <div class="panel-body">
+                                    {% set check = '' %}
                                     {% for pacote in arrPacote %}
                                         <div class="col-md-4 form-group">
                                             <label class="checkbox-inline">
-                                                {{ formCheckbox('idPacote[]', pacote.idPacote, {class: 'form-control'}) }}
+                                                {% for pacoteEntity in entity.getRlOrdemServicoPacote() %}
+                                                    {% if pacoteEntity.getIdPacote().getIdPacote() == pacote.getIdPacote() %}
+                                                        {% set check = 'checked' %}
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                {{ formCheckbox('idPacote[]', pacote.getIdPacote(), {class: 'form-control', checked: check}) }}
                                             </label>
 
                                             {{ pacote.noPacote }}
                                         </div>
+                                        {% set check = '' %}
                                     {% endfor %}
                                 </div>
                             </div>

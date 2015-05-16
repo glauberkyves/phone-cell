@@ -1,1 +1,9 @@
-{% include 'SuperOrdemServicoBundle:Default:form.html.twig' %}  
+{% block body %}
+    {% include 'SuperOrdemServicoBundle:Default:form.html.twig' %}
+
+    <script>
+        $(document).ready(function(){
+            $('button[type=submit]').remove()
+        })
+    </script>
+{% endblock %}

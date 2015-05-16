@@ -26,12 +26,17 @@ class OrdemServico extends CrudService
         $request = $this->getRequest()->request;
 
         $this->entity->populate($params);
-        $this->entity->setIdPessoa($this->savePessoa());
+        $this->entity->setIdPessoa($this->savePessoa($params));
 
         $this->entity->setNuNumeroPortado($request->getDigits('nuNumeroPortado'));
         $this->entity->setNuTerminalFixoExistente($request->getDigits('nuTerminalFixoExistente'));
 
         $idTipoOrdemServico = $this->getService('service.tipo_ordem_servico')->find(TipoOrdemServico::OIFIXO);
+
+        if (false !== strpos($this->getRequest()->getPathInfo(), 'oi-tv')) {
+            $idTipoOrdemServico = $this->getService('service.tipo_ordem_servico')->find(TipoOrdemServico::OITV);
+        }
+
         $this->entity->setIdTipoOrdemServico($idTipoOrdemServico);
 
         $idSituacao = $this->getService('service.situacao')->find(Situacao::COLETADA);
@@ -85,7 +90,16 @@ class OrdemServico extends CrudService
         $entity->setIdUsuario($this->getUser());
         $entity->setDtCadastro(new \DateTime());
 
-        $this->persist($entity);
+        $criteria  = array(
+            'idUsuario'      => $this->entity->getIdUsuario()->getIdUsuario(),
+            'idOrdemServico' => $this->entity->getIdOrdemServico(),
+            'idSituacao'     => $this->entity->getIdSituacao()->getIdSituacao()
+        );
+        $entityOld = $this->getService('service.historico')->findOneBy($criteria, array('idHistorico' => 'DESC'), 1);
+
+        if (!$entityOld) {
+            $this->persist($entity);
+        }
     }
 
     public function savePessoa(array $params = array())
@@ -164,7 +178,7 @@ class OrdemServico extends CrudService
                 }
             }
 
-            $html = '<div class="btn-group  btn-group-sm">';
+            $html   = '<div class="btn-group  btn-group-sm">';
             $rtEdit = $this
                 ->getRouter()
                 ->generate('super_ordem_servico_oi_fixo_alterar', array('id' => $value['idOrdemServico']));
@@ -183,12 +197,14 @@ class OrdemServico extends CrudService
                     ->generate('super_ordem_servico_oi_tv_visualizar', array('id' => $value['idOrdemServico']));
             }
 
-            $html .= '<a href="' . $rtEdit . '">';
-            $html .= '<button class="btn btn-white" type="button"><i class="fa fa-edit"></i></button>';
-            $html .= '</a>';
+            if ($value['idSituacao'] == Situacao::COLETADA) {
+                $html .= '<a href="' . $rtEdit . '">';
+                $html .= '<button class="btn btn-white" type="button"><i class="fa fa-edit"></i></button>';
+                $html .= '</a>';
+            }
 
             $html .= '<a href="' . $rtView . '">';
-            $html .= '<button class="btn btn-white" type="button"><i class="fa fa-edit"></i></button>';
+            $html .= '<button class="btn btn-white" type="button"><i class="fa fa-eye"></i></button>';
             $html .= '</a>';
 
             $html .= '<a href="/encaminhar/' . $value['idOrdemServico'] . '">';

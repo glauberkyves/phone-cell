@@ -3,36 +3,36 @@
 {% block body %}
     <div class="row">
         <div class="col-md-3">
-            <a href="{{ path('super_ordem_servico_fila_auditor') }}">
-                <div class="mini-stat clearfix">
-                    <span class="mini-stat-icon tar"><i class="fa fa-eye"></i></span>
+            {#<a href="{{ path('super_ordem_servico_fila_auditor') }}">#}
+            <div class="mini-stat clearfix">
+                <span class="mini-stat-icon tar"><i class="fa fa-eye"></i></span>
 
-                    <div class="mini-stat-info">
-                        <span>{{ coletadas|length }}</span>
-                        Solitações Coletadas
-                    </div>
+                <div class="mini-stat-info">
+                    <span>{{ coletadas|length }}</span>
+                    Solitações Coletadas
                 </div>
-            </a>
+            </div>
+            {#</a>#}
         </div>
         <div class="col-md-3">
-            <a href="{{ path('super_ordem_servico_fila_inputador') }}">
-                <div class="mini-stat clearfix">
-                    <span class="mini-stat-icon green"><i class="fa fa-check-square-o"></i></span>
+            {#<a href="{{ path('super_ordem_servico_fila_inputador') }}">#}
+            <div class="mini-stat clearfix">
+                <span class="mini-stat-icon green"><i class="fa fa-check-square-o"></i></span>
 
-                    <div class="mini-stat-info">
-                        <span>{{ validadas|length }}</span>
-                        Solitações Validadas
-                    </div>
+                <div class="mini-stat-info">
+                    <span>{{ validadas|length }}</span>
+                    Solitações Validadas
                 </div>
-            </a>
+            </div>
+            {#</a>#}
         </div>
         <div class="col-md-3">
             <div class="mini-stat clearfix">
                 <span class="mini-stat-icon pink"><i class="fa fa-warning"></i></span>
 
                 <div class="mini-stat-info">
-                    <span>{{ pendentes|length }}</span>
-                    Solicitações Pendentes
+                    <span>{{ imputadas|length }}</span>
+                    Solicitações Imputadas
                 </div>
             </div>
         </div>
@@ -82,29 +82,49 @@
                 </div>
             </section>
         </div>
+
+        <div class="col-md-3">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="top-stats-panel">
+                        <h4 class="widget-h">Balanço</h4>
+
+                        <div class="sm-pie">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
 
     <script src="{{ asset('bundles/basebase/js/skycons/skycons.js') }}"></script>
     <script src="{{ asset('bundles/basebase/js/gauge/gauge.js') }}"></script>
-    {#<script src="{{ asset('bundles/basebase/js/morris-chart/morris.js') }}"></script>#}
-    {#<script src="{{ asset('bundles/basebase/js/morris-chart/raphael-min.js') }}"></script>#}
+    <script src="{{ asset('bundles/basebase/js/morris-chart/morris.js') }}"></script>
+    <script src="{{ asset('bundles/basebase/js/morris-chart/raphael-min.js') }}"></script>
+    <script src="{{ asset('bundles/basebase/js/flot-chart/jquery.flot.js') }}"></script>
+    <script src="{{ asset('bundles/basebase/js/flot-chart/jquery.flot.tooltip.min.js') }}"></script>
+    <script src="{{ asset('bundles/basebase/js/flot-chart/jquery.flot.resize.js') }}"></script>
+    <script src="{{ asset('bundles/basebase/js/flot-chart/jquery.flot.pie.resize.js') }}"></script>
+    <script src="{{ asset('bundles/basebase/js/flot-chart/jquery.flot.animator.min.js') }}"></script>
+    <script src="{{ asset('bundles/basebase/js/flot-chart/jquery.flot.growraf.js') }}"></script>
+
     <script>
         $(document).ready(function () {
             if (Gauge) {
                 /*Knob*/
                 var opts = {
-                    lines: 12, // The number of lines to draw
-                    angle: 0, // The length of each line
-                    lineWidth: 0.48, // The line thickness
-                    pointer: {
-                        length: 0.6, // The radius of the inner circle
+                    lines:            12, // The number of lines to draw
+                    angle:            0, // The length of each line
+                    lineWidth:        0.48, // The line thickness
+                    pointer:          {
+                        length:      0.6, // The radius of the inner circle
                         strokeWidth: 0.03, // The rotation offset
-                        color: '#464646' // Fill color
+                        color:       '#464646' // Fill color
                     },
-                    limitMax: 'true', // If true, the pointer will not go past the end of the gauge
-                    colorStart: '#fa8564', // Colors
-                    colorStop: '#fa8564', // just experiment with them
-                    strokeColor: '#F1F1F1', // to see which ones work best for you
+                    limitMax:         'true', // If true, the pointer will not go past the end of the gauge
+                    colorStart:       '#fa8564', // Colors
+                    colorStop:        '#fa8564', // just experiment with them
+                    strokeColor:      '#F1F1F1', // to see which ones work best for you
                     generateGradient: true
                 };
 
@@ -118,18 +138,18 @@
 
                 /*Knob*/
                 var optsTv = {
-                    lines: 12, // The number of lines to draw
-                    angle: 0, // The length of each line
-                    lineWidth: 0.48, // The line thickness
-                    pointer: {
-                        length: 0.6, // The radius of the inner circle
+                    lines:            12, // The number of lines to draw
+                    angle:            0, // The length of each line
+                    lineWidth:        0.48, // The line thickness
+                    pointer:          {
+                        length:      0.6, // The radius of the inner circle
                         strokeWidth: 0.03, // The rotation offset
-                        color: '#464646' // Fill color
+                        color:       '#464646' // Fill color
                     },
-                    limitMax: 'true', // If true, the pointer will not go past the end of the gauge
-                    colorStart: '#fa8564', // Colors
-                    colorStop: '#fa8564', // just experiment with them
-                    strokeColor: '#F1F1F1', // to see which ones work best for you
+                    limitMax:         'true', // If true, the pointer will not go past the end of the gauge
+                    colorStart:       '#fa8564', // Colors
+                    colorStop:        '#fa8564', // just experiment with them
+                    strokeColor:      '#F1F1F1', // to see which ones work best for you
                     generateGradient: true
                 };
 
@@ -140,6 +160,48 @@
                 gaugeTv.set({{ oiTv|length }}); // set actual value
                 gaugeTv.setTextField(document.getElementById("gauge-textfield-tv"));
             }
+
+            // DONUT
+            var dataPie = [{
+                label: "OS Coletadas",
+                data:  {{ coletadas|length }}
+            }, {
+                label: "OS Validadas",
+                data:  {{ validadas|length }}
+            }, {
+                label: "OS Imputadas",
+                data:  {{ imputadas|length }}
+            }, {
+                label: "OS Pendentes",
+                data:  {{ pendentes|length }}
+            }, {
+                label: "OS Canceladas",
+                data:  {{ canceladas|length }}
+            }];
+
+            $.plot($(".sm-pie"), dataPie, {
+                series: {
+                    pie: {
+                        innerRadius: 0.7,
+                        show:        true,
+                        stroke:      {
+                            width: 0.1,
+                            color: '#ffffff'
+                        }
+                    }
+
+                },
+
+                legend: {
+                    show: true
+                },
+                grid:   {
+                    hoverable: true,
+                    clickable: true
+                },
+
+                colors: ["#ffdf7c", "#b2def7", "#efb3e6"]
+            });
         })
     </script>
 {% endblock %}

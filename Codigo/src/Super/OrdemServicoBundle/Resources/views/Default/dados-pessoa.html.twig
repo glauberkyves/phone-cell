@@ -223,10 +223,16 @@
     $(document).ready(function () {
         $('input[type=checkbox], input[type=radio]').iCheck({
             checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-            increaseArea: '20%' // optional
+            radioClass:    'iradio_square-green',
+            increaseArea:  '20%' // optional
         });
 
+        {% if app.request.get('cpf') %}
         $('#nuCpf').val('{{ app.request.get('cpf') }}')
+        {% endif %}
+
+        {% if entity.getIdPessoa().getIdPessoaFisica().getNuCpf() %}
+        $('#nuCpf').val('{{ entity.getIdPessoa().getIdPessoaFisica().getNuCpf() }}')
+        {% endif %}
     });
 </script>

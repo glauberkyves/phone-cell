@@ -8,6 +8,7 @@
 
 namespace Base\BaseBundle\Repository;
 
+use Super\OrdemServicoBundle\Service\Situacao;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrdemServicoRepository extends AbstractRepository

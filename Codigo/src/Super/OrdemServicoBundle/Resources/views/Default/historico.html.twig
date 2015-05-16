@@ -4,7 +4,7 @@
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    Fila de Atendimento
+                    Histórico
                 </header>
                 <div class="panel-body">
                     <div class="position-center">
@@ -54,6 +54,7 @@
                         <table class="table table-bordered table-striped table-condensed" data-grid="form-fila">
                             <thead>
                             <tr>
+                                <th data-column="idOrdemServico" width="3%">Código</th>
                                 <th data-column="noPessoa">Nome</th>
                                 <th data-column="nuCpf" width="10%">CPF</th>
                                 <th data-column="noTipoOrdemServico" width="20%">Ordem de Serviço</th>
@@ -61,8 +62,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="odd" >
-                                <td valign="top" colspan="3">Acione a pesquisa</td>
+                            <tr class="odd">
+                                <td valign="top" colspan="5">Acione a pesquisa</td>
                             </tr>
                             </tbody>
                         </table>
@@ -71,9 +72,14 @@
             </section>
         </div>
     </div>
+
     <script>
-        $(document).ready(function () {
-//            $('button[type=submit]').click()
-        });
+        $(document).ajaxStop(function () {
+            $('table[data-grid="form-fila"] tr').not('table[data-grid="form-fila"] tr:first').css('cursor', 'pointer')
+
+            $('table[data-grid="form-fila"] tr').click(function () {
+                window.location = '/ordem-de-servico/historico/' + $(this).find('td:first').text()
+            })
+        })
     </script>
 {% endblock %}

@@ -281,6 +281,20 @@ class TbOrdemServico extends AbstractEntity
      */
     private $idSituacao;
 
+    /**
+     * @var \RlOrdemServicoPlano
+     *
+     * @ORM\OneToMany(targetEntity="Base\BaseBundle\Entity\RlOrdemServicoPlano", mappedBy="idOrdemServico")
+     */
+    private $rlOrdemServicoPlano;
+
+    /**
+     * @var \RlOrdemServicoPacote
+     *
+     * @ORM\OneToMany(targetEntity="Base\BaseBundle\Entity\RlOrdemServicoPacote", mappedBy="idOrdemServico")
+     */
+    private $rlOrdemServicoPacote;
+
     public function __construct()
     {
         $this->dtCadastro   = new \DateTime();
@@ -864,5 +878,36 @@ class TbOrdemServico extends AbstractEntity
         $this->tpFidelizacao = $tpFidelizacao;
     }
 
+    /**
+     * @return \RlOrdemServicoPlano
+     */
+    public function getRlOrdemServicoPlano()
+    {
+        return $this->rlOrdemServicoPlano;
+    }
+
+    /**
+     * @param \RlOrdemServicoPlano $rlOrdemServicoPlano
+     */
+    public function setRlOrdemServicoPlano($rlOrdemServicoPlano)
+    {
+        $this->rlOrdemServicoPlano = $rlOrdemServicoPlano;
+    }
+
+    /**
+     * @return \RlOrdemServicoPacote
+     */
+    public function getRlOrdemServicoPacote()
+    {
+        return $this->rlOrdemServicoPacote;
+    }
+
+    /**
+     * @param \RlOrdemServicoPacote $rlOrdemServicoPacote
+     */
+    public function setRlOrdemServicoPacote($rlOrdemServicoPacote)
+    {
+        $this->rlOrdemServicoPacote = $rlOrdemServicoPacote;
+    }
 }
 

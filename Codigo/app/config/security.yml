@@ -44,4 +44,4 @@ security:
          - { path: ^/profile, roles: [ROLE_USER, ROLE_SUPER] }
 #         - { path: ^/administrativo, roles: [ROLE_SUPER] }
          - { path: ^/ordem-de-servico/$, roles: [ROLE_VENDEDOR, ROLE_AUDITOR] }
-         - { path: ^/ordem-de-servico/visualizar/, roles: [ROLE_INPUTADOR] }
+         - { path: ^/ordem-de-servico/visualizar/, roles: [ROLE_AUDITOR, ROLE_INPUTADOR, ROLE_ACOMPANHADOR] }

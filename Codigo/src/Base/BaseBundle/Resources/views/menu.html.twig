@@ -1,10 +1,12 @@
 <ul class="sidebar-menu" id="nav-accordion">
-    <li>
-        <a href="{{ path('super_home') }}">
-            <i class="fa fa-dashboard"></i>
-            <span>Dashboard</span>
-        </a>
-    </li>
+    {% if not is_granted('ROLE_VENDEDOR') %}
+        <li>
+            <a href="{{ path('super_home') }}">
+                <i class="fa fa-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+    {% endif %}
 
     {#{% if is_granted('ROLE_SUPER') %}#}
         <li class="sub-menu">
@@ -25,7 +27,7 @@
         </li>
     {#{% endif %}#}
 
-    {% if is_granted('ROLE_VENDEDOR') and is_granted('ROLE_INPUTADOR') %}
+    {% if is_granted('ROLE_VENDEDOR') or is_granted('ROLE_AUDITOR') %}
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="fa fa-file-text-o"></i>
@@ -37,4 +39,31 @@
             </ul>
         </li>
     {% endif %}
+
+
+    {% if is_granted('ROLE_INPUTADOR') %}
+        <li>
+            <a href="{{ path('super_ordem_servico_fila_inputador') }}">
+                <i class="fa fa-list"></i>
+                <span>Fila de atendimento</span>
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_AUDITOR') %}
+        <li>
+            <a href="{{ path('super_ordem_servico_fila_auditor') }}">
+                <i class="fa fa-list"></i>
+                <span>Fila de atendimento</span>
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_ACOMPANHADOR') %}
+        <li>
+            <a href="{{ path('super_ordem_servico_fila_acompanhador') }}">
+                <i class="fa fa-list"></i>
+                <span>Fila de atendimento</span>
+            </a>
+        </li>
+    {% endif %}
+
 </ul>

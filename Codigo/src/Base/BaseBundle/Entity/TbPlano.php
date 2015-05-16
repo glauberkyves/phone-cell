@@ -44,6 +44,14 @@ class TbPlano extends AbstractEntity
     }
 
     /**
+     * @param int $idPlano
+     */
+    public function setIdPlano($idPlano)
+    {
+        $this->idPlano = $idPlano;
+    }
+
+    /**
      * @return string
      */
     public function getNoPlano()
@@ -74,4 +82,6 @@ class TbPlano extends AbstractEntity
     {
         $this->stAtivo = $stAtivo;
     }
+
+
 }

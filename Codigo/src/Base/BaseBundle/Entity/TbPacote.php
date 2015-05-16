@@ -35,13 +35,6 @@ class TbPacote extends AbstractEntity
      */
     private $stAtivo;
 
-    /**
-     * @return int
-     */
-    public function getIdPacote()
-    {
-        return $this->idPacote;
-    }
 
     /**
      * @return string
@@ -74,4 +67,22 @@ class TbPacote extends AbstractEntity
     {
         $this->stAtivo = $stAtivo;
     }
+
+    /**
+     * @return int
+     */
+    public function getIdPacote()
+    {
+        return $this->idPacote;
+    }
+
+    /**
+     * @param int $idPacote
+     */
+    public function setIdPacote($idPacote)
+    {
+        $this->idPacote = $idPacote;
+    }
+
+
 }
