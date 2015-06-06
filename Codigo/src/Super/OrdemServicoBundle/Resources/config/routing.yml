@@ -54,6 +54,14 @@ super_ordem_servico_encaminhar:
     path:     /encaminhar/{idOrdemServico}
     defaults: { _controller: SuperOrdemServicoBundle:Default:encaminhar }
 
+super_ordem_servico_anexar:
+    path:     /anexar
+    defaults: { _controller: SuperOrdemServicoBundle:Default:anexar }
+
+super_ordem_servico_download:
+    path:     /download/{idOrdemServico}
+    defaults: { _controller: SuperOrdemServicoBundle:Default:download }
+
 super_ordem_servico_historico:
     path:     /ordem-de-servico/historico
     defaults: { _controller: SuperOrdemServicoBundle:Default:historico }

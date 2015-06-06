@@ -66,7 +66,7 @@ class Usuario extends CrudService
         $this->persist($entity);
     }
 
-    public function parserItens(array $itens = array())
+    public function parserItens(array $itens = array(), $addOptions = false)
     {
         foreach ($itens as $key => $value) {
             $html = '<div class="btn-group  btn-group-sm">';

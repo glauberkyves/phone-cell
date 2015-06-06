@@ -165,7 +165,7 @@ class OrdemServico extends CrudService
         $arrContato = $this->getRequest()->get('contato');
     }
 
-    public function parserItens(array $itens = array())
+    public function parserItens(array $itens = array(), $addOptions = false)
     {
         foreach ($itens as $key => $value) {
             foreach ($value as $keyIten => $iten) {
@@ -178,7 +178,7 @@ class OrdemServico extends CrudService
                 }
             }
 
-            $html   = '<div class="btn-group  btn-group-sm">';
+            $html = '<div class="btn-group  btn-group-sm">';
             $rtEdit = $this
                 ->getRouter()
                 ->generate('super_ordem_servico_oi_fixo_alterar', array('id' => $value['idOrdemServico']));
@@ -197,14 +197,12 @@ class OrdemServico extends CrudService
                     ->generate('super_ordem_servico_oi_tv_visualizar', array('id' => $value['idOrdemServico']));
             }
 
-            if ($value['idSituacao'] == Situacao::COLETADA) {
-                $html .= '<a href="' . $rtEdit . '">';
-                $html .= '<button class="btn btn-white" type="button"><i class="fa fa-edit"></i></button>';
-                $html .= '</a>';
-            }
+            $html .= '<a href="' . $rtEdit . '">';
+            $html .= '<button class="btn btn-white" type="button"><i class="fa fa-edit"></i></button>';
+            $html .= '</a>';
 
             $html .= '<a href="' . $rtView . '">';
-            $html .= '<button class="btn btn-white" type="button"><i class="fa fa-eye"></i></button>';
+            $html .= '<button class="btn btn-white" type="button"><i class="fa fa-edit"></i></button>';
             $html .= '</a>';
 
             $html .= '<a href="/encaminhar/' . $value['idOrdemServico'] . '">';
@@ -215,7 +213,7 @@ class OrdemServico extends CrudService
             $itens[$key]['opcoes'] = $html;
         }
 
-        return parent::parserItens($itens);
+        return parent::parserItens($itens, true);
     }
 
     public function encaminhar($idOrdemServico)
@@ -240,5 +238,16 @@ class OrdemServico extends CrudService
         }
 
         return false;
+    }
+
+    public function upload()
+    {
+        $request = $this->getRequest();
+        $fileName = $this->uploadFile('ordem-servico', 'file', true);
+
+        $entity = $this->find($request->request->get('idOrdemServico'));
+        $entity->setNoUrl($fileName);
+
+        $this->persist($entity);
     }
 }
