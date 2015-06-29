@@ -1,28 +1,36 @@
 <div class="btn-group  btn-group-sm">
-    {% if data.idTipoOrdemServico == 1 and (is_granted('ROLE_VENDEDOR') or is_granted('ROLE_AUDITOR')) %}
-        <a class="btn btn-white" href="{{ path('super_ordem_servico_oi_tv_alterar', {id: data.idOrdemServico}) }}"
-           title="Editar Ordem de Serviço">
-            <i class="fa fa-edit"></i>
-        </a>
-        <a class="btn btn-white" href="{{ path('super_ordem_servico_oi_tv_visualizar', {id: data.idOrdemServico}) }}"
-           title="Visualizar Ordem de Serviço">
-            <i class="fa fa-eye"></i>
-        </a>
-    {% endif %}
-
-    {% if data.idTipoOrdemServico == 2 and (is_granted('ROLE_VENDEDOR') or is_granted('ROLE_AUDITOR')) %}
-        <a class="btn btn-white" href="{{ path('super_ordem_servico_oi_fixo_alterar', {id: data.idOrdemServico}) }}"
-           title="Editar Ordem de Serviço">
-            <i class="fa fa-edit"></i>
-        </a>
+    {% if data.idTipoOrdemServico == 1 %}
+        {% if is_granted('ROLE_VENDEDOR') or is_granted('ROLE_AUDITOR') %}
+            <a class="btn btn-white" href="{{ path('super_ordem_servico_oi_fixo_alterar', {id: data.idOrdemServico}) }}"
+               title="Editar Ordem de Serviço">
+                <i class="fa fa-edit"></i>
+            </a>
+        {% endif %}
         <a class="btn btn-white" href="{{ path('super_ordem_servico_oi_fixo_visualizar', {id: data.idOrdemServico}) }}"
            title="Visualizar Ordem de Serviço">
             <i class="fa fa-eye"></i>
         </a>
     {% endif %}
 
-    {% if data.noUrl  %}
-        <a class="btn btn-white" href="{{ path('super_ordem_servico_download', {idOrdemServico: data.idOrdemServico}) }}" title="Download Anexo Ordem de Serviço">
+    {% if data.idTipoOrdemServico == 2 %}
+        {% if is_granted('ROLE_VENDEDOR') or is_granted('ROLE_AUDITOR') %}
+            <a class="btn btn-white" href="{{ path('super_ordem_servico_oi_tv_alterar', {id: data.idOrdemServico}) }}"
+               title="Editar Ordem de Serviço">
+                <i class="fa fa-edit"></i>
+            </a>
+        {% endif %}
+
+        <a class="btn btn-white" href="{{ path('super_ordem_servico_oi_tv_visualizar', {id: data.idOrdemServico}) }}"
+           title="Visualizar Ordem de Serviço">
+            <i class="fa fa-eye"></i>
+        </a>
+    {% endif %}
+
+
+    {% if data.noUrl %}
+        <a class="btn btn-white"
+           href="{{ path('super_ordem_servico_download', {idOrdemServico: data.idOrdemServico}) }}"
+           title="Download Anexo Ordem de Serviço">
             <i class="fa  fa-download"></i>
         </a>
     {% endif %}
@@ -39,13 +47,45 @@
         </a>
     {% endif %}
 
-    {% if not is_granted('ROLE_VENDEDOR') %}
+    {% if is_granted('ROLE_AUDITOR') %}
         <a class="btn btn-white encaminhar" data-toggle="modal" data-target="#encaminhar-modal"
            data-id="{{ data.idOrdemServico }}"
            href="#"
            title="Encaminhar Ordem de Serviço">
             <i class="fa fa-share"></i>
         </a>
+    {% endif %}
+
+    {% if is_granted('ROLE_IMPUTADOR') or is_granted('ROLE_SUPERVISOR') and (data.nuOrdemServico) %}
+        {% if data.idTipoOrdemServico == 2 %}
+            <a class="btn btn-white"
+               href="{{ path('super_ordem_servico_oi_fixo_imputar', {id: data.idOrdemServico}) }}"
+               title="Encaminhar Ordem de Serviço">
+                <i class="fa fa-share-square-o"></i>
+            </a>
+        {% else %}
+            <a class="btn btn-white"
+               href="{{ path('super_ordem_servico_oi_tv_imputar', {id: data.idOrdemServico}) }}"
+               title="Encaminhar Ordem de Serviço">
+                <i class="fa fa-share-square-o"></i>
+            </a>
+        {% endif %}
+    {% endif %}
+
+    {% if is_granted('ROLE_ACOMPANHADOR') or is_granted('ROLE_SUPERVISOR') and (data.nuOrdemServico) %}
+        {% if data.idTipoOrdemServico == 2 %}
+            <a class="btn btn-white"
+               href="{{ path('super_ordem_servico_oi_fixo_acompanhar', {id: data.idOrdemServico}) }}"
+               title="Acompanhar Ordem de Serviço">
+                <i class="fa fa-desktop"></i>
+            </a>
+        {% else %}
+            <a class="btn btn-white"
+               href="{{ path('super_ordem_servico_oi_tv_acompanhar', {id: data.idOrdemServico}) }}"
+               title="Acompanhar Ordem de Serviço">
+                <i class="fa fa-desktop"></i>
+            </a>
+        {% endif %}
     {% endif %}
 </div>
 
@@ -70,11 +110,11 @@
             $('#idOrdemServico').val(id)
         })
 
-        $('#btn-anexar').click(function(){
+        $('#btn-anexar').click(function () {
             $('#form-anexar').submit()
         })
 
-        $('#btn-encaminhar').click(function(){
+        $('#btn-encaminhar').click(function () {
             window.location = '/encaminhar/' + $('#idOrdemServico').val()
         })
     })

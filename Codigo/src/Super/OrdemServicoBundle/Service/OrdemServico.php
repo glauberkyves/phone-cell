@@ -9,7 +9,6 @@
 namespace Super\OrdemServicoBundle\Service;
 
 use Base\BaseBundle\Entity\AbstractEntity;
-use Base\BaseBundle\Entity\TbTipoOrdemServico;
 use Base\CrudBundle\Service\CrudService;
 
 class OrdemServico extends CrudService
@@ -24,6 +23,10 @@ class OrdemServico extends CrudService
     public function preSave(AbstractEntity $entity = null, array $params = array())
     {
         $request = $this->getRequest()->request;
+
+        if(($request->get('nuOrdemServico') && $request->get('nuContratoOi')) || ($request->get('nuOrdemServicoOiTv') && $request->get('nuProtocoloOiTv'))){
+            return $this->persist($entity);
+        }
 
         $this->entity->populate($params);
         $this->entity->setIdPessoa($this->savePessoa($params));
@@ -63,12 +66,19 @@ class OrdemServico extends CrudService
 
     public function postSave(AbstractEntity $entity = null)
     {
+        $request = $this->getRequest()->request;
+
+        if(($request->get('nuOrdemServico') && $request->get('nuContratoOi')) || ($request->get('nuOrdemServicoOiTv') && $request->get('nuProtocoloOiTv'))){
+            $this->encaminhar($this->entity->getIdOrdemServico());
+            return;
+        }
+
         $this->savePlanos();
         $this->savePacotes();
         $this->saveContato();
         $this->saveEndereco(
             array('idPessoa' => $this->entity->getIdPessoa()->getIdPessoa()) +
-            $this->getRequest()->request->all()
+            $request->all()
         );
 
         $this->saveHistorico();
@@ -90,16 +100,15 @@ class OrdemServico extends CrudService
         $entity->setIdUsuario($this->getUser());
         $entity->setDtCadastro(new \DateTime());
 
-        $criteria  = array(
-            'idUsuario'      => $this->entity->getIdUsuario()->getIdUsuario(),
-            'idOrdemServico' => $this->entity->getIdOrdemServico(),
-            'idSituacao'     => $this->entity->getIdSituacao()->getIdSituacao()
-        );
-        $entityOld = $this->getService('service.historico')->findOneBy($criteria, array('idHistorico' => 'DESC'), 1);
+//        $criteria  = array(
+//            'idUsuario'      => $this->entity->getIdUsuario()->getIdUsuario(),
+//            'idOrdemServico' => $this->entity->getIdOrdemServico(),
+//        );
+//        $entityOld = $this->getService('service.historico')->findOneBy($criteria, array('idHistorico' => 'DESC'), 1);
 
-        if (!$entityOld) {
+//        if (!$entityOld) {
             $this->persist($entity);
-        }
+//        }
     }
 
     public function savePessoa(array $params = array())

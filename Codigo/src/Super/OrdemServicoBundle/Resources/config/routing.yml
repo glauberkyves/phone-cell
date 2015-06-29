@@ -42,6 +42,10 @@ super_ordem_servico_fila_auditor:
     path:     /auditor/fila-de-atendimento
     defaults: { _controller: SuperOrdemServicoBundle:Default:index, idSituacao: 1 }
 
+super_ordem_servico_fila_vendedor:
+    path:     /vendedor/fila-de-atendimento
+    defaults: { _controller: SuperOrdemServicoBundle:Default:index, idSituacao: false}
+
 super_ordem_servico_fila_inputador:
     path:     /inputador/fila-de-atendimento
     defaults: { _controller: SuperOrdemServicoBundle:Default:index, idSituacao: 2 }
@@ -69,3 +73,19 @@ super_ordem_servico_historico:
 super_ordem_servico_historico_view:
     path:     /ordem-de-servico/historico/{idOrdemServico}
     defaults: { _controller: SuperOrdemServicoBundle:Default:historicoView }
+
+super_ordem_servico_oi_fixo_imputar:
+    path:     /ordem-de-servico/oi-fixo/imputar-dados
+    defaults: { _controller: SuperOrdemServicoBundle:Default:edit, form: true }
+
+super_ordem_servico_oi_tv_imputar:
+    path:     /ordem-de-servico/oi-tv/imputar-dados
+    defaults: { _controller: SuperOrdemServicoBundle:Default:edit, form: false }
+
+super_ordem_servico_oi_fixo_acompanhar:
+    path:     /ordem-de-servico/oi-fixo/acompanhar
+    defaults: { _controller: SuperOrdemServicoBundle:Default:edit, form: true }
+
+super_ordem_servico_oi_tv_acompanhar:
+    path:     /ordem-de-servico/oi-tv/acompanhar
+    defaults: { _controller: SuperOrdemServicoBundle:Default:edit, form: false }

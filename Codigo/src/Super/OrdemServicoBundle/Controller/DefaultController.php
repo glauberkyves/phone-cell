@@ -15,6 +15,8 @@ class DefaultController extends CrudController
     public function indexAction(Request $request, $idSituacao = null)
     {
         $request->query->set('idSituacao', $idSituacao);
+        $request->query->set('idUsuario', $this->getUser()->getIdUsuario());
+
         return parent::indexAction($request);
     }
 

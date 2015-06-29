@@ -40,8 +40,16 @@
         </li>
     {% endif %}
 
+    {% if is_granted('ROLE_VENDEDOR') %}
+        <li>
+            <a href="{{ path('super_ordem_servico_fila_vendedor') }}">
+                <i class="fa fa-list"></i>
+                <span>Fila de atendimento</span>
+            </a>
+        </li>
+    {% endif %}
 
-    {% if is_granted('ROLE_INPUTADOR') %}
+    {% if is_granted('ROLE_IMPUTADOR') %}
         <li>
             <a href="{{ path('super_ordem_servico_fila_inputador') }}">
                 <i class="fa fa-list"></i>

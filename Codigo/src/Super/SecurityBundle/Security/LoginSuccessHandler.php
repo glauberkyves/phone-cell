@@ -32,7 +32,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
                 $response = new RedirectResponse($this->router->generate('super_home'));
                 break;
 
-            case $this->security->isGranted('ROLE_INPUTADOR'):
+            case $this->security->isGranted('ROLE_IMPUTADOR'):
                 $response = new RedirectResponse($this->router->generate('super_home'));
                 break;
 

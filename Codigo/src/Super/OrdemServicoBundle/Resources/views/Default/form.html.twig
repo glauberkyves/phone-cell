@@ -2,6 +2,57 @@
 {% block body %}
     <div class="row">
         <form class="form-horizontal" role="form" method="post">
+            {% if ('super_ordem_servico_oi_fixo_imputar' == app.request.get('_route')
+            or 'super_ordem_servico_oi_tv_imputar' == app.request.get('_route')) and is_granted('ROLE_IMPUTADOR') %}
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="panel-heading">
+                            Dados da Ordem de Serviço
+                        </div>
+                        <div class="panel-body">
+                            <div class="position-center">
+                                {% if form %}
+                                    <div class="form-group">
+                                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Nº Ordem
+                                            Serviço</label>
+
+                                        <div class="col-lg-10">
+                                            {{ formText('nuOrdemServico', entity.getNuOrdemServico(), {class: 'form-control required'}) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Nº
+                                            Contrato</label>
+
+                                        <div class="col-lg-10">
+                                            {{ formText('nuContratoOi', entity.getNuContratoOi(), {class: 'form-control required'}) }}
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="form-group">
+                                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Nº Ordem
+                                            Serviço</label>
+
+                                        <div class="col-lg-10">
+                                            {{ formText('nuOrdemServicoOiTv', entity.getNuOrdemServicoOiTv(), {class: 'form-control required'}) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Nº Protocolo Oi
+                                            TV</label>
+
+                                        <div class="col-lg-10">
+                                            {{ formText('nuProtocoloOiTv', entity.getNuProtocoloOiTv(), {class: 'form-control required'}) }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            {% endif %}
 
             {% include 'SuperOrdemServicoBundle:Default:dados-pessoa.html.twig' %}
 
@@ -27,7 +78,7 @@
                                 </div>
                             </div>
 
-                            {% if is_granted("ROLE_INPUTADOR") %}
+                            {% if is_granted("ROLE_IMPUTADOR") and not entity.getIdOrdemServico() %}
                                 <div class="form-group">
                                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Vendedor</label>
 
@@ -35,6 +86,8 @@
                                         {{ formSelect('idUsuario', entity.getIdUsuario().getIdUsuario(), {class: 'form-control  m-bot15'}, arrVendedor) }}
                                     </div>
                                 </div>
+                            {% else %}
+                                {{ formHidden('idUsuario', entity.getIdUsuario().getIdUsuario()) }}
                             {% endif %}
 
                             <div class="form-group">
@@ -60,7 +113,7 @@
                                 <div class="col-lg-12">
                                     {% if not ('super_ordem_servico_oi_fixo_visualizar' == app.request.get('_route')
                                     or 'super_ordem_servico_oi_tv_visualizar' == app.request.get('_route'))
-                                    and (is_granted('ROLE_VENDEDOR') or is_granted('ROLE_INPUTADOR') or is_granted('ROLE_AUDITOR') or is_granted('ROLE_SUPER')) %}
+                                    and (is_granted('ROLE_VENDEDOR') or is_granted('ROLE_IMPUTADOR') or is_granted('ROLE_AUDITOR') or is_granted('ROLE_SUPER')) %}
                                         <button type="submit" class="btn btn-primary">
                                             <span class="fa fa-save"></span> Salvar
                                         </button>
@@ -68,12 +121,12 @@
 
                                     <a href="javascript: history.back();" class="btn btn-default"><span
                                                 class="fa fa-times"></span>
-                                    {% if 'super_ordem_servico_oi_fixo_visualizar' == app.request.get('_route')
-                                    or 'super_ordem_servico_oi_tv_visualizar' == app.request.get('_route') %}
-                                        Voltar
-                                    {% else %}
-                                        Cancelar
-                                    {% endif %}
+                                        {% if 'super_ordem_servico_oi_fixo_visualizar' == app.request.get('_route')
+                                        or 'super_ordem_servico_oi_tv_visualizar' == app.request.get('_route') %}
+                                            Voltar
+                                        {% else %}
+                                            Cancelar
+                                        {% endif %}
                                     </a>
                                 </div>
                             </div>
@@ -81,7 +134,6 @@
                     </div>
                 </section>
             </div>
-
         </form>
     </div>
 
@@ -108,6 +160,18 @@
                     $('#parcela').removeClass('hide');
                 }
             })
+
+            {% if ('super_ordem_servico_oi_fixo_imputar' == app.request.get('_route')
+                    or 'super_ordem_servico_oi_tv_imputar' == app.request.get('_route')) %}
+
+            $('input:visible, select:visible').attr('disabled', true)
+            $('#nuOrdemServico, #nuContratoOi, #nuOrdemServicoOiTv, #nuProtocoloOiTv').removeAttr('disabled')
+            {% endif %}
+
+            {% if 'super_ordem_servico_oi_fixo_visualizar' == app.request.get('_route')
+                   or 'super_ordem_servico_oi_tv_visualizar' == app.request.get('_route') %}
+            $('input:visible, select:visible').attr('disabled', true)
+            {% endif %}
         });
     </script>
 {% endblock %}
