@@ -18,35 +18,31 @@ USE `phonecell`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tb_historico`
+-- Table structure for table `tb_perfil`
 --
 
-DROP TABLE IF EXISTS `tb_historico`;
+DROP TABLE IF EXISTS `tb_perfil`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tb_historico` (
-  `id_historico` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ordem_servico` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `id_situacao` int(11) NOT NULL,
+CREATE TABLE `tb_perfil` (
+  `id_perfil` int(11) NOT NULL AUTO_INCREMENT,
+  `no_perfil` varchar(100) NOT NULL,
+  `sg_perfil` varchar(45) NOT NULL,
+  `st_ativo` int(11) NOT NULL,
   `dt_cadastro` datetime NOT NULL,
-  PRIMARY KEY (`id_historico`),
-  KEY `fk_historico_usuario_idx` (`id_usuario`),
-  KEY `fk_historico__idx` (`id_ordem_servico`),
-  KEY `fk_historico_situacao_idx` (`id_situacao`),
-  CONSTRAINT `fk_historico_ordem` FOREIGN KEY (`id_ordem_servico`) REFERENCES `tb_ordem_servico` (`id_ordem_servico`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_historico_situacao` FOREIGN KEY (`id_situacao`) REFERENCES `tb_situacao` (`id_situacao`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_historico_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+  `dt_atualizacao` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_perfil`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tb_historico`
+-- Dumping data for table `tb_perfil`
 --
 
-LOCK TABLES `tb_historico` WRITE;
-/*!40000 ALTER TABLE `tb_historico` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tb_historico` ENABLE KEYS */;
+LOCK TABLES `tb_perfil` WRITE;
+/*!40000 ALTER TABLE `tb_perfil` DISABLE KEYS */;
+INSERT INTO `tb_perfil` VALUES (1,'Usuario','ROLE_USER',1,'2015-02-10 21:15:35','2015-02-10 21:15:36'),(2,'Administrador','ROLE_SUPER',1,'2015-02-14 17:31:03','2015-02-14 17:31:04'),(3,'Vendedor','ROLE_VENDEDOR',1,'2015-03-21 20:21:40','2015-05-09 09:29:01'),(4,'Imputador','ROLE_INPUTADOR',1,'2015-05-09 09:26:42','2015-05-09 09:29:04'),(5,'Auditor','ROLE_AUDITOR',1,'2015-05-09 09:27:01','2015-05-09 09:29:06'),(6,'Acompanhador','ROLE_ACOMPANHADOR',1,'2015-05-09 09:27:16','2015-05-09 09:29:08');
+/*!40000 ALTER TABLE `tb_perfil` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -73,6 +69,39 @@ CREATE TABLE `tb_pessoa_juridica` (
 LOCK TABLES `tb_pessoa_juridica` WRITE;
 /*!40000 ALTER TABLE `tb_pessoa_juridica` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tb_pessoa_juridica` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_historico`
+--
+
+DROP TABLE IF EXISTS `tb_historico`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_historico` (
+  `id_historico` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ordem_servico` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_situacao` int(11) NOT NULL,
+  `dt_cadastro` datetime NOT NULL,
+  PRIMARY KEY (`id_historico`),
+  KEY `fk_historico_usuario_idx` (`id_usuario`),
+  KEY `fk_historico__idx` (`id_ordem_servico`),
+  KEY `fk_historico_situacao_idx` (`id_situacao`),
+  CONSTRAINT `fk_historico_ordem` FOREIGN KEY (`id_ordem_servico`) REFERENCES `tb_ordem_servico` (`id_ordem_servico`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_historico_situacao` FOREIGN KEY (`id_situacao`) REFERENCES `tb_situacao` (`id_situacao`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_historico_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_historico`
+--
+
+LOCK TABLES `tb_historico` WRITE;
+/*!40000 ALTER TABLE `tb_historico` DISABLE KEYS */;
+INSERT INTO `tb_historico` VALUES (1,4,1,1,'2015-05-09 19:32:54'),(2,5,1,1,'2015-05-09 19:33:02'),(3,6,2,1,'2015-05-09 19:33:31');
+/*!40000 ALTER TABLE `tb_historico` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -156,31 +185,27 @@ INSERT INTO `tb_velocidade` VALUES (1,'300 Kbps'),(2,'600 Kbps'),(3,'1Mb'),(4,'2
 UNLOCK TABLES;
 
 --
--- Table structure for table `tb_perfil`
+-- Table structure for table `tb_tipo_ordem_servico`
 --
 
-DROP TABLE IF EXISTS `tb_perfil`;
+DROP TABLE IF EXISTS `tb_tipo_ordem_servico`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tb_perfil` (
-  `id_perfil` int(11) NOT NULL AUTO_INCREMENT,
-  `no_perfil` varchar(100) NOT NULL,
-  `sg_perfil` varchar(45) NOT NULL,
-  `st_ativo` int(11) NOT NULL,
-  `dt_cadastro` datetime NOT NULL,
-  `dt_atualizacao` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_perfil`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+CREATE TABLE `tb_tipo_ordem_servico` (
+  `id_tipo_ordem_servico` int(11) NOT NULL AUTO_INCREMENT,
+  `no_tipo_ordem_servico` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_tipo_ordem_servico`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tb_perfil`
+-- Dumping data for table `tb_tipo_ordem_servico`
 --
 
-LOCK TABLES `tb_perfil` WRITE;
-/*!40000 ALTER TABLE `tb_perfil` DISABLE KEYS */;
-INSERT INTO `tb_perfil` VALUES (1,'Usuario','ROLE_USER',1,'2015-02-10 21:15:35','2015-02-10 21:15:36'),(2,'Administrador','ROLE_SUPER',1,'2015-02-14 17:31:03','2015-02-14 17:31:04'),(3,'Vendedor','ROLE_VENDEDOR',1,'2015-03-21 20:21:40','2015-05-09 09:29:01'),(4,'Imputador','ROLE_INPUTADOR',1,'2015-05-09 09:26:42','2015-05-09 09:29:04'),(5,'Auditor','ROLE_AUDITOR',1,'2015-05-09 09:27:01','2015-05-09 09:29:06'),(6,'Acompanhador','ROLE_ACOMPANHADOR',1,'2015-05-09 09:27:16','2015-05-09 09:29:08');
-/*!40000 ALTER TABLE `tb_perfil` ENABLE KEYS */;
+LOCK TABLES `tb_tipo_ordem_servico` WRITE;
+/*!40000 ALTER TABLE `tb_tipo_ordem_servico` DISABLE KEYS */;
+INSERT INTO `tb_tipo_ordem_servico` VALUES (1,'Oi Fixo / Oi Banda Larga'),(2,'Oi Tv');
+/*!40000 ALTER TABLE `tb_tipo_ordem_servico` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -200,7 +225,7 @@ CREATE TABLE `rl_ordem_servico_plano` (
   KEY `id_solicitacaoplano_solicitacao_idx` (`id_ordem_servico`),
   CONSTRAINT `id_ordemservicoplano_ordemservico` FOREIGN KEY (`id_ordem_servico`) REFERENCES `tb_ordem_servico` (`id_ordem_servico`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `id_ordemservicoplano_plano` FOREIGN KEY (`id_plano`) REFERENCES `tb_plano` (`id_plano`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,6 +234,7 @@ CREATE TABLE `rl_ordem_servico_plano` (
 
 LOCK TABLES `rl_ordem_servico_plano` WRITE;
 /*!40000 ALTER TABLE `rl_ordem_servico_plano` DISABLE KEYS */;
+INSERT INTO `rl_ordem_servico_plano` VALUES (23,6,6,'2015-05-09 19:56:36'),(24,6,4,'2015-05-09 19:56:36'),(29,4,6,'2015-05-09 20:30:25'),(30,4,2,'2015-05-09 20:30:25'),(31,4,4,'2015-05-09 20:30:25'),(32,4,5,'2015-05-09 20:30:25');
 /*!40000 ALTER TABLE `rl_ordem_servico_plano` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,6 +302,7 @@ CREATE TABLE `tb_endereco` (
 
 LOCK TABLES `tb_endereco` WRITE;
 /*!40000 ALTER TABLE `tb_endereco` DISABLE KEYS */;
+INSERT INTO `tb_endereco` VALUES (1,2620,4,NULL,'123','312','12312','213',123123123,'3123'),(2,2620,5,NULL,'123','312','12312','213',123123123,'3123'),(3,2620,6,NULL,'123','312','12312','213',123123123,'3123'),(4,2620,7,NULL,'123','312','12312','213',123123123,'3123'),(5,2620,8,NULL,'123','312','12312','213',123123123,'3123'),(6,2620,9,NULL,'123','312','12312','213',123123123,'3123'),(7,2620,9,NULL,'123','312','12312','213',123123123,'3123'),(8,2620,9,NULL,'123','312','12312','213',123123123,'3123'),(9,2620,9,NULL,'123','312','12312','213',123123123,'3123'),(10,2620,9,NULL,'123','312','12312','213',123123123,'3123'),(11,2620,9,NULL,'123','312','12312','213',123123123,'3123'),(12,2620,9,NULL,'123','312','12312','213',123123123,'3123'),(13,2620,7,NULL,'123','312','12312','213',123123123,'3123'),(14,2620,7,NULL,'123','312','12312','213',123123123,'3123');
 /*!40000 ALTER TABLE `tb_endereco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -322,7 +349,7 @@ CREATE TABLE `rl_ordem_servico_pacote` (
   KEY `fk_solicitacaopacote_pacote_idx` (`id_pacote`),
   CONSTRAINT `fk_ordemservicopacote_ordemservico` FOREIGN KEY (`id_ordem_servico`) REFERENCES `tb_ordem_servico` (`id_ordem_servico`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ordemservicopacote_pacote` FOREIGN KEY (`id_pacote`) REFERENCES `tb_pacote` (`id_pacote`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -373,7 +400,7 @@ CREATE TABLE `tb_pessoa` (
   `dt_cadastro` datetime NOT NULL,
   `dt_atualizacao` datetime DEFAULT NULL,
   PRIMARY KEY (`id_pessoa`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -382,7 +409,7 @@ CREATE TABLE `tb_pessoa` (
 
 LOCK TABLES `tb_pessoa` WRITE;
 /*!40000 ALTER TABLE `tb_pessoa` DISABLE KEYS */;
-INSERT INTO `tb_pessoa` VALUES (1,'Glauber Kyves ',1,'2015-03-05 13:54:25',NULL),(3,'Guilherme',1,'2015-03-21 20:23:19',NULL);
+INSERT INTO `tb_pessoa` VALUES (1,'Glauber Kyves ',1,'2015-03-05 13:54:25',NULL),(3,'Guilherme',1,'2015-03-21 20:23:19',NULL),(4,'Teste',1,'2015-05-09 19:32:31',NULL),(5,'Teste',1,'2015-05-09 19:32:42',NULL),(6,'Teste',1,'2015-05-09 19:32:46',NULL),(7,'Teste',1,'2015-05-09 19:32:54','2015-05-09 20:22:56'),(8,'Teste',1,'2015-05-09 19:33:02',NULL),(9,'Teste',1,'2015-05-09 19:33:31',NULL);
 /*!40000 ALTER TABLE `tb_pessoa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -433,6 +460,7 @@ CREATE TABLE `tb_ordem_servico` (
   `nu_valor_parcela` int(11) DEFAULT NULL,
   `tp_forma_pagamento` int(11) DEFAULT NULL,
   `tp_fidelizacao` int(11) DEFAULT NULL,
+  `no_url` varchar(100) NOT NULL,
   PRIMARY KEY (`id_ordem_servico`),
   KEY `fk_ordemservico_situacao_idx` (`id_situacao`),
   KEY `fk_ordemservico_pessoa_idx` (`id_pessoa`),
@@ -444,7 +472,7 @@ CREATE TABLE `tb_ordem_servico` (
   CONSTRAINT `fk_ordemservico_tipoordemservico` FOREIGN KEY (`id_tipo_ordem_servico`) REFERENCES `tb_tipo_ordem_servico` (`id_tipo_ordem_servico`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ordemservico_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ordemservico_velocidade` FOREIGN KEY (`id_velocidade`) REFERENCES `tb_velocidade` (`id_velocidade`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -453,6 +481,7 @@ CREATE TABLE `tb_ordem_servico` (
 
 LOCK TABLES `tb_ordem_servico` WRITE;
 /*!40000 ALTER TABLE `tb_ordem_servico` DISABLE KEYS */;
+INSERT INTO `tb_ordem_servico` VALUES (4,1,7,1,1,1,NULL,'213123',0,NULL,NULL,NULL,NULL,'2015-05-09 19:32:54','2015-05-09 19:32:54',NULL,NULL,1231232132,'12321',NULL,1,123123,NULL,1,NULL,0,'3123','312','12',1,'2015-05-09 19:32:54',NULL,NULL,NULL,NULL,1,0,NULL,NULL,''),(5,1,8,1,1,1,NULL,'213123',0,NULL,NULL,NULL,NULL,'2015-05-09 19:33:02','2015-05-09 19:33:02',NULL,NULL,1231232132,'12321',NULL,1,123123,NULL,1,NULL,0,'3123','312','12',1,'2015-05-09 19:33:02',NULL,NULL,NULL,NULL,1,0,NULL,NULL,''),(6,1,9,1,1,1,NULL,'213123',0,NULL,NULL,NULL,NULL,'2015-05-09 19:33:31','2015-05-09 19:33:31',NULL,NULL,1231232132,'12321',NULL,1,123123,NULL,1,NULL,0,'3123','312','12',1,'2015-05-09 19:33:31',NULL,NULL,NULL,NULL,1,0,NULL,NULL,'');
 /*!40000 ALTER TABLE `tb_ordem_servico` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -498,7 +527,7 @@ CREATE TABLE `rl_usuario_perfil` (
   KEY `fk_usuarioperfil_usuario_idx` (`id_usuario`),
   CONSTRAINT `FK_USUAIROPERFIL_PERFIL` FOREIGN KEY (`id_perfil`) REFERENCES `tb_perfil` (`id_perfil`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuarioperfil_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -507,7 +536,7 @@ CREATE TABLE `rl_usuario_perfil` (
 
 LOCK TABLES `rl_usuario_perfil` WRITE;
 /*!40000 ALTER TABLE `rl_usuario_perfil` DISABLE KEYS */;
-INSERT INTO `rl_usuario_perfil` VALUES (14,2,3,1,'2015-03-21 20:23:19'),(20,1,2,1,'2015-05-09 10:11:08');
+INSERT INTO `rl_usuario_perfil` VALUES (14,2,3,1,'2015-03-21 20:23:19'),(26,1,4,1,'2015-05-09 20:32:57');
 /*!40000 ALTER TABLE `rl_usuario_perfil` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -540,31 +569,8 @@ CREATE TABLE `tb_pessoa_fisica` (
 
 LOCK TABLES `tb_pessoa_fisica` WRITE;
 /*!40000 ALTER TABLE `tb_pessoa_fisica` DISABLE KEYS */;
+INSERT INTO `tb_pessoa_fisica` VALUES (4,'12345678909','2015-05-09 00:00:00','1','123','3123','2123','2015-05-09 00:00:00','212312'),(5,'12345678909','2015-05-09 00:00:00','1','123','3123','3123','2015-05-09 00:00:00','212312'),(6,'12345678909','2015-05-09 00:00:00','1','12','3123','12312','2015-05-09 00:00:00','212312'),(7,'12345678909','2015-05-09 00:00:00','1','12312','3123','312','2015-05-09 00:00:00','212312'),(8,'12345678909','2015-05-09 00:00:00','1','12','3123','3123','2015-05-09 00:00:00','212312'),(9,'12345678909','2015-05-09 00:00:00','1','212','3123','13','2015-05-09 00:00:00','212312');
 /*!40000 ALTER TABLE `tb_pessoa_fisica` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tb_tipo_ordem_servico`
---
-
-DROP TABLE IF EXISTS `tb_tipo_ordem_servico`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tb_tipo_ordem_servico` (
-  `id_tipo_ordem_servico` int(11) NOT NULL AUTO_INCREMENT,
-  `no_tipo_ordem_servico` varchar(45) NOT NULL,
-  PRIMARY KEY (`id_tipo_ordem_servico`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tb_tipo_ordem_servico`
---
-
-LOCK TABLES `tb_tipo_ordem_servico` WRITE;
-/*!40000 ALTER TABLE `tb_tipo_ordem_servico` DISABLE KEYS */;
-INSERT INTO `tb_tipo_ordem_servico` VALUES (1,'Oi Fixo / Oi Banda Larga'),(2,'Oi Tv');
-/*!40000 ALTER TABLE `tb_tipo_ordem_servico` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -632,4 +638,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-09 10:40:55
+-- Dump completed on 2015-05-16 12:22:50
