@@ -73,5 +73,19 @@
             </a>
         </li>
     {% endif %}
+    {% if is_granted('ROLE_GERENTE') %}
+        <li>
+            <a href="{{ path('super_ordem_servico_fila_gerente') }}">
+                <i class="fa fa-list"></i>
+                <span>Fila de atendimento</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('super_ordem_servico_comissionamento') }}">
+                <i class="fa  fa-money"></i>
+                <span>Comissionamento</span>
+            </a>
+        </li>
+    {% endif %}
 
 </ul>

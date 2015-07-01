@@ -87,6 +87,12 @@
             </a>
         {% endif %}
     {% endif %}
+
+    <a class="btn btn-white"
+       href="{{ path('super_ordem_servico_historico_view', {idOrdemServico: data.idOrdemServico}) }}"
+       title="Histórico Ordem de Serviço">
+        <i class="fa  fa-sort-amount-asc"></i>
+    </a>
 </div>
 
 <script>

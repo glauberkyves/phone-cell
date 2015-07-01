@@ -24,8 +24,18 @@ class OrdemServico extends CrudService
     {
         $request = $this->getRequest()->request;
 
-        if(($request->get('nuOrdemServico') && $request->get('nuContratoOi')) || ($request->get('nuOrdemServicoOiTv') && $request->get('nuProtocoloOiTv'))){
+        if (($request->get('nuOrdemServico') && $request->get('nuContratoOi')) || ($request->get('nuOrdemServicoOiTv') && $request->get('nuProtocoloOiTv'))) {
             return $this->persist($entity);
+        }
+
+        if ($request->get('idSituacao')) {
+            $idSituacao = $this->getService('service.situacao')->find($request->get('idSituacao'));
+            $entity->setIdSituacao($idSituacao);
+            $this->entity = $entity;
+
+            $this->persist($this->entity);
+            $this->saveHistorico();
+            return;
         }
 
         $this->entity->populate($params);
@@ -68,8 +78,12 @@ class OrdemServico extends CrudService
     {
         $request = $this->getRequest()->request;
 
-        if(($request->get('nuOrdemServico') && $request->get('nuContratoOi')) || ($request->get('nuOrdemServicoOiTv') && $request->get('nuProtocoloOiTv'))){
+        if (($request->get('nuOrdemServico') && $request->get('nuContratoOi')) || ($request->get('nuOrdemServicoOiTv') && $request->get('nuProtocoloOiTv'))) {
             $this->encaminhar($this->entity->getIdOrdemServico());
+            return;
+        }
+
+        if ($request->get('idSituacao')) {
             return;
         }
 
@@ -107,7 +121,7 @@ class OrdemServico extends CrudService
 //        $entityOld = $this->getService('service.historico')->findOneBy($criteria, array('idHistorico' => 'DESC'), 1);
 
 //        if (!$entityOld) {
-            $this->persist($entity);
+        $this->persist($entity);
 //        }
     }
 

@@ -54,6 +54,14 @@ super_ordem_servico_fila_acompanhador:
     path:     /acompanhador/fila-de-atendimento
     defaults: { _controller: SuperOrdemServicoBundle:Default:index, idSituacao: 3 }
 
+super_ordem_servico_fila_gerente:
+    path:     /gerente/fila-de-atendimento
+    defaults: { _controller: SuperOrdemServicoBundle:Default:index, idSituacao: null }
+
+super_ordem_servico_comissionamento:
+    path:     /gerente/comissionsamento
+    defaults: { _controller: SuperOrdemServicoBundle:Default:index, idSituacao: 6 }
+
 super_ordem_servico_encaminhar:
     path:     /encaminhar/{idOrdemServico}
     defaults: { _controller: SuperOrdemServicoBundle:Default:encaminhar }

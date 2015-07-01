@@ -2,8 +2,34 @@
 {% block body %}
     <div class="row">
         <form class="form-horizontal" role="form" method="post">
-            {% if ('super_ordem_servico_oi_fixo_imputar' == app.request.get('_route')
-            or 'super_ordem_servico_oi_tv_imputar' == app.request.get('_route')) and is_granted('ROLE_IMPUTADOR') %}
+            {% if ('super_ordem_servico_oi_fixo_acompanhar' == app.request.get('_route')
+            or 'super_ordem_servico_oi_tv_acompanhar' == app.request.get('_route')) and is_granted('ROLE_ACOMPANHADOR') %}
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="panel-heading">
+                            Acompanhamento Ordem Serviço
+                        </div>
+                        <div class="panel-body">
+                            <div class="position-center">
+                                <div class="form-group">
+                                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">
+                                        Situação Ordem Serviço
+                                    </label>
+
+                                    <div class="col-lg-10">
+                                        {{ formSelect('idSituacao', entity.getIdSituacao().getIdSituacao(), {class: 'form-control required'}, cmbSituacao) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            {% endif %}
+
+            {% if (('super_ordem_servico_oi_fixo_imputar' == app.request.get('_route')
+            or 'super_ordem_servico_oi_tv_imputar' == app.request.get('_route')) and is_granted('ROLE_IMPUTADOR'))
+            or ('super_ordem_servico_oi_fixo_acompanhar' == app.request.get('_route')
+            or 'super_ordem_servico_oi_tv_acompanhar' == app.request.get('_route')) and is_granted('ROLE_ACOMPANHADOR') %}
                 <div class="col-lg-12">
                     <section class="panel">
                         <div class="panel-heading">
@@ -119,6 +145,13 @@
                                         </button>
                                     {% endif %}
 
+                                    {% if ('super_ordem_servico_oi_fixo_acompanhar' == app.request.get('_route')
+                                    or 'super_ordem_servico_oi_tv_acompanhar' == app.request.get('_route')) %}
+                                        <button type="submit" class="btn btn-primary">
+                                            <span class="fa fa-save"></span> Salvar
+                                        </button>
+                                    {% endif %}
+
                                     <a href="javascript: history.back();" class="btn btn-default"><span
                                                 class="fa fa-times"></span>
                                         {% if 'super_ordem_servico_oi_fixo_visualizar' == app.request.get('_route')
@@ -163,9 +196,14 @@
 
             {% if ('super_ordem_servico_oi_fixo_imputar' == app.request.get('_route')
                     or 'super_ordem_servico_oi_tv_imputar' == app.request.get('_route')) %}
-
             $('input:visible, select:visible').attr('disabled', true)
             $('#nuOrdemServico, #nuContratoOi, #nuOrdemServicoOiTv, #nuProtocoloOiTv').removeAttr('disabled')
+            {% endif %}
+
+            {% if ('super_ordem_servico_oi_fixo_acompanhar' == app.request.get('_route')
+                    or 'super_ordem_servico_oi_tv_acompanhar' == app.request.get('_route')) %}
+            $('input:visible, select:visible').attr('disabled', true)
+            $('#idSituacao').removeAttr('disabled')
             {% endif %}
 
             {% if 'super_ordem_servico_oi_fixo_visualizar' == app.request.get('_route')

@@ -89,6 +89,12 @@ class DefaultController extends CrudController
     public function getCmb()
     {
         $this->vars['cmbSexo'] = Dominio::getStSexo();
+        $this->vars['cmbSituacao'] = array(
+            '' => 'Selecione...',
+            Situacao::PENDENTE => 'Pendente',
+            Situacao::REPROVADA => 'Reprovada',
+            Situacao::INSTALADA => 'Instalada',
+        );
         $this->vars['arrEstado'] = $this->getService('service.estado')->getComboDefault(array(), array('noEstado' => 'asc'));
 
         $this->vars['arrMunicipio'] = array('' => 'Selecione');
@@ -182,8 +188,8 @@ class DefaultController extends CrudController
             return $this->redirect($this->getRequest()->headers->get('referer'));
         }
 
-        $rootDir  = $this->getRequest()->server->get('DOCUMENT_ROOT');
-        $filename = $rootDir . '/' .$entity->getNoUrl();
+        $rootDir = $this->getRequest()->server->get('DOCUMENT_ROOT');
+        $filename = $rootDir . '/' . $entity->getNoUrl();
         $response = new Response();
 
         $response->headers->set('Cache-Control', 'private');
@@ -196,3 +202,4 @@ class DefaultController extends CrudController
         return $response->setContent(readfile($filename));
     }
 }
+
