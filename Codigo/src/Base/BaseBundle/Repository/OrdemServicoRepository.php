@@ -16,7 +16,7 @@ class OrdemServicoRepository extends AbstractRepository
 {
     public function fetchGrid(Request $request)
     {
-        $exp = new Expr();
+        $exp   = new Expr();
         $query = $this
             ->getEntityManager()
             ->createQueryBuilder()
@@ -31,7 +31,12 @@ class OrdemServicoRepository extends AbstractRepository
 
         if ($request->get('idSituacao')) {
             if ($request->get('idSituacao') == Situacao::IMPUTADA) {
-                $query->where($exp->in('s.idSituacao', array(Situacao::REPROVADA, Situacao::PENDENTE, Situacao::CANCELADA)));
+                $query->where($exp->in('s.idSituacao', array(
+                    Situacao::IMPUTADA,
+                    Situacao::REPROVADA,
+                    Situacao::PENDENTE,
+                    Situacao::CANCELADA
+                )));
             } else {
                 $query->where('s.idSituacao = :idSituacao')
                     ->setParameter('idSituacao', $request->get('idSituacao'));

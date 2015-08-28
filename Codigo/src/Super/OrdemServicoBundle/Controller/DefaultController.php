@@ -52,7 +52,7 @@ class DefaultController extends CrudController
 //        $this->vars['idOrdemServico'] = $this->getService('service.ordem_servico')->newEntity()->populate($arrOrdemServico);
 
         $this->vars['entityPessoa'] = null;
-        $cpf = $this->getRequest()->query->getDigits('cpf');
+        $cpf                        = $this->getRequest()->query->getDigits('cpf');
 
         if ($cpf && null === $this->getRequest()->query->get('id', null)) {
             $entityPessoaFisica = $this->getService('service.pessoa_fisica')->findOneByNuCpf($cpf);
@@ -71,9 +71,9 @@ class DefaultController extends CrudController
     public function CheckCpfAction(Request $request)
     {
         if ($request->query->getAlnum('buscar')) {
-            $nuCpf = $request->query->getDigits('nuCpf');
+            $nuCpf  = $request->query->getDigits('nuCpf');
             $entity = $this->getService('service.pessoa_fisica')->findOneByNuCpf($nuCpf);
-            $json = array();
+            $json   = array();
 
             if ($entity) {
                 $json['noPessoa'] = $entity->getIdPessoa()->getNoPessoa();
@@ -88,29 +88,29 @@ class DefaultController extends CrudController
 
     public function getCmb()
     {
-        $this->vars['cmbSexo'] = Dominio::getStSexo();
+        $this->vars['cmbSexo']     = Dominio::getStSexo();
         $this->vars['cmbSituacao'] = array(
-            '' => 'Selecione...',
-            Situacao::PENDENTE => 'Pendente',
+            ''                  => 'Selecione...',
+            Situacao::PENDENTE  => 'Pendente',
             Situacao::REPROVADA => 'Reprovada',
             Situacao::INSTALADA => 'Instalada',
         );
-        $this->vars['arrEstado'] = $this->getService('service.estado')->getComboDefault(array(), array('noEstado' => 'asc'));
+        $this->vars['arrEstado']   = $this->getService('service.estado')->getComboDefault(array(), array('noEstado' => 'asc'));
 
         $this->vars['arrMunicipio'] = array('' => 'Selecione');
-        $this->vars['arrBairro'] = array('' => 'Selecione');
-        $this->vars['arrProduto'] = Dominio::getStProduto();
+        $this->vars['arrBairro']    = array('' => 'Selecione');
+        $this->vars['arrProduto']   = Dominio::getStProduto();
 
-        $this->vars['arrPlano'] = $this->getService('service.plano')->findBy(array(), array('noPlano' => 'asc'));
-        $this->vars['arrPacote'] = $this->getService('service.pacote')->findBy(array(), array('noPacote' => 'asc'));
-        $this->vars['arrPeriodo'] = Dominio::getPeriodo(true);
-        $this->vars['arrSimNao'] = Dominio::getSimNao(true);
-        $this->vars['arrTpTerminal'] = Dominio::getTpTerminal();
-        $this->vars['arrVelocidade'] = $this->getService('service.velocidade')->getComboDefault(array(), array('idVelocidade' => 'asc'));
+        $this->vars['arrPlano']           = $this->getService('service.plano')->findBy(array(), array('noPlano' => 'asc'));
+        $this->vars['arrPacote']          = $this->getService('service.pacote')->findBy(array(), array('noPacote' => 'asc'));
+        $this->vars['arrPeriodo']         = Dominio::getPeriodo(true);
+        $this->vars['arrSimNao']          = Dominio::getSimNao(true);
+        $this->vars['arrTpTerminal']      = Dominio::getTpTerminal();
+        $this->vars['arrVelocidade']      = $this->getService('service.velocidade')->getComboDefault(array(), array('idVelocidade' => 'asc'));
         $this->vars['arrTaxaHabilitacao'] = Dominio::getTpTaxaHabilitacao();
-        $this->vars['arrFormaPagamento'] = Dominio::getTpFormaPagamento();
-        $this->vars['arrFidelizacao'] = Dominio::getTpFidelizacao();
-        $this->vars['arrVendedor'] = $this->getService('service.usuario')->getVendedores();
+        $this->vars['arrFormaPagamento']  = Dominio::getTpFormaPagamento();
+        $this->vars['arrFidelizacao']     = Dominio::getTpFidelizacao();
+        $this->vars['arrVendedor']        = $this->getService('service.usuario')->getVendedores();
 
         $request = $this->getRequest();
         if ($request->get('id')) {
@@ -129,6 +129,7 @@ class DefaultController extends CrudController
                     && ($route == 'super_ordem_servico_oi_fixo_alterar' || $route == 'super_ordem_servico_oi_tv_alterar')
                 ) {
                     $this->addMessage('Ordem de serviço já em andamento, não é possível alterar.', 'error');
+
                     return $this->redirect($request->headers->get('referer'));
                 }
             }
@@ -156,12 +157,13 @@ class DefaultController extends CrudController
     public function historicoAction(Request $request)
     {
         $request->query->set('idSituacao', null);
+
         return $this->indexAction($request);
     }
 
     public function historicoViewAction(Request $request, $idOrdemServico)
     {
-        $entity = $this->getService()->find($idOrdemServico);
+        $entity    = $this->getService()->find($idOrdemServico);
         $historico = $this->getService('service.historico')->findByIdOrdemServico($idOrdemServico);
 
         return $this->render($this->resolveRouteName(), array('entity' => $entity, 'historicos' => $historico));
@@ -185,10 +187,11 @@ class DefaultController extends CrudController
 
         if (!$entity) {
             $this->addMessage('Erro ao iniciar download.', 'error');
+
             return $this->redirect($this->getRequest()->headers->get('referer'));
         }
 
-        $rootDir = $this->getRequest()->server->get('DOCUMENT_ROOT');
+        $rootDir  = $this->getRequest()->server->get('DOCUMENT_ROOT');
         $filename = $rootDir . '/' . $entity->getNoUrl();
         $response = new Response();
 
@@ -200,6 +203,22 @@ class DefaultController extends CrudController
         $response->sendHeaders();
 
         return $response->setContent(readfile($filename));
+    }
+
+    public function comissionarAction(Request $request)
+    {
+        if ($request->get('idOrdemServico')) {
+            $this->getService()->comissionar($request);
+
+            $this->addMessage('Operação realizada com sucesso.');
+            return $this->redirect($this->generateUrl('super_ordem_servico_fila_gerente'));
+        }
+
+        $entity = $this->getService()->find($request->get('id'));
+
+        return $this->render($this->resolveRouteName(), array(
+            'entity' => $entity
+        ));
     }
 }
 

@@ -8,7 +8,7 @@
         </li>
     {% endif %}
 
-    {#{% if is_granted('ROLE_SUPER') %}#}
+    {% if is_granted('ROLE_GERENTE') %}
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="fa fa-user"></i>
@@ -25,7 +25,7 @@
                 <span>Histórico</span>
             </a>
         </li>
-    {#{% endif %}#}
+    {% endif %}
 
     {% if is_granted('ROLE_VENDEDOR') or is_granted('ROLE_AUDITOR') %}
         <li class="sub-menu">

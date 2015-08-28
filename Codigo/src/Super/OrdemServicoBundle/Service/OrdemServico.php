@@ -9,7 +9,9 @@
 namespace Super\OrdemServicoBundle\Service;
 
 use Base\BaseBundle\Entity\AbstractEntity;
+use Base\BaseBundle\Entity\TbComissao;
 use Base\CrudBundle\Service\CrudService;
+use Symfony\Component\HttpFoundation\Request;
 
 class OrdemServico extends CrudService
 {
@@ -35,6 +37,7 @@ class OrdemServico extends CrudService
 
             $this->persist($this->entity);
             $this->saveHistorico();
+
             return;
         }
 
@@ -80,6 +83,7 @@ class OrdemServico extends CrudService
 
         if (($request->get('nuOrdemServico') && $request->get('nuContratoOi')) || ($request->get('nuOrdemServicoOiTv') && $request->get('nuProtocoloOiTv'))) {
             $this->encaminhar($this->entity->getIdOrdemServico());
+
             return;
         }
 
@@ -201,7 +205,7 @@ class OrdemServico extends CrudService
                 }
             }
 
-            $html = '<div class="btn-group  btn-group-sm">';
+            $html   = '<div class="btn-group  btn-group-sm">';
             $rtEdit = $this
                 ->getRouter()
                 ->generate('super_ordem_servico_oi_fixo_alterar', array('id' => $value['idOrdemServico']));
@@ -265,12 +269,33 @@ class OrdemServico extends CrudService
 
     public function upload()
     {
-        $request = $this->getRequest();
+        $request  = $this->getRequest();
         $fileName = $this->uploadFile('ordem-servico', 'file', true);
 
         $entity = $this->find($request->request->get('idOrdemServico'));
         $entity->setNoUrl($fileName);
 
         $this->persist($entity);
+    }
+
+    public function comissionar(Request $request)
+    {
+        $entity = $this->find($request->get('idOrdemServico'));
+
+        $entityComissao = new TbComissao();
+        $entityComissao->setDtCadastro(new \DateTime());
+        $entityComissao->setIdOrdemServico($entity);
+        $entityComissao->setIdUsuario($entity->getIdUsuario());
+        $entityComissao->setNuValor(100);
+
+        $this->persist($entityComissao);
+
+        $idSituacao = $this->getService('service.situacao')->find(Situacao::COMISSIONADA);
+        $entity->setIdSituacao($idSituacao);
+        $this->entity = $entity;
+
+        $this->persist($entity);
+
+        $this->saveHistorico();
     }
 }

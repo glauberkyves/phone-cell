@@ -892,6 +892,7 @@ class TbOrdemServico extends AbstractEntity
     {
         return $this->noUrl;
     }
+
     /**
      * @return \RlOrdemServicoPlano
      */

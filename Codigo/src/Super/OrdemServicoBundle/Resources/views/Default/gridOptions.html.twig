@@ -93,6 +93,14 @@
        title="Histórico Ordem de Serviço">
         <i class="fa  fa-sort-amount-asc"></i>
     </a>
+
+    {% if is_granted('ROLE_GERENTE') and data.nuOrdemServico %}
+        <a class="btn btn-white"
+           href="{{ path('super_ordem_servico_comissionar', {id: data.idOrdemServico}) }}"
+           title="Comissionar Ordem de Serviço">
+            <i class="fa fa-money"></i>
+        </a>
+    {% endif %}
 </div>
 
 <script>

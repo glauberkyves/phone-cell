@@ -1,0 +1,114 @@
+{% extends 'BaseBaseBundle::layout.html.twig' %}
+{% block body %}
+    <div class="row">
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="panel-body profile-information">
+                <div class="col-md-6">
+                    <div class="profile-desk">
+                        <h1>{{ entity.getIdUsuario().getIdPessoa().getNoPessoa() }}</h1>
+                        <span class="text-muted">{{ entity.getIdUsuario().getRlUsuarioPerfil().current().getIdPerfil().getNoPerfil() }}</span>
+                        <br/>
+
+                        <p>
+                            <b>Data de Cadastro:</b> {{ entity.getIdUsuario().getDtCadastro().format('d/m/Y') }}
+                            <br/>
+                            <b>Última
+                                Atualização:</b> {{ entity.getIdUsuario().getDtAtualizacao() ? entity.getIdUsuario().getDtAtualizacao().format('d/m/Y'): '' }}
+                            <br/>
+                            <b>Situação:</b> {{ entity.getIdUsuario().getStAtivo() ==  true ?'Ativo' : 'Inativo' }}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="profile-statistics">
+                        <h1>
+                            {% if entity.getIdUsuario.getIdComissao().count() %}
+                                {% set totalComissao = 0 %}
+                                {% for comissao in entity.getIdUsuario.getIdComissao() %}
+                                    {% set totalComissao = totalComissao + comissao.getNuValor() %}
+                                {% endfor %}
+
+                                R$ {{ totalComissao|number_format(2, ',', '.') }}
+                            {% else %}
+                                R$ 0,00
+                            {% endif %}
+                        </h1>
+
+                        <p>Total Comissionado</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-md-12">
+    <section class="panel">
+    <header class="panel-heading tab-bg-dark-navy-blue">
+        <ul class="nav nav-tabs nav-justified ">
+            <li class="active">
+                <a data-toggle="tab" href="#overview">
+                    Detalhe Ordem de Serviço
+                </a>
+            </li>
+        </ul>
+    </header>
+    <div class="panel-body">
+        <div id="contacts" class="tab-pane ">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="prf-contacts">
+                        <h2>
+                            {% if entity.getIdTipoOrdemServico().getIdTipoOrdemServico() == 1 %}
+                                <span><i class="fa fa-phone"></i></span> {{ entity.getIdTipoOrdemServico().getNoTipoOrdemServico() }}
+                            {% else %}
+                                <span><i class="fa fa-desktop"></i></span> {{ entity.getIdTipoOrdemServico().getNoTipoOrdemServico() }}
+                            {% endif %}
+                        </h2>
+                        {% if entity.getIdTipoOrdemServico().getIdTipoOrdemServico() == 1 %}
+                            <div class="location-info">
+                                <p>
+                                    <b>Número Contrato:</b> {{ entity.getNuContratoOi() }} <br/>
+                                    <b>Número Ordem Serviço:</b> {{ entity.getNuOrdemServicoOi() }} <br/>
+                                    <b>Débito Automático:</b> {{ entity.getStDebitoAutomatico()?'Sim':'Não' }} <br/>
+                                    <b>Data da Venda:</b> {{ entity.getDtVenda().format('d/m/Y') }} <br/>
+                                    <b>Data de Cadastro:</b> {{ entity.getDtCadastro().format('d/m/Y') }} <br/>
+                                </p>
+                            </div>
+                        {% else %}
+                            <div class="location-info">
+                                <p>
+                                    <b>Número Contrato:</b> {{ entity.getNuContratoOi() }} <br/>
+                                    <b>Número Ordem Serviço:</b> {{ entity.getNuOrdemServicoOi() }} <br/>
+                                    <b>Débito Automático:</b> {{ entity.getStDebitoAutomatico()?'Sim':'Não' }} <br/>
+                                    <b>Data da Venda:</b> {{ entity.getDtVenda().format('d/m/Y') }} <br/>
+                                    <b>Data de Cadastro:</b> {{ entity.getDtCadastro().format('d/m/Y') }} <br/>
+                                </p>
+                            </div>
+                        {% endif %}
+
+                        <h2><span><i class="fa  fa-user"></i></span>Dados Pessoais</h2>
+
+                        <div class="location-info">
+                            <p>
+                                <b>Nome:</b> {{ entity.getIdPessoa().getNoPessoa() }} <br/>
+                                <b>Nome Mãe:</b> {{ entity.getIdPessoa().getIdPessoaFisica().getNoMae() }} <br/>
+                                <b>Data de
+                                    Nascimento:</b> {{ entity.getIdPessoa().getIdPessoaFisica().getDtNascimento().format('d/m/Y') }}
+                                <br/>
+                                <b>RG:</b> {{ entity.getIdPessoa().getIdPessoaFisica().getNuRg() }}  {{ entity.getIdPessoa().getIdPessoaFisica().getDsOrgaoExpedido() }}
+                                <br/>
+                                <b>Nascionalidade:</b> {{ entity.getIdPessoa().getIdPessoaFisica().getNoNascionalidade() }}
+                                <br/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group pull-right">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <a class="btn btn-primary" type="submit" href="{{ path('super_ordem_servico_comissionar') }}?idOrdemServico={{ entity.getIdOrdemServico() }}">Comissionar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

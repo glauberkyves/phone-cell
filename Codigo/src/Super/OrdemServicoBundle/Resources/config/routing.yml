@@ -97,3 +97,7 @@ super_ordem_servico_oi_fixo_acompanhar:
 super_ordem_servico_oi_tv_acompanhar:
     path:     /ordem-de-servico/oi-tv/acompanhar
     defaults: { _controller: SuperOrdemServicoBundle:Default:edit, form: false }
+
+super_ordem_servico_comissionar:
+    path:     /gerente/ordem-de-servico/comissionar
+    defaults: { _controller: SuperOrdemServicoBundle:Default:comissionar }

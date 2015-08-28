@@ -40,6 +40,10 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
                 $response = new RedirectResponse($this->router->generate('super_home'));
                 break;
 
+            case $this->security->isGranted('ROLE_GERENTE'):
+                $response = new RedirectResponse($this->router->generate('super_home'));
+                break;
+
         }
 
         return $response;

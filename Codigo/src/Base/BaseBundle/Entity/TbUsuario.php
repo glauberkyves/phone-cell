@@ -78,6 +78,13 @@ class TbUsuario extends AbstractEntity implements UserInterface, \Serializable
      */
     private $rlUsuarioPerfil;
 
+    /**
+     * @var TbComissao
+     *
+     * @ORM\OneToMany(targetEntity="Base\BaseBundle\Entity\TbComissao", mappedBy="idUsuario")
+     */
+    protected $idComissao;
+
     private $salt;
 
     /**
@@ -125,7 +132,7 @@ class TbUsuario extends AbstractEntity implements UserInterface, \Serializable
      *
      * @return string
      */
-    public function getNoEmail()
+    public function Email()
     {
         return $this->noEmail;
     }
@@ -374,4 +381,13 @@ class TbUsuario extends AbstractEntity implements UserInterface, \Serializable
 
         $this->roles = unserialize($roles);
     }
+
+    /**
+     * @return TbComissao
+     */
+    public function getIdComissao()
+    {
+        return $this->idComissao;
+    }
+
 }
