@@ -1,0 +1,19 @@
+- portabilidade nao eh obrigatorio
+- DAC nao eh obrigatorio
+- nome obrigatorio esta em cima do campo
+- nao esta recuprando email do usuario cadastrado
+- dashboard coletadas, validadas, imputadas, pendente, instalda, comissionada, cancelada
+- Nova situacao fila de espera: desistencia, indimplente, sem viabilidade, quem determina situacao eh o auditor, nao vai pra fila do imputador
+- colocar nome do perfil logado
+- imputador pode adiionar novas ordem de servioes
+- supervisor, cadastra a venda e pode determinar o vendedor
+- auditor nao pode terminar o vendedor
+- no formulario de cadastro determinar qual superiro esta na ativa
+- criar campo observacao
+- colocar observaocao no hostiroio
+- criar perfil de teleoperador, pode vender, ver historico geral
+- criar campo e dterminar valor 
+
+------
+- criar comissao para superviro
+- cirar funcioanldiade de vinculacao de vendendo ao supervisor
