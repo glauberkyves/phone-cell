@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TbPacote
  *
  * @ORM\Table(name="tb_pacote")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Base\BaseBundle\Repository\PacoteRepository")
  */
 class TbPacote extends AbstractEntity
 {

@@ -39,4 +39,8 @@ services:
           class: Super\OrdemServicoBundle\Service\Historico
           arguments:  ["@service_container"]
 
+    service.comissao:
+          class: Super\OrdemServicoBundle\Service\Comissao
+          arguments:  ["@service_container"]
+
 

@@ -101,3 +101,7 @@ super_ordem_servico_oi_tv_acompanhar:
 super_ordem_servico_comissionar:
     path:     /gerente/ordem-de-servico/comissionar
     defaults: { _controller: SuperOrdemServicoBundle:Default:comissionar }
+
+super_ordem_servico_configurar_comissao:
+    path:     /gerente/comissao/configurar
+    defaults: { _controller: SuperOrdemServicoBundle:ConfiguracaoComissao:index }

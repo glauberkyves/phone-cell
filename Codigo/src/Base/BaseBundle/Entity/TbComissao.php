@@ -22,9 +22,9 @@ class TbComissao extends AbstractEntity
     private $idComissao;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="nu_valor", type="integer", nullable=false)
+     * @ORM\Column(name="nu_valor", type="decimal", precision=10, scale=2, nullable=false)
      */
     private $nuValor;
 

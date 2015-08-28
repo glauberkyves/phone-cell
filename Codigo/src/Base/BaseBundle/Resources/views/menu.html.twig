@@ -80,11 +80,15 @@
                 <span>Fila de atendimento</span>
             </a>
         </li>
-        <li>
-            <a href="{{ path('super_ordem_servico_comissionamento') }}">
-                <i class="fa  fa-money"></i>
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-user"></i>
                 <span>Comissionamento</span>
             </a>
+            <ul class="sub">
+                <li><a href="{{ path('super_ordem_servico_comissionamento') }}">Comissionar</a></li>
+                <li><a href="{{ path('super_ordem_servico_configurar_comissao') }}">Configurar Comissão</a></li>
+            </ul>
         </li>
     {% endif %}
 
