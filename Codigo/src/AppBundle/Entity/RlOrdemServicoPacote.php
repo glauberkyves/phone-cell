@@ -26,7 +26,7 @@ class RlOrdemServicoPacote
      *
      * @ORM\Column(name="st_fidelizacao", type="integer", nullable=false)
      */
-    private $stFidelizacao;
+    private $stFidelizacao = '0';
 
     /**
      * @var \DateTime

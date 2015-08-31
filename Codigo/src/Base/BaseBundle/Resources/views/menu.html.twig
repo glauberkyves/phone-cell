@@ -15,7 +15,8 @@
                 <span>Usuário</span>
             </a>
             <ul class="sub">
-                <li><a href="{{ path('super_usuario') }}">Manter Usuário</a></li>
+                <li><a href="{{ path('super_usuario') }}">Gerenciar Usuário</a></li>
+                <li><a href="{{ path('super_supervisor_vendedor') }}">Gerenciar Supervisor</a></li>
                 <li><a href="{{ path('super_perfil') }}">Manter Perfil</a></li>
             </ul>
         </li>
@@ -89,6 +90,15 @@
                 <li><a href="{{ path('super_ordem_servico_comissionamento') }}">Comissionar</a></li>
                 <li><a href="{{ path('super_ordem_servico_configurar_comissao') }}">Configurar Comissão</a></li>
             </ul>
+        </li>
+    {% endif %}
+
+    {% if is_granted('ROLE_TELEOPERADOR') %}
+        <li>
+            <a href="{{ path('super_ordem_servico_historico') }}">
+                <i class="fa fa-sort-amount-asc"></i>
+                <span>Histórico</span>
+            </a>
         </li>
     {% endif %}
 

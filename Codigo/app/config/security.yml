@@ -38,6 +38,8 @@ security:
         ROLE_ACOMPANHADOR:  [ROLE_ACOMPANHADOR]
         ROLE_GERENTE:       [ROLE_GERENTE]
         ROLE_SUPER:         [ROLE_SUPER]
+        ROLE_TELEOPERADOR:  [ROLE_VENDEDOR, ROLE_TELEOPERADOR]
+        ROLE_SUPERVISOR:    [ROLE_VENDEDOR, ROLE_SUPERVISOR]
 
     access_control:
          - { path: ^/profile, roles: [ROLE_USER, ROLE_SUPER] }

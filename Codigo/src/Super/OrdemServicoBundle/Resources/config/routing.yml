@@ -47,7 +47,7 @@ super_ordem_servico_fila_vendedor:
     defaults: { _controller: SuperOrdemServicoBundle:Default:index, idSituacao: false}
 
 super_ordem_servico_fila_inputador:
-    path:     /inputador/fila-de-atendimento
+    path:     /imputador/fila-de-atendimento
     defaults: { _controller: SuperOrdemServicoBundle:Default:index, idSituacao: 2 }
 
 super_ordem_servico_fila_acompanhador:

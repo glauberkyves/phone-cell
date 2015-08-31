@@ -22,6 +22,13 @@ class TbHistorico extends AbstractEntity
     private $idHistorico;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="ds_observacao", type="text", length=65535, nullable=true)
+     */
+    private $dsObservacao;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dt_cadastro", type="datetime", nullable=false)
@@ -137,5 +144,21 @@ class TbHistorico extends AbstractEntity
     public function setIdUsuario($idUsuario)
     {
         $this->idUsuario = $idUsuario;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDsObservacao()
+    {
+        return $this->dsObservacao;
+    }
+
+    /**
+     * @param string $dsObservacao
+     */
+    public function setDsObservacao($dsObservacao)
+    {
+        $this->dsObservacao = $dsObservacao;
     }
 }

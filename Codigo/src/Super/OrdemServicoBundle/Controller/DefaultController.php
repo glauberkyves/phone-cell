@@ -90,10 +90,14 @@ class DefaultController extends CrudController
     {
         $this->vars['cmbSexo']     = Dominio::getStSexo();
         $this->vars['cmbSituacao'] = array(
-            ''                  => 'Selecione...',
-            Situacao::PENDENTE  => 'Pendente',
-            Situacao::REPROVADA => 'Reprovada',
-            Situacao::INSTALADA => 'Instalada',
+            ''                        => 'Selecione...',
+            Situacao::PENDENTE        => 'Pendente',
+            Situacao::CANCELADA       => 'Cancelada',
+            Situacao::INSTALADA       => 'Instalada',
+            Situacao::REPROVADA       => 'Reprovada',
+            Situacao::DESISTENCIA     => 'Desistência',
+            Situacao::INADIMPLENTE    => 'Inadimplente',
+            Situacao::SEM_VIABILIDADE => 'Sem viabilidade',
         );
         $this->vars['arrEstado']   = $this->getService('service.estado')->getComboDefault(array(), array('noEstado' => 'asc'));
 
@@ -211,13 +215,16 @@ class DefaultController extends CrudController
             $this->getService()->comissionar($request);
 
             $this->addMessage('Operação realizada com sucesso.');
+
             return $this->redirect($this->generateUrl('super_ordem_servico_fila_gerente'));
         }
 
-        $entity = $this->getService()->find($request->get('id'));
+        $entity   = $this->getService()->find($request->get('id'));
+        $comissao = $this->getService()->getComissao($entity);
 
         return $this->render($this->resolveRouteName(), array(
-            'entity' => $entity
+            'entity'   => $entity,
+            'comissao' => $comissao
         ));
     }
 }

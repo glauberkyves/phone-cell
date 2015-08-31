@@ -26,7 +26,7 @@
                                                     <span class="arrow"></span>
 
                                                     <div class="text">
-                                                        <div class="first">
+                                                        <div class="first" style="width: 90px !important;">
                                                             {{ historico.dtCadastro.format('d/m/Y') }}
                                                         </div>
                                                         <div class="second bg-terques ">
@@ -34,6 +34,12 @@
                                                             -
                                                             {{ historico.getIdSituacao().getNoSituacao() }}
                                                         </div>
+                                                        <div class=" " style="margin-left: 50px;">
+                                                            <p>
+                                                                {{ historico.getDsObservacao() }}
+                                                            </p>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>

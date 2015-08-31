@@ -18,3 +18,11 @@ super_perfil:
 super_perfil_edit:
     path:     /administrativo/perfil/editar
     defaults: { _controller: SuperUsuarioBundle:Perfil:edit }
+
+super_supervisor_vendedor:
+    path:     /gerente/supervisor
+    defaults: { _controller: SuperUsuarioBundle:Supervisor:index }
+
+super_supervisor_vendedor_gerenciar:
+    path:     /gerente/supervisor/gerenciar/{id}
+    defaults: { _controller: SuperUsuarioBundle:Supervisor:create }

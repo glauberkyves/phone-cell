@@ -38,9 +38,16 @@ class TbUsuario
     /**
      * @var integer
      *
+     * @ORM\Column(name="st_interno", type="integer", nullable=false)
+     */
+    private $stInterno;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="st_ativo", type="integer", nullable=false)
      */
-    private $stAtivo;
+    private $stAtivo = '0';
 
     /**
      * @var \DateTime

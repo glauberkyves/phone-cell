@@ -43,6 +43,13 @@ class TbUsuario extends AbstractEntity implements UserInterface, \Serializable
     /**
      * @var integer
      *
+     * @ORM\Column(name="st_interno", type="integer", nullable=false)
+     */
+    private $stInterno;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="st_ativo", type="integer", nullable=false)
      */
     private $stAtivo = '0';
@@ -64,7 +71,7 @@ class TbUsuario extends AbstractEntity implements UserInterface, \Serializable
     /**
      * @var \TbPessoa
      *
-     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\TbPessoa")
+     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\TbPessoa", fetch="EAGER")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_pessoa", referencedColumnName="id_pessoa")
      * })
@@ -132,7 +139,7 @@ class TbUsuario extends AbstractEntity implements UserInterface, \Serializable
      *
      * @return string
      */
-    public function Email()
+    public function getNoEmail()
     {
         return $this->noEmail;
     }
@@ -388,6 +395,22 @@ class TbUsuario extends AbstractEntity implements UserInterface, \Serializable
     public function getIdComissao()
     {
         return $this->idComissao;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStInterno()
+    {
+        return $this->stInterno;
+    }
+
+    /**
+     * @param int $stInterno
+     */
+    public function setStInterno($stInterno)
+    {
+        $this->stInterno = $stInterno;
     }
 
 }

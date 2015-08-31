@@ -22,6 +22,13 @@ class TbHistorico
     private $idHistorico;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="ds_observacao", type="text", length=65535, nullable=true)
+     */
+    private $dsObservacao;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dt_cadastro", type="datetime", nullable=false)

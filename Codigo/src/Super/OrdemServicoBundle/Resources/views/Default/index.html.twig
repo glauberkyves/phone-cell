@@ -136,7 +136,14 @@
                     <h4 class="modal-title" id="exampleModalLabel">Encaminhar Ordem de Serviço</h4>
                 </div>
                 <div class="modal-body">
-                    Deseja realmente encaminhar essa ordem de serviço?
+                    <div class="form-group">
+                        <label for="dsObservacao"><b>Observação</b></label>
+                        {{ formTextarea('dsObservacao', '', {
+                            class: 'form-control',
+                            rows: 4
+                        }) }}
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="btn-encaminhar">Encaminhar</button>

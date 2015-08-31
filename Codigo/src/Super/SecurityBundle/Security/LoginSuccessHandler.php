@@ -23,8 +23,10 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
-        switch(true){
-            case $this->security->isGranted('ROLE_VENDEDOR'):
+        switch (true) {
+            case $this->security->isGranted('ROLE_VENDEDOR')
+                || $this->security->isGranted('ROLE_TELEOPERADOR')
+                || $this->security->isGranted('ROLE_SUPERVISOR'):
                 $response = new RedirectResponse($this->router->generate('super_ordem_servico_oi_fixo'));
                 break;
 

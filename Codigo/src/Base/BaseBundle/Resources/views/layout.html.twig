@@ -54,7 +54,7 @@
 
             <a href="/" class="logo">
                 Phone Cell
-            {#de    <img src="{{ asset('bundles/basebase/images/logo.png') }}" alt="">#}
+                {#de    <img src="{{ asset('bundles/basebase/images/logo.png') }}" alt="">#}
             </a>
 
             <div class="sidebar-toggle-box">
@@ -82,9 +82,13 @@
             <ul class="nav pull-right top-menu">
 
                 <!-- user login dropdown start-->
-                <li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="username">{{ app.security.getToken().getUser().getIdPessoa().getNoPessoa(true) }}</span>
+                <li class="dropdown  col-md-8">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="width: 157%">
+                        <span class="username">
+                            &nbsp;&nbsp;&nbsp;
+                            {{ app.security.getToken().getUser().getRlUsuarioPerfil().current().getIdPerfil().getNoPerfil() }}:
+                            {{ app.security.getToken().getUser().getIdPessoa().getNoPessoa(true) }}
+                        </span>
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu extended logout">

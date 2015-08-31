@@ -22,6 +22,20 @@ class TbConfiguracaoComissao extends AbstractEntity
     private $idConfiguracaoComissao;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="nu_valor", type="decimal", precision=10, scale=2, nullable=false)
+     */
+    private $nuValor;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="st_interno", type="integer", nullable=false)
+     */
+    private $stInterno;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dt_cadastro", type="datetime", nullable=false)
@@ -136,6 +150,38 @@ class TbConfiguracaoComissao extends AbstractEntity
     public function setIdVelocidade($idVelocidade)
     {
         $this->idVelocidade = $idVelocidade;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNuValor()
+    {
+        return $this->nuValor;
+    }
+
+    /**
+     * @param string $nuValor
+     */
+    public function setNuValor($nuValor)
+    {
+        $this->nuValor = $nuValor;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStInterno()
+    {
+        return $this->stInterno;
+    }
+
+    /**
+     * @param int $stInterno
+     */
+    public function setStInterno($stInterno)
+    {
+        $this->stInterno = $stInterno;
     }
 
 

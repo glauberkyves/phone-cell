@@ -5,7 +5,7 @@
         <div class="col-md-3">
             {#<a href="{{ path('super_ordem_servico_fila_auditor') }}">#}
             <div class="mini-stat clearfix">
-                <span class="mini-stat-icon tar"><i class="fa fa-eye"></i></span>
+                <span class="mini-stat-icon "><i class="fa fa-eye"></i></span>
 
                 <div class="mini-stat-info">
                     <span>{{ coletadas|length }}</span>
@@ -17,7 +17,7 @@
         <div class="col-md-3">
             {#<a href="{{ path('super_ordem_servico_fila_inputador') }}">#}
             <div class="mini-stat clearfix">
-                <span class="mini-stat-icon green"><i class="fa fa-check-square-o"></i></span>
+                <span class="mini-stat-icon tar"><i class="fa fa-check-square-o"></i></span>
 
                 <div class="mini-stat-info">
                     <span>{{ validadas|length }}</span>
@@ -28,11 +28,41 @@
         </div>
         <div class="col-md-3">
             <div class="mini-stat clearfix">
-                <span class="mini-stat-icon pink"><i class="fa fa-warning"></i></span>
+                <span class="mini-stat-icon tar"><i class="fa  fa-desktop"></i></span>
 
                 <div class="mini-stat-info">
                     <span>{{ imputadas|length }}</span>
                     Solicitações Imputadas
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mini-stat clearfix">
+                <span class="mini-stat-icon green"><i class="fa fa-wrench"></i></span>
+
+                <div class="mini-stat-info">
+                    <span>{{ instaladas|length }}</span>
+                    Solicitações Instaladas
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mini-stat clearfix">
+                <span class="mini-stat-icon green"><i class="fa fa-money"></i></span>
+
+                <div class="mini-stat-info">
+                    <span>{{ comissionadas|length }}</span>
+                    Solicitações Comissionadas
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mini-stat clearfix">
+                <span class="mini-stat-icon orange"><i class="fa fa-warning"></i></span>
+
+                <div class="mini-stat-info">
+                    <span>{{ pendentes|length }}</span>
+                    Solicitações Pendentes
                 </div>
             </div>
         </div>
@@ -163,19 +193,25 @@
 
             // DONUT
             var dataPie = [{
-                label: "OS Coletadas",
+                label: "OS Coletada",
                 data:  {{ coletadas|length }}
             }, {
-                label: "OS Validadas",
+                label: "OS Validada",
                 data:  {{ validadas|length }}
             }, {
-                label: "OS Imputadas",
+                label: "OS Imputada",
                 data:  {{ imputadas|length }}
             }, {
-                label: "OS Pendentes",
+                label: "OS Instalada",
+                data:  {{ instaladas|length }}
+            }, {
+                label: "OS Comissionada",
+                data:  {{ comissionadas|length }}
+            }, {
+                label: "OS Pendente",
                 data:  {{ pendentes|length }}
             }, {
-                label: "OS Canceladas",
+                label: "OS Cancelada",
                 data:  {{ canceladas|length }}
             }];
 

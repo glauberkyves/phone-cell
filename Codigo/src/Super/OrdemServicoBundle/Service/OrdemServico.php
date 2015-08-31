@@ -10,6 +10,7 @@ namespace Super\OrdemServicoBundle\Service;
 
 use Base\BaseBundle\Entity\AbstractEntity;
 use Base\BaseBundle\Entity\TbComissao;
+use Base\BaseBundle\Entity\TbOrdemServico;
 use Base\CrudBundle\Service\CrudService;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -83,7 +84,6 @@ class OrdemServico extends CrudService
 
         if (($request->get('nuOrdemServico') && $request->get('nuContratoOi')) || ($request->get('nuOrdemServicoOiTv') && $request->get('nuProtocoloOiTv'))) {
             $this->encaminhar($this->entity->getIdOrdemServico());
-
             return;
         }
 
@@ -116,6 +116,7 @@ class OrdemServico extends CrudService
         $entity->setIdOrdemServico($this->entity);
         $entity->setIdSituacao($this->entity->getIdSituacao());
         $entity->setIdUsuario($this->getUser());
+        $entity->setDsObservacao($this->getRequest()->get('dsObservacao'));
         $entity->setDtCadastro(new \DateTime());
 
 //        $criteria  = array(
@@ -141,32 +142,7 @@ class OrdemServico extends CrudService
     {
         $request = $this->getRequest()->request;
 
-        if ($request->has('idPacote')) {
-            $svOrdemServicoPacote = $this->getService('service.ordem_pacote');
-
-            foreach ($svOrdemServicoPacote->findByIdOrdemServico($this->entity->getIdOrdemServico()) as $planoOld) {
-                $this->remove($planoOld);
-            }
-
-            foreach ($request->get('idPacote') as $pacote) {
-                $idPlano = $this->getService('service.pacote')->find($pacote);
-
-                $entity = $svOrdemServicoPacote->newEntity();
-
-                $entity->setIdPacote($idPlano);
-                $entity->setIdOrdemServico($this->entity);
-                $entity->setDtCadastro(new \DateTime());
-
-                $this->persist($entity);
-            }
-        }
-    }
-
-    public function savePacotes()
-    {
-        $request = $this->getRequest()->request;
-
-        if ($request->get('idPlano')) {
+        if ($request->has('idPlano')) {
             $svOrdemServicoPlano = $this->getService('service.ordem_plano');
 
             foreach ($svOrdemServicoPlano->findByIdOrdemServico($this->entity->getIdOrdemServico()) as $planoOld) {
@@ -179,6 +155,31 @@ class OrdemServico extends CrudService
                 $entity = $svOrdemServicoPlano->newEntity();
 
                 $entity->setIdPlano($idPlano);
+                $entity->setIdOrdemServico($this->entity);
+                $entity->setDtCadastro(new \DateTime());
+
+                $this->persist($entity);
+            }
+        }
+    }
+
+    public function savePacotes()
+    {
+        $request = $this->getRequest()->request;
+
+        if ($request->get('idPacote')) {
+            $svOrdemServicoPacote = $this->getService('service.ordem_pacote');
+
+            foreach ($svOrdemServicoPacote->findByIdOrdemServico($this->entity->getIdOrdemServico()) as $pacoteOld) {
+                $this->remove($pacoteOld);
+            }
+
+            foreach ($request->get('idPacote') as $pacote) {
+                $idPlano = $this->getService('service.pacote')->find($pacote);
+
+                $entity = $svOrdemServicoPacote->newEntity();
+
+                $entity->setIdPacote($idPlano);
                 $entity->setIdOrdemServico($this->entity);
                 $entity->setDtCadastro(new \DateTime());
 
@@ -286,7 +287,7 @@ class OrdemServico extends CrudService
         $entityComissao->setDtCadastro(new \DateTime());
         $entityComissao->setIdOrdemServico($entity);
         $entityComissao->setIdUsuario($entity->getIdUsuario());
-        $entityComissao->setNuValor(100);
+        $entityComissao->setNuValor($this->getComissao($entity));
 
         $this->persist($entityComissao);
 
@@ -297,5 +298,48 @@ class OrdemServico extends CrudService
         $this->persist($entity);
 
         $this->saveHistorico();
+    }
+
+    public function getComissao(TbOrdemServico $entity)
+    {
+        $nuValor   = 0;
+        $stInterno = $entity->getIdUsuario()->getStInterno();
+
+        if ($entity->getIdTipoOrdemServico()->getIdTipoOrdemServico() == TipoOrdemServico::OIFIXO) {
+            if ($entity->getIdVelocidade()->getIdVelocidade()) {
+                $criteria = array(
+                    'idVelocidade' => $entity->getIdVelocidade()->getIdVelocidade(),
+                    'stInterno'    => $stInterno
+                );
+
+                $configVelocidade = $this->getService('service.comissao')->findOneBy($criteria);
+                $nuValor += $configVelocidade->getNuValor();
+            }
+
+            $svOrdemServicoPlano = $this->getService('service.ordem_plano');
+            foreach ($svOrdemServicoPlano->findByIdOrdemServico($entity->getIdOrdemServico()) as $plano) {
+                $criteria = array(
+                    'idPlano'   => $plano->getIdPlano()->getIdPlano(),
+                    'stInterno' => $stInterno
+                );
+
+                $configPlano = $this->getService('service.comissao')->findOneBy($criteria);
+                $nuValor += $configPlano->getNuValor();
+            }
+
+        } else {
+            $svOrdemServicoPacote = $this->getService('service.ordem_pacote');
+            foreach ($svOrdemServicoPacote->findByIdOrdemServico($entity->getIdOrdemServico()) as $pacote) {
+                $criteria = array(
+                    'idPacote'  => $pacote->getIdPacote()->getIdPacote(),
+                    'stInterno' => $stInterno
+                );
+
+                $configPacote = $this->getService('service.comissao')->findOneBy($criteria);
+                $nuValor += $configPacote->getNuValor();
+            }
+        }
+
+        return $nuValor;
     }
 }

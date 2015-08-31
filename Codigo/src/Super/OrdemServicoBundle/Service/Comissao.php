@@ -11,7 +11,7 @@ namespace Super\OrdemServicoBundle\Service;
 use Base\BaseBundle\Entity\AbstractEntity;
 use Base\CrudBundle\Service\CrudService;
 
-class OrdemServicoPlano extends CrudService
+class Comissao extends CrudService
 {
     protected $entityName = 'Base\BaseBundle\Entity\TbConfiguracaoComissao';
 }

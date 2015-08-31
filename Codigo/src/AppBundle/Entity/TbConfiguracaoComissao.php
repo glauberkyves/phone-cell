@@ -22,6 +22,20 @@ class TbConfiguracaoComissao
     private $idConfiguracaoComissao;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="nu_valor", type="decimal", precision=10, scale=2, nullable=false)
+     */
+    private $nuValor;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="st_interno", type="integer", nullable=false)
+     */
+    private $stInterno;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dt_cadastro", type="datetime", nullable=false)

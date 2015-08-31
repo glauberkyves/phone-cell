@@ -18,3 +18,7 @@ services:
     service.pessoa_fisica:
           class: Super\UsuarioBundle\Service\PessoaFisica
           arguments:  ["@service_container"]
+
+    service.supervisor_usuario:
+          class: Super\UsuarioBundle\Service\SupervisorUsuario
+          arguments:  ["@service_container"]

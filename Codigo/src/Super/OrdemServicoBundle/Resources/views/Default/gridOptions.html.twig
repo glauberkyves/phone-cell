@@ -35,7 +35,7 @@
         </a>
     {% endif %}
 
-    {% if not data.noUrl and (is_granted('ROLE_AUDITOR') or is_granted('ROLE_SUPER')) %}
+    {% if not data.noUrl and (is_granted('ROLE_AUDITOR') or is_granted('ROLE_GERENTE')) %}
         <a class="btn btn-white anexar" data-toggle="modal" data-target="#anexo-modal"
            data-id="{{ data.idOrdemServico }}"
            data-nome="{{ data.noPessoa }}"
@@ -59,13 +59,13 @@
     {% if is_granted('ROLE_IMPUTADOR') or is_granted('ROLE_SUPERVISOR') and (data.nuOrdemServico) %}
         {% if data.idTipoOrdemServico == 2 %}
             <a class="btn btn-white"
-               href="{{ path('super_ordem_servico_oi_fixo_imputar', {id: data.idOrdemServico}) }}"
+               href="{{ path('super_ordem_servico_oi_tv_imputar', {id: data.idOrdemServico}) }}"
                title="Encaminhar Ordem de Serviço">
                 <i class="fa fa-share-square-o"></i>
             </a>
         {% else %}
             <a class="btn btn-white"
-               href="{{ path('super_ordem_servico_oi_tv_imputar', {id: data.idOrdemServico}) }}"
+               href="{{ path('super_ordem_servico_oi_fixo_imputar', {id: data.idOrdemServico}) }}"
                title="Encaminhar Ordem de Serviço">
                 <i class="fa fa-share-square-o"></i>
             </a>
@@ -94,7 +94,7 @@
         <i class="fa  fa-sort-amount-asc"></i>
     </a>
 
-    {% if is_granted('ROLE_GERENTE') and data.nuOrdemServico %}
+    {% if is_granted('ROLE_GERENTE') and data.nuOrdemServico and data.idSituacao == 6 %}
         <a class="btn btn-white"
            href="{{ path('super_ordem_servico_comissionar', {id: data.idOrdemServico}) }}"
            title="Comissionar Ordem de Serviço">
@@ -129,7 +129,11 @@
         })
 
         $('#btn-encaminhar').click(function () {
-            window.location = '/encaminhar/' + $('#idOrdemServico').val()
+            window.location = '/encaminhar/' + $('#idOrdemServico').val() + '?dsObservacao=' + $('#dsObservacao').val()
+        })
+
+        $('a.encaminhar').click(function () {
+            $('#dsObservacao').val('')
         })
     })
 </script>

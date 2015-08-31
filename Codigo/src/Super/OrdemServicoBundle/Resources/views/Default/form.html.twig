@@ -20,6 +20,17 @@
                                         {{ formSelect('idSituacao', entity.getIdSituacao().getIdSituacao(), {class: 'form-control required'}, cmbSituacao) }}
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Observação</label>
+
+                                    <div class="col-lg-10">
+                                        {{ formTextarea('dsObservacao', '', {
+                                            class: 'form-control',
+                                            rows: 4
+                                        }) }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -74,6 +85,21 @@
                                         </div>
                                     </div>
                                 {% endif %}
+
+                                {% if ('super_ordem_servico_oi_fixo_acompanhar' == app.request.get('_route')
+                                or 'super_ordem_servico_oi_tv_acompanhar' == app.request.get('_route')) and is_granted('ROLE_ACOMPANHADOR') %}
+                                {% else %}
+                                    <div class="form-group">
+                                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Observação</label>
+
+                                        <div class="col-lg-10">
+                                            {{ formTextarea('dsObservacao', '', {
+                                                class: 'form-control',
+                                                rows: 4
+                                            }) }}
+                                        </div>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </section>
@@ -104,7 +130,7 @@
                                 </div>
                             </div>
 
-                            {% if is_granted("ROLE_IMPUTADOR") and not entity.getIdOrdemServico() %}
+                            {% if is_granted("ROLE_IMPUTADOR") or is_granted("ROLE_SUPERVISOR") %}
                                 <div class="form-group">
                                     <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Vendedor</label>
 
@@ -114,6 +140,21 @@
                                 </div>
                             {% else %}
                                 {{ formHidden('idUsuario', entity.getIdUsuario().getIdUsuario()) }}
+                            {% endif %}
+
+                            {% if ('super_ordem_servico_oi_fixo_acompanhar' == app.request.get('_route')
+                            or 'super_ordem_servico_oi_tv_acompanhar' == app.request.get('_route')) and is_granted('ROLE_ACOMPANHADOR') %}
+                            {% else %}
+                                <div class="form-group">
+                                    <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Observação</label>
+
+                                    <div class="col-lg-10">
+                                        {{ formTextarea('dsObservacao', '', {
+                                            class: 'form-control',
+                                            rows: 4
+                                        }) }}
+                                    </div>
+                                </div>
                             {% endif %}
 
                             <div class="form-group">
@@ -139,7 +180,7 @@
                                 <div class="col-lg-12">
                                     {% if not ('super_ordem_servico_oi_fixo_visualizar' == app.request.get('_route')
                                     or 'super_ordem_servico_oi_tv_visualizar' == app.request.get('_route'))
-                                    and (is_granted('ROLE_VENDEDOR') or is_granted('ROLE_IMPUTADOR') or is_granted('ROLE_AUDITOR') or is_granted('ROLE_SUPER')) %}
+                                    and (is_granted('ROLE_VENDEDOR') or is_granted('ROLE_IMPUTADOR') or is_granted('ROLE_AUDITOR') or is_granted('ROLE_GERENTE')) %}
                                         <button type="submit" class="btn btn-primary">
                                             <span class="fa fa-save"></span> Salvar
                                         </button>

@@ -20,6 +20,9 @@ class Situacao extends CrudService
     CONST INSTALADA = 6;
     CONST REPROVADA = 7;
     CONST COMISSIONADA = 8;
+    CONST DESISTENCIA = 9;
+    CONST INADIMPLENTE = 10;
+    CONST SEM_VIABILIDADE = 11;
 
     protected $entityName = 'Base\BaseBundle\Entity\TbSituacao';
 }

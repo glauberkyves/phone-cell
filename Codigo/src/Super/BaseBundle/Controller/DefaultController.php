@@ -13,14 +13,16 @@ class DefaultController extends CrudController
 
     public function indexAction(Request $request)
     {
-        $this->vars['oiFixo']       = $this->getService('service.ordem_servico')->findByIdTipoOrdemServico(TipoOrdemServico::OIFIXO);
-        $this->vars['oiTv']         = $this->getService('service.ordem_servico')->findByIdTipoOrdemServico(TipoOrdemServico::OITV);
-        $this->vars['coletadas']    = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::COLETADA);
-        $this->vars['validadas']    = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::VALIDADA);
-        $this->vars['imputadas']    = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::IMPUTADA);
-        $this->vars['pendentes']    = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::PENDENTE);
-        $this->vars['canceladas']   = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::CANCELADA);
+        $this->vars['oiFixo'] = $this->getService('service.ordem_servico')->findByIdTipoOrdemServico(TipoOrdemServico::OIFIXO);
+        $this->vars['oiTv']   = $this->getService('service.ordem_servico')->findByIdTipoOrdemServico(TipoOrdemServico::OITV);
 
+        $this->vars['coletadas']     = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::COLETADA);
+        $this->vars['validadas']     = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::VALIDADA);
+        $this->vars['imputadas']     = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::IMPUTADA);
+        $this->vars['pendentes']     = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::PENDENTE);
+        $this->vars['instaladas']    = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::INSTALADA);
+        $this->vars['comissionadas'] = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::COMISSIONADA);
+        $this->vars['canceladas']    = $this->getService('service.ordem_servico')->findByIdSituacao(Situacao::CANCELADA);
 
         return $this->render($this->resolveRouteName(), $this->vars);
     }
