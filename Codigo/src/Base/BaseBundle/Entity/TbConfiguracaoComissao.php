@@ -31,6 +31,13 @@ class TbConfiguracaoComissao extends AbstractEntity
     /**
      * @var integer
      *
+     * @ORM\Column(name="st_comissao_supervisor", type="integer", nullable=true)
+     */
+    private $stComissaoSupervisor;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="st_interno", type="integer", nullable=false)
      */
     private $stInterno;
@@ -182,6 +189,22 @@ class TbConfiguracaoComissao extends AbstractEntity
     public function setStInterno($stInterno)
     {
         $this->stInterno = $stInterno;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStComissaoSupervisor()
+    {
+        return $this->stComissaoSupervisor;
+    }
+
+    /**
+     * @param int $stComissaoSupervisor
+     */
+    public function setStComissaoSupervisor($stComissaoSupervisor)
+    {
+        $this->stComissaoSupervisor = $stComissaoSupervisor;
     }
 
 

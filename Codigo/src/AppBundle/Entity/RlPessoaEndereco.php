@@ -26,7 +26,7 @@ class RlPessoaEndereco
      *
      * @ORM\Column(name="st_endereco_cobranca", type="integer", nullable=false)
      */
-    private $stEnderecoCobranca = '0';
+    private $stEnderecoCobranca;
 
     /**
      * @var \DateTime

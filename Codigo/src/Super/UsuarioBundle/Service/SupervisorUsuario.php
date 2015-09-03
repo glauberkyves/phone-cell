@@ -24,7 +24,7 @@ class SupervisorUsuario extends CrudService
 
             $html .= "<a href=\"{$rtEdit}\">";
             $html .= '<button class="btn btn-white" type="button">';
-            $html .= '<i class="fa fa-edit"></i>';
+            $html .= '<i class="fa fa-gear"></i>';
             $html .= '</button></a>';
             $html .= ' </div>';
 

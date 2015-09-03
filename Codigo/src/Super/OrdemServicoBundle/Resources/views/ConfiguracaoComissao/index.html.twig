@@ -1,8 +1,41 @@
 {% extends 'BaseBaseBundle::layout.html.twig' %}
 {% block body %}
-    <form method="post" action="{{ path('super_ordem_servico_configurar_comissao') }}" id="form-cadastro" class="form-horizontal tasi-form"
+    <form method="post" action="{{ path('super_ordem_servico_configurar_comissao') }}" id="form-cadastro"
+          class="form-horizontal tasi-form"
           novalidate="novalidate">
         <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Supervisor
+                    </header>
+                    <div class="panel-body">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    {% for config in configuracao %}
+                                        {% if config.getStInterno() == false and  config.getStComissaoSupervisor() == true %}
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label col-lg-4"
+                                                       for="inputSuccess">Comissão por vendedor</label>
+
+                                                <div class="input-group m-bot15 col-lg-2">
+                                                    <span class="input-group-addon">$</span>
+                                                    {{ formText('supervisor', config.getNuValor()|number_format(2, ',', '.'), {
+                                                        class: 'form-control',
+                                                        'data-mask': '99,99'
+                                                    }) }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
@@ -114,7 +147,8 @@
                                         <a data-toggle="tab" href="#pacote-externo" aria-expanded="false">Oi TV</a>
                                     </li>
                                     <li class="">
-                                        <a data-toggle="tab" href="#velocidade-externo" aria-expanded="false">Velocidade</a>
+                                        <a data-toggle="tab" href="#velocidade-externo"
+                                           aria-expanded="false">Velocidade</a>
                                     </li>
                                 </ul>
                             </header>

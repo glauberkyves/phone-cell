@@ -26,14 +26,14 @@ class TbEstado
      *
      * @ORM\Column(name="sg_uf", type="string", length=10, nullable=false)
      */
-    private $sgUf = '';
+    private $sgUf;
 
     /**
      * @var string
      *
      * @ORM\Column(name="no_estado", type="string", length=20, nullable=false)
      */
-    private $noEstado = '';
+    private $noEstado;
 
 
 }

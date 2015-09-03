@@ -92,6 +92,13 @@ class TbUsuario extends AbstractEntity implements UserInterface, \Serializable
      */
     protected $idComissao;
 
+    /**
+     * @var TbComissao
+     *
+     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\RlSupervisorVendendor", mappedBy="idVendedor")
+     */
+    protected $idSupervisorVendendor;
+
     private $salt;
 
     /**
@@ -412,5 +419,23 @@ class TbUsuario extends AbstractEntity implements UserInterface, \Serializable
     {
         $this->stInterno = $stInterno;
     }
+
+    /**
+     * @return TbComissao
+     */
+    public function getIdSupervisorVendendor()
+    {
+        return $this->idSupervisorVendendor;
+    }
+
+    /**
+     * @param TbComissao $idSupervisorVendendor
+     */
+    public function setIdSupervisorVendendor($idSupervisorVendendor)
+    {
+        $this->idSupervisorVendendor = $idSupervisorVendendor;
+    }
+
+
 
 }

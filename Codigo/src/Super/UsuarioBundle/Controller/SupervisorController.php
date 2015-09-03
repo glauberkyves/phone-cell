@@ -29,7 +29,7 @@ class SupervisorController extends CrudController
         if ($request->isMethod('post')) {
             $this->getService()->saveVendedores($request);
 
-            $this->addMessage('Operação realizada com sucesso.');
+            $this->addMessage('OperaÃ§Ã£o realizada com sucesso.');
             return $this->redirect($this->generateUrl('super_supervisor_vendedor'));
         }
 

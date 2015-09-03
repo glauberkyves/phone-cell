@@ -27,17 +27,30 @@
 
                                                     <div class="text">
                                                         <div class="first" style="width: 90px !important;">
-                                                            {{ historico.dtCadastro.format('d/m/Y') }}
+                                                            {{ historico.dtCadastro.format('d/m/Y H:i:s') }}
                                                         </div>
-                                                        <div class="second bg-terques ">
+                                                        {% if historico.getIdSituacao().getIdSituacao() == 6
+                                                        or historico.getIdSituacao().getIdSituacao() == 8 %}
+                                                            {% set bg = 'bg-green' %}
+                                                        {% elseif historico.getIdSituacao().getIdSituacao() == 4
+                                                        or historico.getIdSituacao().getIdSituacao() == 5
+                                                        or historico.getIdSituacao().getIdSituacao() == 7
+                                                        or historico.getIdSituacao().getIdSituacao() == 9
+                                                        or historico.getIdSituacao().getIdSituacao() == 10
+                                                        or historico.getIdSituacao().getIdSituacao() == 11 %}
+                                                            {% set bg = 'bg-red' %}
+                                                        {% else %}
+                                                            {% set bg = 'bg-terques' %}
+                                                        {% endif %}
+
+                                                        <div class="second {{ bg }}">
                                                             {{ historico.getIdUsuario().getIdPessoa().getNoPessoa() }}
                                                             -
                                                             {{ historico.getIdSituacao().getNoSituacao() }}
                                                         </div>
-                                                        <div class=" " style="margin-left: 50px;">
-                                                            <p>
-                                                                {{ historico.getDsObservacao() }}
-                                                            </p>
+                                                        <div class="second"
+                                                             style="background: none !important; color:rgb(110, 111, 111) !important">
+                                                            <b>{{ historico.getDsObservacao() }}</b>
                                                         </div>
 
                                                     </div>

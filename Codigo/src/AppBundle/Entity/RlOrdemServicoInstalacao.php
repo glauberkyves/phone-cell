@@ -26,7 +26,7 @@ class RlOrdemServicoInstalacao
      *
      * @ORM\Column(name="st_segunda_opcao", type="integer", nullable=false)
      */
-    private $stSegundaOpcao = '0';
+    private $stSegundaOpcao;
 
     /**
      * @var \DateTime

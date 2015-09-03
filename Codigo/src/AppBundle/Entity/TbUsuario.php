@@ -47,7 +47,7 @@ class TbUsuario
      *
      * @ORM\Column(name="st_ativo", type="integer", nullable=false)
      */
-    private $stAtivo = '0';
+    private $stAtivo;
 
     /**
      * @var \DateTime

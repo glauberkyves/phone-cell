@@ -211,7 +211,7 @@ class DefaultController extends CrudController
 
     public function comissionarAction(Request $request)
     {
-        if ($request->get('idOrdemServico')) {
+        if ($request->query->get('idOrdemServico') && $request->query->has('dsObservacao')) {
             $this->getService()->comissionar($request);
 
             $this->addMessage('Operação realizada com sucesso.');

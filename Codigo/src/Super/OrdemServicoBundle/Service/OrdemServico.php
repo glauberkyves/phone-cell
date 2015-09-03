@@ -206,7 +206,7 @@ class OrdemServico extends CrudService
                 }
             }
 
-            $html   = '<div class="btn-group  btn-group-sm">';
+            $html = '<div class="btn-group  btn-group-sm">';
             $rtEdit = $this
                 ->getRouter()
                 ->generate('super_ordem_servico_oi_fixo_alterar', array('id' => $value['idOrdemServico']));
@@ -270,7 +270,7 @@ class OrdemServico extends CrudService
 
     public function upload()
     {
-        $request  = $this->getRequest();
+        $request = $this->getRequest();
         $fileName = $this->uploadFile('ordem-servico', 'file', true);
 
         $entity = $this->find($request->request->get('idOrdemServico'));
@@ -282,6 +282,16 @@ class OrdemServico extends CrudService
     public function comissionar(Request $request)
     {
         $entity = $this->find($request->get('idOrdemServico'));
+
+        if ($entity->getIdUsuario()->getIdSupervisorVendendor()) {
+            $entityComissao = new TbComissao();
+            $entityComissao->setDtCadastro(new \DateTime());
+            $entityComissao->setIdOrdemServico($entity);
+            $entityComissao->setIdUsuario($entity->getIdUsuario()->getIdSupervisorVendendor()->getIdSupervisor());
+            $entityComissao->setNuValor($this->getComissaoSupervisor());
+
+            $this->persist($entityComissao);
+        }
 
         $entityComissao = new TbComissao();
         $entityComissao->setDtCadastro(new \DateTime());
@@ -302,14 +312,14 @@ class OrdemServico extends CrudService
 
     public function getComissao(TbOrdemServico $entity)
     {
-        $nuValor   = 0;
+        $nuValor = 0;
         $stInterno = $entity->getIdUsuario()->getStInterno();
 
         if ($entity->getIdTipoOrdemServico()->getIdTipoOrdemServico() == TipoOrdemServico::OIFIXO) {
             if ($entity->getIdVelocidade()->getIdVelocidade()) {
                 $criteria = array(
                     'idVelocidade' => $entity->getIdVelocidade()->getIdVelocidade(),
-                    'stInterno'    => $stInterno
+                    'stInterno' => $stInterno
                 );
 
                 $configVelocidade = $this->getService('service.comissao')->findOneBy($criteria);
@@ -319,7 +329,7 @@ class OrdemServico extends CrudService
             $svOrdemServicoPlano = $this->getService('service.ordem_plano');
             foreach ($svOrdemServicoPlano->findByIdOrdemServico($entity->getIdOrdemServico()) as $plano) {
                 $criteria = array(
-                    'idPlano'   => $plano->getIdPlano()->getIdPlano(),
+                    'idPlano' => $plano->getIdPlano()->getIdPlano(),
                     'stInterno' => $stInterno
                 );
 
@@ -331,7 +341,7 @@ class OrdemServico extends CrudService
             $svOrdemServicoPacote = $this->getService('service.ordem_pacote');
             foreach ($svOrdemServicoPacote->findByIdOrdemServico($entity->getIdOrdemServico()) as $pacote) {
                 $criteria = array(
-                    'idPacote'  => $pacote->getIdPacote()->getIdPacote(),
+                    'idPacote' => $pacote->getIdPacote()->getIdPacote(),
                     'stInterno' => $stInterno
                 );
 
@@ -341,5 +351,11 @@ class OrdemServico extends CrudService
         }
 
         return $nuValor;
+    }
+
+    public function getComissaoSupervisor()
+    {
+        $configPlano = $this->getService('service.comissao')->findOneByStComissaoSupervisor(true);
+        return $configPlano->getNuValor();
     }
 }

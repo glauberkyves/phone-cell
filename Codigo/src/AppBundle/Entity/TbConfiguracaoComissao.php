@@ -31,6 +31,13 @@ class TbConfiguracaoComissao
     /**
      * @var integer
      *
+     * @ORM\Column(name="st_comissao_supervisor", type="integer", nullable=true)
+     */
+    private $stComissaoSupervisor;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="st_interno", type="integer", nullable=false)
      */
     private $stInterno;

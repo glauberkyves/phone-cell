@@ -19,6 +19,25 @@ class ConfiguracaoComissaoController extends CrudController
         $this->vars['configuracao'] = $this->getService('service.comissao')->findAll();
 
         if ($request->isMethod('post')) {
+            $valor = str_replace(".", "", $request->request->get('supervisor'));
+            $valor = str_replace(",", ".", $valor);
+
+            $confComissao = new TbConfiguracaoComissao();
+
+            $criteria = array(
+                'stComissaoSupervisor' => true,
+            );
+            if ($entity = $this->getService('service.comissao')->findOneBy($criteria)) {
+                $confComissao = $entity;
+            }
+
+            $confComissao->setStInterno(false);
+            $confComissao->setNuValor($valor);
+            $confComissao->setStComissaoSupervisor(true);
+            $confComissao->setDtCadastro(new \DateTime());
+
+            $this->getService()->persist($confComissao);
+
             foreach ($request->request->get('plano') as $key => $value) {
                 if ($key == 'interno') {
                     foreach ($value as $idPlano => $valor) {
@@ -40,7 +59,7 @@ class ConfiguracaoComissaoController extends CrudController
                         $confComissao->setNuValor($valor);
                         $confComissao->setDtCadastro(new \DateTime());
 
-                        $this->getService('service.comissao')->persist($confComissao);
+                        $this->getService()->persist($confComissao);
                     }
 
                 } else {
@@ -63,7 +82,7 @@ class ConfiguracaoComissaoController extends CrudController
                         $confComissao->setNuValor($valor);
                         $confComissao->setDtCadastro(new \DateTime());
 
-                        $this->getService('service.comissao')->persist($confComissao);
+                        $this->getService()->persist($confComissao);
                     }
                 }
             }
@@ -89,7 +108,7 @@ class ConfiguracaoComissaoController extends CrudController
                         $confComissao->setNuValor($valor);
                         $confComissao->setDtCadastro(new \DateTime());
 
-                        $this->getService('service.comissao')->persist($confComissao);
+                        $this->getService()->persist($confComissao);
                     }
 
                 } else {
@@ -112,7 +131,7 @@ class ConfiguracaoComissaoController extends CrudController
                         $confComissao->setNuValor($valor);
                         $confComissao->setDtCadastro(new \DateTime());
 
-                        $this->getService('service.comissao')->persist($confComissao);
+                        $this->getService()->persist($confComissao);
                     }
                 }
             }
@@ -138,7 +157,7 @@ class ConfiguracaoComissaoController extends CrudController
                         $confComissao->setNuValor($valor);
                         $confComissao->setDtCadastro(new \DateTime());
 
-                        $this->getService('service.comissao')->persist($confComissao);
+                        $this->getService()->persist($confComissao);
                     }
 
                 } else {
@@ -161,10 +180,12 @@ class ConfiguracaoComissaoController extends CrudController
                         $confComissao->setNuValor($valor);
                         $confComissao->setDtCadastro(new \DateTime());
 
-                        $this->getService('service.comissao')->persist($confComissao);
+                        $this->getService()->persist($confComissao);
                     }
                 }
             }
+
+            $this->addMessage('Operação realizada com sucesso.');
         }
 
         return $this->render($this->resolveRouteName(), $this->vars);
