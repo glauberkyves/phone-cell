@@ -38,7 +38,7 @@ class RlPessoaEndereco
     /**
      * @var \TbEndereco
      *
-     * @ORM\ManyToOne(targetEntity="TbEndereco")
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbEndereco")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_endereco", referencedColumnName="id_endereco")
      * })
@@ -48,7 +48,7 @@ class RlPessoaEndereco
     /**
      * @var \TbPessoa
      *
-     * @ORM\OneToOne(targetEntity="TbPessoa")
+     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\TbPessoa")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_pessoa", referencedColumnName="id_pessoa")
      * })

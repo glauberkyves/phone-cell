@@ -31,7 +31,7 @@ class RlSupervisorVendendor extends AbstractEntity
     /**
      * @var \TbUsuario
      *
-     * @ORM\ManyToOne(targetEntity="TbUsuario")
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbUsuario")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_supervisor", referencedColumnName="id_usuario")
      * })
@@ -41,7 +41,7 @@ class RlSupervisorVendendor extends AbstractEntity
     /**
      * @var \TbUsuario
      *
-     * @ORM\ManyToOne(targetEntity="TbUsuario")
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbUsuario")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_vendedor", referencedColumnName="id_usuario")
      * })

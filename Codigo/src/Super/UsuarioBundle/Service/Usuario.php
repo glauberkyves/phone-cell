@@ -24,6 +24,7 @@ class Usuario extends CrudService
         $this->entity->setIdPessoa($entityPessoa->getIdPessoa());
         $this->entity->setDtCadastro(new \DateTime());
         $this->entity->setNoSenha(md5($this->entity->getNoSenha()));
+        $this->entity->setIdSupervisorVendendor(null);
     }
 
     public function postUpdate(AbstractEntity $entity = null)

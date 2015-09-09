@@ -45,7 +45,7 @@ class TbLogradouro extends AbstractEntity
     /**
      * @var \TbBairro
      *
-     * @ORM\ManyToOne(targetEntity="TbBairro")
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbBairro")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_bairro", referencedColumnName="id_bairro")
      * })

@@ -38,7 +38,7 @@ class RlUsuarioPerfil extends AbstractEntity
     /**
      * @var \TbPerfil
      *
-     * @ORM\OneToOne(targetEntity="TbPerfil")
+     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\TbPerfil")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_perfil", referencedColumnName="id_perfil")
      * })
@@ -48,7 +48,7 @@ class RlUsuarioPerfil extends AbstractEntity
     /**
      * @var \TbUsuario
      *
-     * @ORM\OneToOne(targetEntity="TbUsuario")
+     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\TbUsuario")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
      * })

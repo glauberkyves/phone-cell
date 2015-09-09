@@ -38,7 +38,7 @@ class TbHistorico extends AbstractEntity
     /**
      * @var \TbUsuario
      *
-     * @ORM\ManyToOne(targetEntity="TbUsuario")
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbUsuario")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
      * })

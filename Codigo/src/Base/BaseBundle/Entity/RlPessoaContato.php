@@ -31,7 +31,7 @@ class RlPessoaContato
     /**
      * @var \TbContato
      *
-     * @ORM\ManyToOne(targetEntity="TbContato")
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbContato")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_contato", referencedColumnName="id_contato")
      * })
@@ -41,7 +41,7 @@ class RlPessoaContato
     /**
      * @var \TbPessoa
      *
-     * @ORM\OneToOne(targetEntity="TbPessoa")
+     * @ORM\OneToOne(targetEntity="Base\BaseBundle\Entity\TbPessoa")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_pessoa", referencedColumnName="id_pessoa")
      * })

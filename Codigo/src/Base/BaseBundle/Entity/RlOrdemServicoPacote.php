@@ -31,7 +31,7 @@ class RlOrdemServicoPacote extends AbstractEntity
     /**
      * @var \TbOrdemServico
      *
-     * @ORM\ManyToOne(targetEntity="TbOrdemServico")
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbOrdemServico")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_ordem_servico", referencedColumnName="id_ordem_servico")
      * })
@@ -41,7 +41,7 @@ class RlOrdemServicoPacote extends AbstractEntity
     /**
      * @var \TbPacote
      *
-     * @ORM\ManyToOne(targetEntity="TbPacote")
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbPacote")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_pacote", referencedColumnName="id_pacote")
      * })

@@ -38,7 +38,7 @@ class RlOrdemServicoInstalacao
     /**
      * @var \TbInstalacao
      *
-     * @ORM\ManyToOne(targetEntity="TbInstalacao")
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbInstalacao")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_instalacao", referencedColumnName="id_instalacao")
      * })
@@ -48,7 +48,7 @@ class RlOrdemServicoInstalacao
     /**
      * @var \TbOrdemServico
      *
-     * @ORM\ManyToOne(targetEntity="TbOrdemServico")
+     * @ORM\ManyToOne(targetEntity="Base\BaseBundle\Entity\TbOrdemServico")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_ordem_servico", referencedColumnName="id_ordem_servico")
      * })
