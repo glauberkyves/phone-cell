@@ -1,11 +1,11 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
     database_driver:   pdo_mysql
-    database_host:     107.180.21.19
+    database_host:     107.180.2.113
     database_port:     3306
     database_name:     phonecell
-    database_user:     phonecell
-    database_password: 8,5Mc=8*x7II
+    database_user:     phonecell_user
+    database_password: St0rm100
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
@@ -18,26 +18,3 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
-
-    #8,5Mc=8*x7II
-
-
-    #Generating public/private rsa key pair.
-    #Enter passphrase (empty for no passphrase):
-    #Enter same passphrase again:
-    #Your identification has been saved in /home/glauberkyves/.ssh/id_dsa.
-    #Your public key has been saved in /home/glauberkyves/.ssh/id_dsa.pub.
-    #The key fingerprint is:
-    #1c:bb:74:dc:57:04:fc:0e:98:0c:e1:3a:16:de:81:06
-    #The key's randomart image is:
-    #+--[ RSA 1024]----+
-    #|      E   .. ....|
-    #|       . o.   .. |
-    #|        = oo o ..|
-    #|       + B o+ ...|
-    #|        S + . .o |
-    #|       o +   .  .|
-    #|        .        |
-    #|                 |
-    #|                 |
-    #+-----------------+
