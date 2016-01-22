@@ -23,7 +23,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
-            new AppBundle\AppBundle(),
             new GlauberKyves\Bundle\ZendFormTwigBundle\ZendFormTwigBundle(),
             new Base\BaseBundle\BaseBaseBundle(),
             new Base\CrudBundle\BaseCrudBundle(),
